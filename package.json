@@ -1,16 +1,17 @@
 {
-  "name": "opportune",
+  "name": "Opportune",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon ./src/server/index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/MichaelChapman305/Opportune.git"
   },
-  "author": "Michael Chapman and  William Robertson",
+  "author": "Michael Chapman and William Robertson",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/MichaelChapman305/Opportune/issues"
@@ -25,6 +26,7 @@
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-es2015": "^6.24.1",
+    "nodemon": "^1.14.12",
     "webpack": "^3.10.0",
     "webpack-node-externals": "^1.6.0"
   }
