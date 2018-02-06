@@ -1,34 +1,22 @@
-const request = require('request');
+const fetch = require('node-fetch');
 
 function getListingsFromLever(companyName) {
-  request(`https://api.lever.co/v0/postings/${companyName}?&mode=json`, (err, res, body) => {
-    if (err) {
-      console.error(err);
-    }
+  fetch(`https://api.lever.co/v0/postings/${companyName}?&mode=json`)
+    .then(res => res.json())
+    .then(json => {
+      const jobs = json.map(job => {
+        return {
+          id: job.id,
+          title: job.text,
+          location: job.categories && job.categories.location,
+          url: job.hostedUrl,
+        };
+      });
 
-    let json = '';
-
-    try {
-      json = JSON.parse(body);
-    } catch (e) {
-      console.error(e);
-    }
-
-    const jobListings = {};
-
-    jobListings[companyName] = {};
-
-    json.map(listing =>
-      jobListings[companyName][listing.id] = {
-        id: listing.id,
-        title: listing.text,
-        location: listing.categories.location,
-        url: listing.hostedUrl,
+      return {
+        [companyName]: jobs
       };
-    );
-
-    return jobListings;
-  });
+    }).catch(err => console.error('Error fetching lever data', err));
 }
 
 module.exports = getListingsFromLever;

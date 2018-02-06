@@ -1,7 +1,5 @@
 const express = require('express');
-
 const app = express();
-
 const publicPath = express.static('./dist');
 
 app.use('/dist', publicPath);
