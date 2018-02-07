@@ -21,9 +21,8 @@ function combineCompanyListings(greenhouseCompanies, leverCompanies) {
 
   Promise.all([greenhousePromise, leverPromise]).then(data => {
     parsedListings = [].concat(...data);
-
     // TODO: Clean the data here
   });
 }
 
-module.exports = parseListingData;
+module.exports = combineCompanyListings;
