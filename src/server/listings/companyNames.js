@@ -1,4 +1,4 @@
-const LEVER_COMPANYNAMES = [
+const LEVER_COMPANIES = [
   'addepar',
   'blendLabs',
   'buildZoom',
@@ -33,7 +33,7 @@ const LEVER_COMPANYNAMES = [
   'voleonGroup' 
 ];
 
-const GREENHOUSE_COMPANYNAMES = [
+const GREENHOUSE_COMPANIES = [
   'yext',
   'appian',
   'segment', 
@@ -98,6 +98,6 @@ const GREENHOUSE_COMPANYNAMES = [
 ];
 
 module.exports = { 
-  LEVER_COMPANYNAMES, 
-  GREENHOUSE_COMPANYNAMES 
+  LEVER_COMPANIES,
+  GREENHOUSE_COMPANIES
 };
