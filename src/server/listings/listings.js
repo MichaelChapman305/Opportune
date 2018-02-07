@@ -2,7 +2,7 @@ const getListingsFromGreenhouse = require('./getListingsFromGreenhouse');
 const getListingsFromLever = require('./getListingsFromLever');
 
 function getCompanyListings(companies, getListingsPromise) {
-  const promises = [];
+  let promises = [];
 
   for (let i = 0, len = companies.length; i < len; i++) {
     const company = companies[i];
@@ -17,11 +17,13 @@ function getCompanyListings(companies, getListingsPromise) {
 function combineCompanyListings(greenhouseCompanies, leverCompanies) {
   const greenhousePromise = getCompanyListings(greenhouseCompanies, getListingsFromGreenhouse);
   const leverPromise = getCompanyListings(leverCompanies, getListingsFromLever);
-  let parsedListings = [];
 
   Promise.all([greenhousePromise, leverPromise]).then(data => {
-    parsedListings = [].concat(...data);
+    const parsedListings = [].concat(...data);
+    const validListings = parsedListings.filter(listing => listing);
+
     // TODO: Clean the data here
+    console.log(validListings);
   });
 }
 
