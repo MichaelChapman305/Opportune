@@ -1,6 +1,6 @@
 {
   "extends": "airbnb",
   "rules": {
-    "arrow-parens": 1
+    "arrow-parens": [2, "as-needed"]
   }
 }

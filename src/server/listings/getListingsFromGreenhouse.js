@@ -12,7 +12,7 @@ function getListingsFromGreenhouse(companyName) {
       }));
 
       return jobs;
-    }).catch(err => console.error('Error fetching greenhouse data', err));
+    }).catch(err => console.error('Error fetching Greenhouse data', err));
 }
 
 module.exports = getListingsFromGreenhouse;

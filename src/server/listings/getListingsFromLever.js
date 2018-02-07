@@ -11,10 +11,8 @@ function getListingsFromLever(companyName) {
         url: job.hostedUrl,
       }));
 
-      return {
-        [companyName]: jobs,
-      };
-    }).catch(err => console.error('Error fetching lever data', err));
+      return jobs;
+    }).catch(err => console.error('Error fetching Lever data', err));
 }
 
 module.exports = getListingsFromLever;
