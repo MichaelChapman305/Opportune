@@ -1,7 +1,7 @@
 const fetch = require('node-fetch');
 
 function getListingsFromLever(companyName) {
-  fetch(`https://api.lever.co/v0/postings/${companyName}?&mode=json`)
+  return fetch(`https://api.lever.co/v0/postings/${companyName}?&mode=json`)
     .then(res => res.json())
     .then(json => {
       const jobs = json.map(job => ({
@@ -11,7 +11,9 @@ function getListingsFromLever(companyName) {
         url: job.hostedUrl,
       }));
 
-      return jobs;
+      return {
+        [companyName]: jobs,
+      };
     }).catch(err => console.error('Error fetching Lever data', err));
 }
 
