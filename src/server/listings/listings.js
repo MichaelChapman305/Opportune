@@ -2,7 +2,15 @@ const getListingsFromGreenhouse = require('./getListingsFromGreenhouse');
 const getListingsFromLever = require('./getListingsFromLever');
 const jobListing = require('../models.js').JobListing;
 
-const EXCLUDED_WORDS = ['specialist', 'consultant', 'trainer', 'it', 'support'];
+const EXCLUDED_WORDS = [
+  'specialist',
+  'consultant',
+  'trainer',
+  'it',
+  'support',
+  'qa',
+  'quality'
+];
 
 function combineCompanyListings(greenhouseCompanies, leverCompanies) {
   const greenhousePromise = getCompanyListings(greenhouseCompanies, getListingsFromGreenhouse);
@@ -25,7 +33,7 @@ function combineCompanyListings(greenhouseCompanies, leverCompanies) {
       }
     });
 
-    // console.log(filteredListings.length);
+    console.log(filteredListings.length);
     // jobListing.insertMany(filteredListings);
   });
 }

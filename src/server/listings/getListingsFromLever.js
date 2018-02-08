@@ -6,7 +6,7 @@ function getListingsFromLever(companyID) {
     .then(res => res.json())
     .then(json => {
       if (!Array.isArray(json)) {
-        return;
+        throw new Error(`couldn't retrieve data for company ${companyID}`);
       }
 
       const jobs = json.map(job => ({
@@ -19,7 +19,7 @@ function getListingsFromLever(companyID) {
       }));
 
       return jobs;
-    }).catch(err => console.error('Error fetching Lever data', err));
+    }).catch(err => console.error('Error fetching Lever data:', err));
 }
 
 module.exports = getListingsFromLever;

@@ -6,7 +6,7 @@ function getListingsFromGreenhouse(companyID) {
     .then(res => res.json())
     .then(json => {
       if (!json.jobs) {
-        return;
+        throw new Error(`couldn't retrieve data for company ${companyID}`);
       }
 
       const jobs = json.jobs.map(job => ({
@@ -19,19 +19,19 @@ function getListingsFromGreenhouse(companyID) {
       }));
 
       return jobs;
-    }).catch(err => console.error('Error fetching Greenhouse data', err));
+    }).catch(err => console.error('Error fetching Greenhouse data:', err));
 }
 
 function htmlToPlainText(str) {
   return str
-    .replace(/&amp;amp;/g, '&')    // Convert HTML entities
+    .replace(/&amp;amp;/g, '&') // Convert HTML entities
     .replace(/&#39;/g, '\'')
     .replace(/&amp;/, '&')
     .replace(/&lt;/g, '<')
     .replace(/&gt;/g, '>')
     .replace(/&quot;/g, '"')
     .replace(/<(?:.|\n)*?>/gm, '') // Strip HTML elements
-    .replace(/\n/g, ' ');          // Strip newlines
+    .replace(/\n/g, ' '); // Strip newlines
 }
 
 module.exports = getListingsFromGreenhouse;
