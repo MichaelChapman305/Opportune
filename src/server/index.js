@@ -1,7 +1,14 @@
 const express = require('express');
+const CronJob = require('cron').CronJob;
+
+const combineCompanyListings = require('./listings/listings.js');
 
 const app = express();
 const publicPath = express.static('./dist');
+
+const cron = new CronJob('00 00 12 * * 6', () => {
+  combineCompanyListings(companyNames.GREENHOUSE_COMPANIES, companyNames.LEVER_COMPANIES);
+}, null, true, 'America/New_York');
 
 app.use('/dist', publicPath);
 

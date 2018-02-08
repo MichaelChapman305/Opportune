@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost:27017/jobsListings');
+mongoose.connect('mongodb://localhost:27017/jobListings');
 
 const db = mongoose.connection;
 mongoose.promise = global.promise;
@@ -23,4 +23,4 @@ const joblisting = new Schema({
 
 const JobListing = mongoose.model('JobListing', joblisting);
 
-module.exports = JobListing;
+module.exports.JobListing = JobListing;

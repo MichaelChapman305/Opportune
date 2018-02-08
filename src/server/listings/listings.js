@@ -51,12 +51,10 @@ function combineCompanyListings(greenhouseCompanies, leverCompanies) {
         return true;
       }
     });
-
-    //jobData.insertMany(filteredListings);
+      console.log(filteredListings.length);
+      //jobListing.insertMany(filteredListings);
   });
 }
-
-combineCompanyListings(companyNames.GREENHOUSE_COMPANIES, companyNames.LEVER_COMPANIES);
 
 module.exports = combineCompanyListings;
 
