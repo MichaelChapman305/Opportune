@@ -5,11 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon ./src/server/index.js",
+    "dev-client": "webpack --watch --display error-details --config ./webpack/development.js",
+    "dev-server": "nodemon ./src/server/index.js",
+    "dev": "npm run dev-server | npm run dev-client",
     "lint": "eslint --ext .js,.jsx ./src",
-    "lint:fix": "eslint --ext .js,.jsx --fix ./src",
-    "build": "webpack --watch --config ./webpack.config-dev.js",
-    "sass": "sass --watch ./src/client/sass/style.scss:./dist/style/css"
+    "lint:fix": "eslint --ext .js,.jsx --fix ./src"
   },
   "repository": {
     "type": "git",
@@ -22,20 +22,20 @@
   },
   "homepage": "https://github.com/MichaelChapman305/Opportune#readme",
   "dependencies": {
+    "babel-preset-env": "^1.6.1",
     "create-react-class": "^15.6.3",
     "cron": "^1.3.0",
     "express": "^4.16.2",
-    "mongoose": "^5.0.3",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "mongoose": "^5.0.4",
     "node-fetch": "^2.0.0",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "extract-text-webpack-plugin": "^3.0.2"
+    "react-dom": "^16.2.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
-    "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "css-loader": "^0.28.9",
     "eslint": "^4.17.0",
