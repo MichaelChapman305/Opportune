@@ -3,6 +3,7 @@ const CronJob = require('cron').CronJob;
 const combineCompanyListings = require('./listings/listings.js');
 const companyNames = require('./listings/companyNames.js');
 
+
 const app = express();
 const publicPath = express.static('./dist');
 
