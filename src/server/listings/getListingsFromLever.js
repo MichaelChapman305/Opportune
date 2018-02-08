@@ -13,6 +13,7 @@ function getListingsFromLever(companyID) {
         id: job.id,
         company: companyNames.LEVER_COMPANIES[companyID],
         title: job.text,
+        description: job.descriptionPlain,
         location: job.categories && job.categories.location,
         url: job.hostedUrl,
       }));
