@@ -24,7 +24,7 @@ function getListingsFromGreenhouse(companyID) {
 
 function htmlToPlainText(str) {
   return str
-    .replace(/&amp;amp;/g, '&')        // Convert HTML entities
+    .replace(/&amp;amp;/g, '&')         // Convert HTML entities
     .replace(/&#39;/g, '\'')
     .replace(/&amp;/, '&')
     .replace(/&lt;/g, '<')
