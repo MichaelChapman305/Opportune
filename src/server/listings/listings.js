@@ -26,7 +26,7 @@ function combineCompanyListings(greenhouseCompanies, leverCompanies) {
       }
     });
 
-    console.log(filteredListings.length);
+    //console.log(filteredListings.length);
     //jobListing.insertMany(filteredListings);
   });
 }
