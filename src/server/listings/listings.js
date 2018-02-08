@@ -27,12 +27,16 @@ function flatten(arr, result = []) {
   return result;
 }
 
+};
+
+
 function combineCompanyListings(greenhouseCompanies, leverCompanies) {
   const greenhousePromise = getCompanyListings(greenhouseCompanies, getListingsFromGreenhouse);
   const leverPromise = getCompanyListings(leverCompanies, getListingsFromLever);
 
   Promise.all([greenhousePromise, leverPromise]).then(data => {
     const parsedListings = flatten(data).filter(listing => listing);
+
 
     // Cleans data of all non-engineering job listings
     for (let i = 0; i < validListings.length; i++) {
@@ -58,3 +62,4 @@ function combineCompanyListings(greenhouseCompanies, leverCompanies) {
 combineCompanyListings(['yext'], ['yelp']);
 
 module.exports = combineCompanyListings;
+
