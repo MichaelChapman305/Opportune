@@ -1,6 +1,8 @@
 const getListingsFromGreenhouse = require('./getListingsFromGreenhouse');
 const getListingsFromLever = require('./getListingsFromLever');
 
+const EXCLUDED_WORDS = ['specialist', 'consultant', 'trainer', 'business', 'it', 'support'];
+
 function getCompanyListings(companies, getListingsPromise) {
   const promises = [];
 
@@ -27,9 +29,6 @@ function flatten(arr, result = []) {
   return result;
 }
 
-};
-
-
 function combineCompanyListings(greenhouseCompanies, leverCompanies) {
   const greenhousePromise = getCompanyListings(greenhouseCompanies, getListingsFromGreenhouse);
   const leverPromise = getCompanyListings(leverCompanies, getListingsFromLever);
@@ -37,29 +36,23 @@ function combineCompanyListings(greenhouseCompanies, leverCompanies) {
   Promise.all([greenhousePromise, leverPromise]).then(data => {
     const parsedListings = flatten(data).filter(listing => listing);
 
-
     // Cleans data of all non-engineering job listings
-    for (let i = 0; i < validListings.length; i++) {
-      const result = Object.values(validListings[i]).filter(listing => {
-        const title = listing.title.toLowerCase();
-        const excludedWords = ['specialist', 'consultant', 'trainer', 'business', 'it', 'support'];
+    const filteredListings = parsedListings.filter(listing => {
+      const title = listing.title.toLowerCase();
 
-        if (title.includes('engineer') || title.includes('developer')) {
-          for (let j = 0; j < excludedWords.length; j++) {
-            if (title.includes(excludedWords[j])) {
-              return false;
-            }
+      if (title.includes('engineer') || title.includes('developer')) {
+        for (let i = 0, len = EXCLUDED_WORDS.length; i < len; i++) {
+          if (title.includes(EXCLUDED_WORDS[i])) {
+            return false;
           }
-          return true;
         }
-      });
-
-      console.log(result);
-    }
+        return true;
+      }
+    });
   });
 }
 
-combineCompanyListings(['yext'], ['yelp']);
+//combineCompanyListings();
 
 module.exports = combineCompanyListings;
 
