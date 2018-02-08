@@ -14,13 +14,14 @@ db.once('open', () => {
 });
 
 const Schema = mongoose.Schema;
-const joblisting = new Schema({
+const jobListing = new Schema({
   'id': String,
   'company': String,
+  'description': String,
   'title': String,
   'location': String,
 });
 
-const JobListing = mongoose.model('JobListing', joblisting);
+const JobListing = mongoose.model('JobListing', jobListing);
 
 module.exports.JobListing = JobListing;

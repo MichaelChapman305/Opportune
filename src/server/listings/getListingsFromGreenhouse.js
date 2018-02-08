@@ -24,14 +24,14 @@ function getListingsFromGreenhouse(companyID) {
 
 function htmlToPlainText(str) {
   return str
-    .replace(/&amp;amp;/g, '&')         // Convert HTML entities
+    .replace(/&amp;amp;/g, '&')    // Convert HTML entities
     .replace(/&#39;/g, '\'')
     .replace(/&amp;/, '&')
     .replace(/&lt;/g, '<')
     .replace(/&gt;/g, '>')
     .replace(/&quot;/g, '"')
-    .replace(/<(?:.|\n)*?>/gm, '')      // Strip HTML elements
-    .replace(/\n/g, ' ');               // Strip newlines
+    .replace(/<(?:.|\n)*?>/gm, '') // Strip HTML elements
+    .replace(/\n/g, ' ');          // Strip newlines
 }
 
 module.exports = getListingsFromGreenhouse;
