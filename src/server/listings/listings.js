@@ -14,16 +14,28 @@ function getCompanyListings(companies, getListingsPromise) {
   return Promise.all(promises);
 }
 
+function flatten(arr, result = []) {
+  for (let i = 0, length = arr.length; i < length; i++) {
+    const value = arr[i];
+
+    if (Array.isArray(value)) {
+      flatten(value, result);
+    } else {
+      result.push(value);
+    }
+  }
+  return result;
+};
+
 function combineCompanyListings(greenhouseCompanies, leverCompanies) {
   const greenhousePromise = getCompanyListings(greenhouseCompanies, getListingsFromGreenhouse);
   const leverPromise = getCompanyListings(leverCompanies, getListingsFromLever);
 
   Promise.all([greenhousePromise, leverPromise]).then(data => {
-    const parsedListings = [].concat(...data);
-    const validListings = parsedListings.filter(listing => listing);
+    const parsedListings = flatten(data).filter(listing => listing);
 
     // TODO: Clean the data here
-    console.log(validListings);
+    console.log(parsedListings);
   });
 }
 

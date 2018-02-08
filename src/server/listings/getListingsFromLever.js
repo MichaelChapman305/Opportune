@@ -10,14 +10,13 @@ function getListingsFromLever(companyName) {
 
       const jobs = json.map(job => ({
         id: job.id,
+        company: companyName,
         title: job.text,
         location: job.categories && job.categories.location,
         url: job.hostedUrl,
       }));
 
-      return {
-        [companyName]: jobs,
-      };
+      return jobs;
     }).catch(err => console.error('Error fetching Lever data', err));
 }
 

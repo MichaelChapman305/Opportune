@@ -10,14 +10,13 @@ function getListingsFromGreenhouse(companyName) {
 
       const jobs = json.jobs.map(job => ({
         id: job.id,
+        company: companyName,
         title: job.title,
         location: job.location && job.location.name,
         url: job.absolute_url,
       }));
 
-      return {
-        [companyName]: jobs,
-      };
+      return jobs;
     }).catch(err => console.error('Error fetching Greenhouse data', err));
 }
 
