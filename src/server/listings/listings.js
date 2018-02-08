@@ -3,7 +3,33 @@ const getListingsFromLever = require('./getListingsFromLever');
 const companyNames = require('./companyNames.js');
 const jobListing = require('../models.js').JobListing;
 
-const EXCLUDED_WORDS = ['specialist', 'consultant', 'trainer', 'business', 'it', 'support'];
+const EXCLUDED_WORDS = ['specialist', 'consultant', 'trainer', 'it', 'support'];
+
+function combineCompanyListings(greenhouseCompanies, leverCompanies) {
+  const greenhousePromise = getCompanyListings(greenhouseCompanies, getListingsFromGreenhouse);
+  const leverPromise = getCompanyListings(leverCompanies, getListingsFromLever);
+
+  Promise.all([greenhousePromise, leverPromise]).then(data => {
+    const parsedListings = flatten(data).filter(listing => listing);
+
+    // Clean the data of all non-engineering job listings
+    const filteredListings = parsedListings.filter(listing => {
+      const title = listing.title.toLowerCase();
+
+      if (title.includes('engineer') || title.includes('developer')) {
+        for (let i = 0, len = EXCLUDED_WORDS.length; i < len; i++) {
+          if (title.includes(EXCLUDED_WORDS[i])) {
+            return false;
+          }
+        }
+        return true;
+      }
+    });
+
+    console.log(filteredListings.length);
+    //jobListing.insertMany(filteredListings);
+  });
+}
 
 function getCompanyListings(companies, getListingsPromise) {
   const promises = [];
@@ -31,30 +57,4 @@ function flatten(arr, result = []) {
   return result;
 }
 
-function combineCompanyListings(greenhouseCompanies, leverCompanies) {
-  const greenhousePromise = getCompanyListings(greenhouseCompanies, getListingsFromGreenhouse);
-  const leverPromise = getCompanyListings(leverCompanies, getListingsFromLever);
-
-  Promise.all([greenhousePromise, leverPromise]).then(data => {
-    const parsedListings = flatten(data).filter(listing => listing);
-
-    // Cleans data of all non-engineering job listings
-    const filteredListings = parsedListings.filter(listing => {
-      const title = listing.title.toLowerCase();
-
-      if (title.includes('engineer') || title.includes('developer')) {
-        for (let i = 0, len = EXCLUDED_WORDS.length; i < len; i++) {
-          if (title.includes(EXCLUDED_WORDS[i])) {
-            return false;
-          }
-        }
-        return true;
-      }
-    });
-      console.log(filteredListings.length);
-      //jobListing.insertMany(filteredListings);
-  });
-}
-
 module.exports = combineCompanyListings;
-
