@@ -1,9 +1,16 @@
 const getListingsFromGreenhouse = require('./getListingsFromGreenhouse');
 const getListingsFromLever = require('./getListingsFromLever');
-const companyNames = require('./companyNames.js');
 const jobListing = require('../models.js').JobListing;
 
-const EXCLUDED_WORDS = ['specialist', 'consultant', 'trainer', 'it', 'support'];
+const EXCLUDED_WORDS = [
+  'specialist',
+  'consultant',
+  'trainer',
+  'it',
+  'support',
+  'qa',
+  'quality'
+];
 
 function combineCompanyListings(greenhouseCompanies, leverCompanies) {
   const greenhousePromise = getCompanyListings(greenhouseCompanies, getListingsFromGreenhouse);
@@ -26,17 +33,18 @@ function combineCompanyListings(greenhouseCompanies, leverCompanies) {
       }
     });
 
-    //console.log(filteredListings.length);
-    //jobListing.insertMany(filteredListings);
+    console.log(filteredListings.length);
+    // jobListing.insertMany(filteredListings);
   });
 }
 
 function getCompanyListings(companies, getListingsPromise) {
   const promises = [];
+  const companyIDs = Object.keys(companies);
 
-  for (let i = 0, len = companies.length; i < len; i++) {
-    const company = companies[i];
-    promises.push(getListingsPromise(company));
+  for (let i = 0, len = companyIDs.length; i < len; i++) {
+    const companyID = companyIDs[i];
+    promises.push(getListingsPromise(companyID));
   }
 
   // Return a promise that resolves when all the listings from all the companies
@@ -45,7 +53,7 @@ function getCompanyListings(companies, getListingsPromise) {
 }
 
 function flatten(arr, result = []) {
-  for (let i = 0, length = arr.length; i < length; i++) {
+  for (let i = 0, len = arr.length; i < len; i++) {
     const value = arr[i];
 
     if (Array.isArray(value)) {
