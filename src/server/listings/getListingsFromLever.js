@@ -1,7 +1,8 @@
 const fetch = require('node-fetch');
+const companyNames = require('./companyNames.js');
 
-function getListingsFromLever(companyName) {
-  return fetch(`https://api.lever.co/v0/postings/${companyName}?&mode=json`)
+function getListingsFromLever(companyID) {
+  return fetch(`https://api.lever.co/v0/postings/${companyID}?&mode=json`)
     .then(res => res.json())
     .then(json => {
       if (!Array.isArray(json)) {
@@ -10,7 +11,7 @@ function getListingsFromLever(companyName) {
 
       const jobs = json.map(job => ({
         id: job.id,
-        company: companyName,
+        company: companyNames.LEVER_COMPANIES[companyID],
         title: job.text,
         location: job.categories && job.categories.location,
         url: job.hostedUrl,

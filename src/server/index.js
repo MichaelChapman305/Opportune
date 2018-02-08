@@ -1,6 +1,5 @@
 const express = require('express');
 const CronJob = require('cron').CronJob;
-
 const combineCompanyListings = require('./listings/listings.js');
 
 const app = express();

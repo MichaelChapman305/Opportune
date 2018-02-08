@@ -1,7 +1,8 @@
 const fetch = require('node-fetch');
+const companyNames = require('./companyNames.js');
 
-function getListingsFromGreenhouse(companyName) {
-  return fetch(`https://api.greenhouse.io/v1/boards/${companyName}/jobs`)
+function getListingsFromGreenhouse(companyID) {
+  return fetch(`https://api.greenhouse.io/v1/boards/${companyID}/jobs`)
     .then(res => res.json())
     .then(json => {
       if (!json.jobs) {
@@ -10,7 +11,7 @@ function getListingsFromGreenhouse(companyName) {
 
       const jobs = json.jobs.map(job => ({
         id: job.id,
-        company: companyName,
+        company: companyNames.GREENHOUSE_COMPANIES[companyID],
         title: job.title,
         location: job.location && job.location.name,
         url: job.absolute_url,
