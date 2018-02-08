@@ -1,5 +1,7 @@
 const getListingsFromGreenhouse = require('./getListingsFromGreenhouse');
 const getListingsFromLever = require('./getListingsFromLever');
+const companyNames = require('./companyNames.js');
+const jobListing = require('../models.js').JobListing;
 
 const EXCLUDED_WORDS = ['specialist', 'consultant', 'trainer', 'business', 'it', 'support'];
 
@@ -49,10 +51,12 @@ function combineCompanyListings(greenhouseCompanies, leverCompanies) {
         return true;
       }
     });
+
+    //jobData.insertMany(filteredListings);
   });
 }
 
-//combineCompanyListings();
+combineCompanyListings(companyNames.GREENHOUSE_COMPANIES, companyNames.LEVER_COMPANIES);
 
 module.exports = combineCompanyListings;
 
