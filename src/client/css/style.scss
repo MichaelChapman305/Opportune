@@ -1,3 +1,89 @@
-p {
-  color: red;
+@import './camphor.scss';
+@import './mixins.scss';
+
+.container {
+  font-family: CamphorThree;
+  background-color: #FAFAFA;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  grid-template-rows: 150px 125px minmax(150px, auto) ;
+  grid-gap: 5px;
+  grid-template-areas:
+    "Header Header Header"
+    "SearchComponent SearchComponent SearchComponent"
+    "JobListingContainer JobListingContainer JobListingContainer";
+}
+
+.Header {
+  grid-area: Header;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  .Header-title {
+    font-size: 4.8em;
+    margin-left: 1em;
+    line-height: 88px;
+  }
+  .Header-subscribe-donate-container {
+    display: flex;
+    flex-direction: row;
+    margin-right: 10em;
+    .Header-subscribe{
+      font-size: 1.5em;
+      margin-right: 1em;
+
+    }
+    .Header-donate {
+      font-size: 1.5em;
+    }
+  }
+}
+
+.SearchComponent {
+  grid-area: SearchComponent;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .SearchComponent-search-bar {
+    font-family: CamphorThree;
+    width: 23em;
+    height: 1.75em;
+    font-size: 2.25em;
+    background-color: #FAFAFA;
+    border-right: none;
+    border-left: none;
+    border-top: none;
+    border-bottom: 1px solid black;
+    outline: none;
+    padding: 5px 0px 0 50px;
+  }
+  .SearchComponent-filter {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    width: 47.9em;
+    height: 2.4em;
+    margin-top: 1em;
+    .SearchComponent-filter-experience {
+      @include filter-buttons;
+      
+    }
+    .SearchComponent-filter-location {
+      @include filter-buttons;
+    }
+    .SearchComponent-filter-more {
+      @include filter-buttons;
+    }
+  }
+}
+
+.JobListingContainer {
+  grid-area: JobListingContainer;
+  /*border: 1px solid green;*/
 }

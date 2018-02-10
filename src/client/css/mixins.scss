@@ -1,0 +1,15 @@
+@mixin filter-buttons {
+  font-family: CamphorThree;
+  width: 14.8em;
+  height: 1.85em;
+  font-size: 1.1em;
+  margin-right: 1em;
+  outline: none;
+  background-color: white;
+  box-shadow: .5px .5px 1px .5px rgba(125,125,125,.25);
+  vertical-align: center;
+  text-align: center;
+  padding-top: .5em;
+ 
+  @content;
+}
