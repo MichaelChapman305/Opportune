@@ -9,13 +9,13 @@ import JobListingContainer from './JobListingContainer.jsx';
 
 class Home extends Component {
   render() {
-  	return (
-  	  <div className="container">
+    return (
+      <div className="container">
         <Header />
         <SearchComponent />
         <JobListingContainer />
-  	  </div>
-  	);
+      </div>
+    );
   }
 }
 

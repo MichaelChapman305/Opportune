@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 
 export default class JobListingComponents extends Component {
   render() {
-  	return (
+    return (
       <div className="JobListingCompoenents">
       </div>
-  	)
+    )
   }
 }

@@ -6,10 +6,10 @@ import JobListingComponents from './JobListingComponents.jsx';
 
 export default class jobListingContainer extends Component {
   render() {
-  	return (
+    return (
       <div className="JobListingContainer">
         <JobListingComponents />
       </div>
-  	)
+    )
   }
 }

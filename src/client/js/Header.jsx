@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 export default class Header extends Component {
   render() {
-  	return (
+    return (
       <div className="Header">
         <p className="Header-title">Opportune</p>
         <div className="Header-subscribe-donate-container">
@@ -12,6 +12,6 @@ export default class Header extends Component {
           <p className="Header-donate">Dontate</p>
         </div>
       </div>
-  	)
+    )
   }
 }
