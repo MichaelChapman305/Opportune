@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import '../css/style.scss';
 
-import Header from './Header';
-import SearchContainer from './SearchContainer';
-import JobListingContainer from './JobListingContainer';
+import Header from './Header.jsx';
+import SearchContainer from './SearchContainer.jsx';
+import JobListingContainer from './JobListingContainer.jsx';
 
 class Home extends Component {
   render() {
