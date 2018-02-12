@@ -6,13 +6,15 @@ export default class SearchBar extends Component {
   render() {
     return (
       <div className="SearchBar__container">
-        <img src="./images/search-icon.svg" alt="image" />
-        <input 
-          className="SearchBar__container__searchbar" 
-          type="search" placeholder="Find your dream job" 
-          minLength="1" 
-          maxLength="15" 
-          pattern="[A-z]" />
+        <img src="./images/search-icon.svg" alt="" />
+        <input
+          className="SearchBar__container__searchbar"
+          type="search"
+          placeholder="Find your dream job"
+          minLength="1"
+          maxLength="15"
+          pattern="[A-z]"
+        />
       </div>
     );
   }
