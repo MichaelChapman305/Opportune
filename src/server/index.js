@@ -9,7 +9,10 @@ const app = express();
   combineCompanyListings(companyNames.GREENHOUSE_COMPANIES, companyNames.LEVER_COMPANIES);
 }, null, true, 'America/New_York'); */
 
+app.use('/images', express.static('./src/client/images'));
+
 app.use('/', express.static('./dist'));
+
 app.get('/', (req, res) => {
   res.sendFile('index.html', { root: '.' });
 });
