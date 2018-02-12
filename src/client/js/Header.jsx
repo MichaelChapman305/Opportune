@@ -6,10 +6,10 @@ export default class Header extends Component {
   render() {
     return (
       <div className="Header">
-        <p className="Header-title">Opportune</p>
-        <div className="Header-subscribe-donate-container">
-          <p className="Header-subscribe">Subscribe</p>
-          <p className="Header-donate">Dontate</p>
+        <h1 className="Header__title">Opportune</h1>
+        <div>
+          <a className="Header__button Header__button--subscribe">Subscribe</a>
+          <a className="Header__button">Donate</a>
         </div>
       </div>
     )

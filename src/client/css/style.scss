@@ -1,6 +1,10 @@
 @import './camphor.scss';
 @import './mixins.scss';
 
+body {
+  margin: 0;
+}
+
 .container {
   font-family: CamphorThree;
   background-color: #FAFAFA;
@@ -11,7 +15,7 @@
   grid-gap: 5px;
   grid-template-areas:
     "Header Header Header"
-    "SearchComponent SearchComponent SearchComponent"
+    "SearchContainer SearchContainer SearchContainer"
     "JobListingContainer JobListingContainer JobListingContainer";
 }
 
@@ -22,33 +26,39 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  .Header-title {
+  margin-left: 5em;
+  margin-right: 10em;
+
+  .Header__title {
     font-size: 4.8em;
-    margin-left: 1em;
-    line-height: 88px;
+    font-weight: 300;
   }
-  .Header-subscribe-donate-container {
-    display: flex;
-    flex-direction: row;
-    margin-right: 10em;
-    .Header-subscribe{
-      font-size: 1.5em;
-      margin-right: 1em;
-    }
-    .Header-donate {
-      font-size: 1.5em;
-    }
+
+  .Header__title::first-letter {
+    background: linear-gradient(to bottom, #8977F8 10%, #CE9FFC 90%);
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+
+  .Header__button {
+    font-size: 1.5em;
+  }
+
+  .Header__button--subscribe {
+    margin-right: 1em;
   }
 }
 
-.SearchComponent {
-  grid-area: SearchComponent;
+.SearchContainer {
+  grid-area: SearchContainer;
   display: flex;
   flex-wrap: nowrap;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  .SearchComponent-search-bar {
+
+  .SearchContainer-searchbar {
     font-family: CamphorThree;
     width: 23em;
     height: 1.75em;
@@ -60,8 +70,11 @@
     border-bottom: 1px solid black;
     outline: none;
     padding: 5px 0px 0 50px;
+    -moz-appearance: none;
+    -webkit-appearance: none;
   }
-  .SearchComponent-filter {
+
+  .SearchContainer-filter {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -69,14 +82,16 @@
     width: 47.9em;
     height: 2.4em;
     margin-top: 1em;
-    .SearchComponent-filter-experience {
-      @include filter-buttons;
-      
-    }
-    .SearchComponent-filter-location {
+
+    .SearchContainer-filter-experience {
       @include filter-buttons;
     }
-    .SearchComponent-filter-more {
+
+    .SearchContainer-filter-location {
+      @include filter-buttons;
+    }
+
+    .SearchContainer-filter-more {
       @include filter-buttons;
     }
   }
@@ -84,5 +99,4 @@
 
 .JobListingContainer {
   grid-area: JobListingContainer;
-  /*border: 1px solid green;*/
 }
