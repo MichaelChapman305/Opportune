@@ -9,6 +9,8 @@ const app = express();
   combineCompanyListings(companyNames.GREENHOUSE_COMPANIES, companyNames.LEVER_COMPANIES);
 }, null, true, 'America/New_York'); */
 
+// combineCompanyListings(companyNames.GREENHOUSE_COMPANIES, companyNames.LEVER_COMPANIES);
+
 app.use('/images', express.static('./src/client/images'));
 app.use('/', express.static('./dist'));
 

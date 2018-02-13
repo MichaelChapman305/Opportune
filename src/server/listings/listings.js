@@ -1,6 +1,6 @@
 const getListingsFromGreenhouse = require('./getListingsFromGreenhouse');
 const getListingsFromLever = require('./getListingsFromLever');
-const jobListing = require('../models.js').JobListing;
+const JobListing = require('../models.js').JobListing;
 
 const EXCLUDED_WORDS = [
   'specialist',
@@ -34,8 +34,10 @@ function combineCompanyListings(greenhouseCompanies, leverCompanies) {
     });
 
     console.log(filteredListings.length);
-    // jobListing.insertMany(filteredListings);
-  });
+    return filteredListings;
+  })
+  .then(filteredListings => JobListing.insertMany(filteredListings))
+  .catch(err => console.error('Error updating database with job listings', err));
 }
 
 function getCompanyListings(companies, getListingsPromise) {
