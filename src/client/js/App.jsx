@@ -10,7 +10,7 @@ import JobListingContainer from './JobListingContainer.jsx';
 class Home extends Component {
   render() {
     return (
-      <div className="container">
+      <div className="app-container">
         <Header />
         <SearchContainer />
         <JobListingContainer />

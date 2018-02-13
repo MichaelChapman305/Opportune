@@ -1,17 +1,26 @@
 @import './camphor.scss';
-@import './mixins.scss';
 
-body {
+* {
+  box-sizing: border-box;
+  padding: 0;
   margin: 0;
 }
 
-.container {
+body, html {
+  height: 100%;
+}
+
+body {
+  background-color: #FAFAFA;
+}
+
+.app-container {
   font-family: CamphorThree;
   background-color: #FAFAFA;
   height: 100vh;
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;
-  grid-template-rows: 150px 125px minmax(150px, auto) ;
+  grid-template-rows: 150px 125px minmax(150px, auto);
   grid-gap: 5px;
   grid-template-areas:
     "Header Header Header"
@@ -58,16 +67,11 @@ body {
   justify-content: center;
   align-items: center;
 
-  .SearchBar__container{
+  .SearchBar {
     display: flex;
-    flex-direction: rows;
+    align-items: center;
 
-    img {
-      position: absolute;
-      top: 10.85em;
-    }
-
-    .SearchBar__container__searchbar {
+    .SearchBar__input {
       font-family: CamphorThree;
       width: 23em;
       height: 1.75em;
@@ -80,30 +84,42 @@ body {
       outline: none;
       padding: 5px 0px 0 50px;
       -moz-appearance: none;
-      -webkit-appearance: none;
+
+      &::-webkit-search-decoration,
+      &::-webkit-search-cancel-button,
+      &::-webkit-search-results-button,
+      &::-webkit-search-results-decoration {
+        -webkit-appearance: none;
+      }
+    }
+
+    img {
+      position: absolute;
+      top: 10.85em;
     }
   }
 
-  .SearchContainer__filter {
+  .SearchContainer__filters {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     flex-wrap: nowrap;
     width: 47.9em;
-    height: 2.4em;
     margin-top: 1em;
+  }
 
-    .SearchContainer__filter__experience {
-      @include filter-buttons;
-    }
-
-    .SearchContainer__filter__location {
-      @include filter-buttons;
-    }
-
-    .SearchContainer__filter__more {
-      @include filter-buttons;
-    }
+  .SearchFilter {
+    font-family: CamphorThree;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 14.8em;
+    height: 1.85em;
+    font-size: 1.1em;
+    margin-right: 1em;
+    outline: none;
+    background-color: white;
+    box-shadow: .5px .5px 1px .5px rgba(125,125,125,.25);
   }
 }
 

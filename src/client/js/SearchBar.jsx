@@ -5,10 +5,10 @@ import PropTypes from 'prop-types';
 export default class SearchBar extends Component {
   render() {
     return (
-      <div className="SearchBar__container">
-        <img src="./images/search-icon.svg" alt="" />
+      <div className="SearchBar">
+        <img src="./images/search-icon.svg" alt="Search icon" />
         <input
-          className="SearchBar__container__searchbar"
+          className="SearchBar__input"
           type="search"
           placeholder="Find your dream job"
           minLength="1"

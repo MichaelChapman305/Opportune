@@ -10,7 +10,6 @@ const app = express();
 }, null, true, 'America/New_York'); */
 
 app.use('/images', express.static('./src/client/images'));
-
 app.use('/', express.static('./dist'));
 
 app.get('/', (req, res) => {

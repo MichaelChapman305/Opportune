@@ -10,7 +10,11 @@ export default class SearchContainer extends Component {
     return (
       <div className="SearchContainer">
         <SearchBar />
-        <SearchFilter />
+        <div className="SearchContainer__filters">
+          <SearchFilter title="Experience" />
+          <SearchFilter title="Location" />
+          <SearchFilter title="More" />
+        </div>
       </div>
     )
   }
