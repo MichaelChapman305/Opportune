@@ -4,6 +4,10 @@ import PropTypes from 'prop-types';
 
 import SearchBar from './SearchBar.jsx';
 import SearchFilter from './SearchFilter.jsx';
+import ExperienceOptions from './ExperienceOptions.jsx';
+import LocationOptions from './LocationOptions.jsx';
+import RoleOptions from './RoleOptions.jsx';
+import SkillsOptions from './SkillsOptions.jsx';
 
 export default class SearchContainer extends Component {
   render() {
@@ -11,11 +15,40 @@ export default class SearchContainer extends Component {
       <div className="SearchContainer">
         <SearchBar />
         <div className="SearchContainer__filters">
-          <SearchFilter title="Experience" />
-          <SearchFilter title="Location" />
-          <SearchFilter title="More" />
+          <div className="SearchContainer__filters-container">
+            <SearchFilter title="Experience" dropDownShown={this.props.dropDownShown}/>
+            {this.props.title === 'Experience' && 
+              <ExperienceOptions />
+            }
+          </div>
+
+          <div className="SearchContainer__filters-container">
+            <SearchFilter title="Location" dropDownShown={this.props.dropDownShown} />
+            {this.props.title === 'Location' && 
+              <LocationOptions />
+            }
+          </div>
+
+          <div className="SearchContainer__filters-container">
+            <SearchFilter title="Role" dropDownShown={this.props.dropDownShown} />  
+            {this.props.title === 'Role' && 
+              <RoleOptions />
+            }
+          </div>
+
+          <div className="SearchContainer__filters-container">
+            <SearchFilter title="Skill" dropDownShown={this.props.dropDownShown} />
+            {this.props.title === 'Skill' && 
+              <SkillsOptions />
+            }
+          </div>
         </div>
       </div>
     )
   }
+}
+
+SearchContainer.propTypes = {
+  title: PropTypes.string,
+  dropDownShown: PropTypes.func.isRequired,
 }

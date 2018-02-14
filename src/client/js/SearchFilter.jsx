@@ -5,13 +5,14 @@ import PropTypes from 'prop-types';
 export default class SearchFilter extends Component {
   render() {
     return (
-      <div className="SearchFilter">
+      <div className="SearchFilter" title={this.props.title}  onClick={this.props.dropDownShown}>
         {this.props.title}
-      </div>  
+      </div>
     )
   }
 }
 
 SearchFilter.propTypes = {
-  title: PropTypes.string,
+  title: PropTypes.string.isRequired,
+  dropDownShown: PropTypes.func.isRequired,
 }
