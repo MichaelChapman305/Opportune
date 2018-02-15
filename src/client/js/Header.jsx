@@ -9,8 +9,8 @@ export default class Header extends Component {
         <h1 className="Header__title">Opportune</h1>
         <div>
           <a className="Header__button Header__button--subscribe">Subscribe</a>
-          <a className="Header__button">Donate</a>
-          <a className="Header__button Header__button--contact">Contact</a>
+          <a className="Header__button Header__button--donate">Donate</a>
+          <a className="Header__button">Contact</a>
         </div>
       </div>
     )

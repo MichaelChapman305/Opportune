@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
-export default class RoleOptions extends Component {
+export default class RoleOptionsMenu extends Component {
   render() {
     return (
-      <div className="dropDown">
+      <div className={this.props.className}>
         <a>Frontend</a>
         <a>Backend</a>
         <a>Fullstack</a>
@@ -13,3 +13,7 @@ export default class RoleOptions extends Component {
     )
   }
 }
+
+RoleOptionsMenu.propTypes = {
+  className: PropTypes.string,
+};

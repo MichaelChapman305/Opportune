@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
-export default class SkillsOptions extends Component {
+export default class SkillsOptionsMenu extends Component {
   render() {
     return (
-      <div className="dropDown">
+      <div className={this.props.className}>
         <a>Javascript</a>
         <a>PhP</a>
         <a>C++</a>
@@ -14,3 +14,7 @@ export default class SkillsOptions extends Component {
     )
   }
 }
+
+SkillsOptionsMenu.propTypes = {
+  className: PropTypes.string,
+};

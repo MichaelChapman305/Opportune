@@ -7,8 +7,7 @@ import JobListing from './JobListing.jsx';
 export default class JobListingContainer extends Component {
   render() {
     return (
-      <div className="JobListingContainer">
-      </div>
-    )
+      <div className="JobListingContainer" />
+    );
   }
 }
