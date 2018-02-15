@@ -133,6 +133,22 @@ body {
     .SearchFilter {
       position: relative;
     }
+
+    .SearchFilter__button {
+      font-family: CamphorThree;
+      line-height: 18px;
+      cursor: pointer;
+      letter-spacing: 0.2px;
+      width: 10em;
+      border-radius: 4px;
+      padding-top: 6px;
+      padding-bottom: 6px;
+      border: 1px solid #dce0e0;
+      font-size: 1.1em;
+      margin-right: 1em;
+      outline: none;
+      background-color: white;
+    }
     
     .SearchFilter__menu {
       position: absolute;
@@ -160,22 +176,6 @@ body {
     }
   }
 }
-
-  .SearchFilter__button {
-      font-family: CamphorThree;
-      line-height: 18px;
-      cursor: pointer;
-      letter-spacing: 0.2px;
-      width: 10em;
-      border-radius: 4px;
-      padding-top: 6px;
-      padding-bottom: 6px;
-      border: 1px solid #dce0e0;
-      font-size: 1.1em;
-      margin-right: 1em;
-      outline: none;
-      background-color: white;
-  }
 
 .JobListingContainer {
   grid-area: JobListingContainer;
