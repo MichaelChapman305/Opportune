@@ -17,13 +17,13 @@ export default class SearchContainer extends Component {
       activeFilterTitle: '',
     };
 
-    this.toggleFilter = this.toggleFilter.bind(this);
+    this.onClickFilter = this.onClickFilter.bind(this);
   }
 
-  toggleFilter(filterTitle) {
-    this.setState(prevState => ({
+  onClickFilter(filterTitle) {
+    this.setState({
       activeFilterTitle: filterTitle,
-    }));
+    });
   }
 
   render() {
@@ -37,25 +37,25 @@ export default class SearchContainer extends Component {
             title="Experience"
             optionsMenu={ExperienceOptionsMenu}
             activeFilterTitle={activeFilterTitle}
-            onClickFilter={this.toggleFilter}
+            onClickFilter={this.onClickFilter}
           />
           <SearchFilter
             title="Location"
             optionsMenu={LocationOptionsMenu}
             activeFilterTitle={activeFilterTitle}
-            onClickFilter={this.toggleFilter}
+            onClickFilter={this.onClickFilter}
           />
           <SearchFilter
             title="Role" 
             optionsMenu={RoleOptionsMenu}
             activeFilterTitle={activeFilterTitle}
-            onClickFilter={this.toggleFilter}
+            onClickFilter={this.onClickFilter}
           />  
           <SearchFilter
             title="Skills" 
             optionsMenu={SkillsOptionsMenu}
             activeFilterTitle={activeFilterTitle}
-            onClickFilter={this.toggleFilter}
+            onClickFilter={this.onClickFilter}
           />
         </div>
       </div>
