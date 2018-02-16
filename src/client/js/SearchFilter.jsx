@@ -17,7 +17,7 @@ export default class SearchFilter extends Component {
   render() {
     // To render a component that was passed as props, the component needs
     // to be PascalCase so "OptionsMenu" and not "optionsMenu"
-    const { title,  activeFilterTitle, optionsMenu: OptionsMenu } = this.props;
+    const { title, activeFilterTitle, optionsMenu: OptionsMenu } = this.props;
     const shouldShowMenu = activeFilterTitle === title;
 
     return (
@@ -31,4 +31,7 @@ export default class SearchFilter extends Component {
 
 SearchFilter.propTypes = {
   title: PropTypes.string.isRequired,
-}
+  activeFilterTitle: PropTypes.string.isRequired,
+  onClickFilter: PropTypes.func.isRequired,
+  optionsMenu: PropTypes.func.isRequired,
+};
