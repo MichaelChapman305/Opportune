@@ -6,7 +6,13 @@ export default class SearchFilter extends Component {
   constructor(props) {
     super(props);
 
+    this.showValue = this.showValue.bind(this);
     this.toggleFilter = this.toggleFilter.bind(this);
+  }
+
+  showValue() {
+    //console.log(e);
+    console.log('whaotea');
   }
 
   toggleFilter() {
@@ -22,8 +28,8 @@ export default class SearchFilter extends Component {
 
     return (
       <div className="SearchFilter">
-        <button className="SearchFilter__button" onClick={this.toggleFilter}>{title}</button>
-        {shouldShowMenu && <OptionsMenu className="SearchFilter__menu" />}
+        <button className="SearchFilter__button" onClick={this.toggleFilter} onBlur={this.props.hideFilter}>{title}</button>
+        {shouldShowMenu && <OptionsMenu className="SearchFilter__menu" showValue={this.showValue} />}
       </div>
     )
   }
@@ -31,7 +37,12 @@ export default class SearchFilter extends Component {
 
 SearchFilter.propTypes = {
   title: PropTypes.string.isRequired,
+<<<<<<< Updated upstream
   activeFilterTitle: PropTypes.string.isRequired,
   onClickFilter: PropTypes.func.isRequired,
   optionsMenu: PropTypes.func.isRequired,
 };
+=======
+  hideFilter: PropTypes.func.isRequired,
+}
+>>>>>>> Stashed changes

@@ -17,11 +17,26 @@ export default class SearchContainer extends Component {
       activeFilterTitle: '',
     };
 
+<<<<<<< Updated upstream
     this.onClickFilter = this.onClickFilter.bind(this);
   }
 
   onClickFilter(filterTitle) {
     this.setState({
+=======
+    this.hideFilter = this.hideFilter.bind(this);
+    this.toggleFilter = this.toggleFilter.bind(this);
+  }
+
+  hideFilter() {
+    setTimeout(() => { this.setState({
+      activeFilterTitle: '',
+    })}, 50);
+  }
+
+  toggleFilter(filterTitle) {
+    this.setState(prevState => ({
+>>>>>>> Stashed changes
       activeFilterTitle: filterTitle,
     });
   }
@@ -34,28 +49,48 @@ export default class SearchContainer extends Component {
         <SearchBar />
         <div className="SearchContainer__filters">
           <SearchFilter
-            title="Experience"
+            title={'Experience'}
             optionsMenu={ExperienceOptionsMenu}
             activeFilterTitle={activeFilterTitle}
+<<<<<<< Updated upstream
             onClickFilter={this.onClickFilter}
+=======
+            onClickFilter={this.toggleFilter}
+            hideFilter={this.hideFilter}
+>>>>>>> Stashed changes
           />
           <SearchFilter
-            title="Location"
+            title={'Location'}
             optionsMenu={LocationOptionsMenu}
             activeFilterTitle={activeFilterTitle}
+<<<<<<< Updated upstream
             onClickFilter={this.onClickFilter}
+=======
+            onClickFilter={this.toggleFilter}
+            hideFilter={this.hideFilter}
+>>>>>>> Stashed changes
           />
           <SearchFilter
-            title="Role" 
+            title={'Role'}
             optionsMenu={RoleOptionsMenu}
             activeFilterTitle={activeFilterTitle}
+<<<<<<< Updated upstream
             onClickFilter={this.onClickFilter}
+=======
+            onClickFilter={this.toggleFilter}
+            hideFilter={this.hideFilter}
+>>>>>>> Stashed changes
           />  
           <SearchFilter
-            title="Skills" 
+            title={'Skills'}
             optionsMenu={SkillsOptionsMenu}
             activeFilterTitle={activeFilterTitle}
+<<<<<<< Updated upstream
             onClickFilter={this.onClickFilter}
+=======
+            onClickFilter={this.toggleFilter}
+            hideFilter={this.hideFilter}
+>>>>>>> Stashed changes
           />
         </div>
       </div>
