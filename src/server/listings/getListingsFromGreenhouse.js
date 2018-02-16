@@ -1,5 +1,6 @@
 const fetch = require('node-fetch');
 const companyNames = require('./companyNames.js');
+const listingUtilities = require('./listingUtilities.js');
 
 function getListingsFromGreenhouse(companyID) {
   return fetch(`https://api.greenhouse.io/v1/boards/${companyID}/jobs?content=true`)
@@ -13,6 +14,7 @@ function getListingsFromGreenhouse(companyID) {
         id: job.id,
         company: companyNames.GREENHOUSE_COMPANIES[companyID],
         title: job.title,
+        experience: listingUtilities.getExperienceLevelFromTitle(job.title),
         description: htmlToPlainText(job.content),
         location: job.location && job.location.name,
         url: job.absolute_url,

@@ -17,6 +17,7 @@ const Schema = mongoose.Schema;
 const jobListing = new Schema({
   'id': String,
   'company': String,
+  'experience': String,
   'description': String,
   'title': String,
   'location': String,

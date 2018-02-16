@@ -1,42 +1,26 @@
 const getListingsFromGreenhouse = require('./getListingsFromGreenhouse');
 const getListingsFromLever = require('./getListingsFromLever');
 const JobListing = require('../models.js').JobListing;
-
-const EXCLUDED_WORDS = [
-  'specialist',
-  'consultant',
-  'trainer',
-  'it',
-  'support',
-  'qa',
-  'quality'
-];
+const listingUtilities = require('./listingUtilities.js');
 
 function combineCompanyListings(greenhouseCompanies, leverCompanies) {
   const greenhousePromise = getCompanyListings(greenhouseCompanies, getListingsFromGreenhouse);
   const leverPromise = getCompanyListings(leverCompanies, getListingsFromLever);
 
   Promise.all([greenhousePromise, leverPromise]).then(data => {
-    const parsedListings = flatten(data).filter(listing => listing);
+    // Flatten the data and remove any undefined entries
+    const listings = flatten(data).filter(listing => listing);
 
     // Clean the data of all non-engineering job listings
-    const filteredListings = parsedListings.filter(listing => {
-      const title = listing.title.toLowerCase();
-
-      if (title.includes('engineer') || title.includes('developer')) {
-        for (let i = 0, len = EXCLUDED_WORDS.length; i < len; i++) {
-          if (title.includes(EXCLUDED_WORDS[i])) {
-            return false;
-          }
-        }
-        return true;
-      }
+    const filteredListings = listings.filter(listing => {
+      return listingUtilities.isEngineeringJob(listing.title);
     });
 
     console.log(filteredListings.length);
     return filteredListings;
   })
   .then(filteredListings => JobListing.insertMany(filteredListings))
+  .then(() => console.log('added'))
   .catch(err => console.error('Error updating database with job listings', err));
 }
 

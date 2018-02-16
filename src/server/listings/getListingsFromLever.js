@@ -1,5 +1,6 @@
 const fetch = require('node-fetch');
 const companyNames = require('./companyNames.js');
+const listingUtilities = require('./listingUtilities.js');
 
 function getListingsFromLever(companyID) {
   return fetch(`https://api.lever.co/v0/postings/${companyID}?&mode=json`)
@@ -13,6 +14,7 @@ function getListingsFromLever(companyID) {
         id: job.id,
         company: companyNames.LEVER_COMPANIES[companyID],
         title: job.text,
+        experience: listingUtilities.getExperienceLevelFromTitle(job.text),
         description: job.descriptionPlain,
         location: job.categories && job.categories.location,
         url: job.hostedUrl,
