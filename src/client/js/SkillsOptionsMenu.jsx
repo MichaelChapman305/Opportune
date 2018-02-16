@@ -6,10 +6,11 @@ export default class SkillsOptionsMenu extends Component {
   render() {
     return (
       <div className={this.props.className}>
-        <a>Javascript</a>
-        <a>PhP</a>
-        <a>C++</a>
-        <a>Javascript, Html5, css, React</a>
+        <a onClick={this.props.changeTitle}>Javascript</a>
+        <a onClick={this.props.changeTitle}>PhP</a>
+        <a onClick={this.props.changeTitle}>C++</a>
+        <a onClick={this.props.changeTitle}>Javascript, Html5, css, React</a>
+        <a onClick={this.props.changeTitle}>none</a>
       </div>
     )
   }

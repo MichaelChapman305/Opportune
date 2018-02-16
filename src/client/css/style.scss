@@ -148,6 +148,10 @@ body {
       margin-right: 1em;
       outline: none;
       background-color: white;
+
+      &:focus {
+        background-color: #8977F8;
+      }
     }
     
     .SearchFilter__menu {
@@ -161,7 +165,7 @@ body {
       height: auto;
       background-color: white;
       box-shadow: .5px .5px 1px .5px rgba(125,125,125,.25);
-
+      
       a {
         padding-top: 10px;
         padding-bottom: 10px;

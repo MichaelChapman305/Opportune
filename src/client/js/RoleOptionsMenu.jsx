@@ -6,9 +6,10 @@ export default class RoleOptionsMenu extends Component {
   render() {
     return (
       <div className={this.props.className}>
-        <a>Frontend</a>
-        <a>Backend</a>
-        <a>Fullstack</a>
+        <a onClick={this.props.changeTitle}>Frontend</a>
+        <a onClick={this.props.changeTitle}>Backend</a>
+        <a onClick={this.props.changeTitle}>Fullstack</a>
+        <a onClick={this.props.changeTitle}>none</a>
       </div>
     )
   }

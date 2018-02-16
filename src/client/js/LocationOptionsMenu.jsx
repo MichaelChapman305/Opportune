@@ -6,10 +6,11 @@ export default class LocationOptionsMenu extends Component {
   render() {
     return (
       <div className={this.props.className}>
-        <a>NY</a>
-        <a>Washington DC</a>
-        <a>San Fran</a>
-        <a>Chicago</a>
+        <a onClick={this.props.changeTitle}>NY</a>
+        <a onClick={this.props.changeTitle}>Washington DC</a>
+        <a onClick={this.props.changeTitle}>San Fran</a>
+        <a onClick={this.props.changeTitle}>Chicago</a>
+        <a onClick={this.props.changeTitle}>none</a>
       </div>
     )
   }

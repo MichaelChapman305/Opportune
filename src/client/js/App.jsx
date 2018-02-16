@@ -14,7 +14,7 @@ class Home extends Component {
 
   render() {
     return (
-      <div className="app-container">
+      <div className="app-container" onClick={this.hideFilter}>
         <Header />
         <SearchContainer />
         <JobListingContainer />

@@ -6,43 +6,61 @@ export default class SearchFilter extends Component {
   constructor(props) {
     super(props);
 
-    this.showValue = this.showValue.bind(this);
+    this.state = {
+      title: '',
+    };
+
+    this.changeTitle = this.changeTitle.bind(this);
     this.toggleFilter = this.toggleFilter.bind(this);
   }
 
-  showValue() {
-    //console.log(e);
-    console.log('whaotea');
+  changeTitle(e) {
+    if (e.target.innerHTML === 'none') {
+      this.setState({
+        title: ''
+      }, this.props.hideFilter());
+    } else {
+      this.setState({
+        title: e.target.innerHTML
+      }, this.props.hideFilter());
+    }
   }
 
   toggleFilter() {
-    const { onClickFilter, title } = this.props;
-    onClickFilter(title);
+    const { onClickFilter, defaultTitle } = this.props;
+    onClickFilter(defaultTitle);
   }
 
   render() {
     // To render a component that was passed as props, the component needs
     // to be PascalCase so "OptionsMenu" and not "optionsMenu"
-    const { title, activeFilterTitle, optionsMenu: OptionsMenu } = this.props;
-    const shouldShowMenu = activeFilterTitle === title;
+    const { defaultTitle, activeFilterTitle, optionsMenu: OptionsMenu } = this.props;
+    const shouldShowMenu = activeFilterTitle === defaultTitle;
 
     return (
       <div className="SearchFilter">
-        <button className="SearchFilter__button" onClick={this.toggleFilter} onBlur={this.props.hideFilter}>{title}</button>
-        {shouldShowMenu && <OptionsMenu className="SearchFilter__menu" showValue={this.showValue} />}
+        <button 
+          className="SearchFilter__button" 
+          value="filterButton" 
+          onClick={this.toggleFilter}
+          {...this.state.title && {style : {backgroundColor: '#8977F8'}}}>
+          {!this.state.title ? this.props.defaultTitle : this.state.title}
+        </button>
+        {shouldShowMenu && <OptionsMenu 
+          className="SearchFilter__menu" 
+          changeTitle={this.changeTitle} 
+        />}
       </div>
-    )
+    );
   }
 }
 
 SearchFilter.propTypes = {
-  title: PropTypes.string.isRequired,
-<<<<<<< Updated upstream
+  defaultTitle: PropTypes.string.isRequired,
   activeFilterTitle: PropTypes.string.isRequired,
   onClickFilter: PropTypes.func.isRequired,
   optionsMenu: PropTypes.func.isRequired,
-};
-=======
   hideFilter: PropTypes.func.isRequired,
-}
->>>>>>> Stashed changes
+};
+
+
