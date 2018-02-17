@@ -43,7 +43,7 @@ export default class SearchFilter extends Component {
           className="SearchFilter__button" 
           value="filterButton" 
           onClick={this.toggleFilter}
-          {...this.state.title && {style : {backgroundColor: '#8977F8'}}}>
+          {...this.state.title && {style : {backgroundColor: '#8977F8', color: 'white'}}}>
           {!this.state.title ? this.props.defaultTitle : this.state.title}
         </button>
         {shouldShowMenu && <OptionsMenu 
