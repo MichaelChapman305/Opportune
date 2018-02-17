@@ -15,14 +15,15 @@ export default class SearchFilter extends Component {
   }
 
   changeTitle(e) {
-    const isOutsideHTML = e.target.innerHTML === 'none';
+    const isOutsideHTML = e.target.innerHTML === 'None';
 
     this.setState({
       title: isOutsideHTML ? '' : e.target.innerHTML,
     }, this.props.onClickFilter(''));
   }
 
-  toggleFilter() {
+  toggleFilter(e) {
+    console.log(this.state.activeFilterTitle);
     const { onClickFilter, defaultTitle } = this.props;
     onClickFilter(defaultTitle);
   }
@@ -35,16 +36,16 @@ export default class SearchFilter extends Component {
 
     return (
       <div className="SearchFilter">
-        <button 
-          className="SearchFilter__button" 
-          value="filterButton" 
+        <button
+          className={'SearchFilter__button' + (this.state.title && this.state.title !== 'None'  || this.props.activeFilterTitle === this.props.defaultTitle ? ' SearchFilter__button--selected' : '')}
+          value="filterButton"
           onClick={this.toggleFilter}
-          {...this.state.title && {style : {backgroundColor: '#8977F8', color: 'white'}}}>
+        >
           {!this.state.title ? this.props.defaultTitle : this.state.title}
         </button>
-        {shouldShowMenu && <OptionsMenu 
-          className="SearchFilter__menu" 
-          changeTitle={this.changeTitle} 
+        {shouldShowMenu && <OptionsMenu
+          className="SearchFilter__menu"
+          changeTitle={this.changeTitle}
         />}
       </div>
     );
@@ -57,5 +58,4 @@ SearchFilter.propTypes = {
   onClickFilter: PropTypes.func.isRequired,
   optionsMenu: PropTypes.func.isRequired,
 };
-
 

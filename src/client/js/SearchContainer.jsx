@@ -23,19 +23,25 @@ export default class SearchContainer extends Component {
   componentDidMount() {
     document.addEventListener('click', (e) => {
       e.preventDefault();
-
+      
       if (e.target.value !== 'filterButton') {
         this.setState({
-          activeFilterTitle: ''
+          activeFilterTitle: '',
         });
       }
     });
   }
 
    onClickFilter(filterTitle) {
-    this.setState({
-      activeFilterTitle: filterTitle,
-    });
+    if (this.state.activeFilterTitle !== filterTitle) {
+      this.setState({
+        activeFilterTitle: filterTitle,
+      });
+    } else {
+      this.setState({
+        activeFilterTitle: ''
+      })
+    }
   }
 
   render() {

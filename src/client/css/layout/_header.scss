@@ -1,0 +1,31 @@
+.Header {
+  grid-area: Header;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 5em;
+  margin-right: 10em;
+
+  .Header__title {
+    font-size: 4.8em;
+    font-weight: 300;
+  }
+
+  .Header__title::first-letter {
+    background: linear-gradient(to bottom, #8977F8 10%, #CE9FFC 90%);
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+
+  .Header__button {
+    font-size: 1.5em;
+  }
+
+  .Header__button--subscribe,
+  .Header__button--donate {
+    margin-right: 1em;
+  }
+}

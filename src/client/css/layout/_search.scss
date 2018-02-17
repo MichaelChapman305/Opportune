@@ -1,0 +1,123 @@
+.SearchContainer {
+  grid-area: SearchContainer;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  justify-self: center;
+  align-self: start;
+
+  .SearchBar {
+    display: flex;
+    align-items: center;
+
+    .SearchBar__input {
+      font-family: CamphorThree;
+      width: 23em;
+      height: 1.75em;
+      font-size: 2.25em;
+      background-color: #fafafa;
+      border-right: none;
+      border-left: none;
+      border-top: none;
+      border-bottom: 1px solid black;
+      outline: none;
+      padding: 5px 0px 0 50px;
+      -moz-appearance: none;
+
+      &::-webkit-search-decoration,
+      &::-webkit-search-results-button,
+      &::-webkit-search-results-decoration,
+      &::-webkit-search-cancel-button {
+        -webkit-appearance: none;
+      }
+
+      &::-webkit-search-cancel-button {
+        background-image: url('/images/search-cancel-icon.svg');
+        height: 18px;
+        width: 18px;
+        margin-top: .5em;
+        margin-right: .25em;
+      }
+    }
+
+    img {
+      position: absolute;
+      top: 10.5em;
+    }
+  }
+
+  .SearchContainer__filters {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: nowrap;
+    margin-top: 1em;
+
+    .SearchFilter {
+      position: relative;
+    }
+
+    .SearchFilter__button {
+      font-family: CamphorThree;
+      line-height: 18px;
+      cursor: pointer;
+      letter-spacing: 0.2px;
+      width: 10em;
+      border-radius: 4px;
+      padding-top: 6px;
+      padding-bottom: 6px;
+      border: 1px solid #dce0e0;
+      font-size: 1.1em;
+      margin-right: 1em;
+      outline: none;
+      background-color: white;
+
+      
+    }
+
+    .SearchFilter__button--selected {
+      background-color: #8977F8;
+      color: white;
+      font-family: CamphorThree;
+      line-height: 18px;
+      cursor: pointer;
+      letter-spacing: 0.2px;
+      width: 10em;
+      border-radius: 4px;
+      padding-top: 6px;
+      padding-bottom: 6px;
+      border: 1px solid #dce0e0;
+      font-size: 1.1em;
+      margin-right: 1em;
+      outline: none;
+    }
+    
+    .SearchFilter__menu {
+      position: absolute;
+      top: 48px !important;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      background-color: white;
+      width: 11em;
+      height: auto;
+      background-color: white;
+      box-shadow: .5px .5px 1px .5px rgba(125,125,125,.25);
+      
+      a {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 20px;
+        padding-right: 1px;
+
+        &:hover {
+          cursor: pointer;
+          background-color: #E5E5E5;
+        }
+      }
+    }
+  }
+}
