@@ -4,12 +4,14 @@ import PropTypes from 'prop-types';
 
 export default class RoleOptionsMenu extends Component {
   render() {
+    const { changeTitle, className } = this.props;
+
     return (
-      <div className={this.props.className}>
-        <a onClick={this.props.changeTitle}>Frontend</a>
-        <a onClick={this.props.changeTitle}>Backend</a>
-        <a onClick={this.props.changeTitle}>Fullstack</a>
-        <a onClick={this.props.changeTitle}>none</a>
+      <div className={className} onClick={changeTitle}>
+        <a>Frontend</a>
+        <a>Backend</a>
+        <a>Fullstack</a>
+        <a>None</a>
       </div>
     )
   }
@@ -17,4 +19,5 @@ export default class RoleOptionsMenu extends Component {
 
 RoleOptionsMenu.propTypes = {
   className: PropTypes.string,
+  changeTitle: PropTypes.func.isRequired,
 };

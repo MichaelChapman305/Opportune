@@ -4,13 +4,15 @@ import PropTypes from 'prop-types';
 
 export default class SkillsOptionsMenu extends Component {
   render() {
+    const { changeTitle, className } = this.props;
+
     return (
-      <div className={this.props.className}>
-        <a onClick={this.props.changeTitle}>Javascript</a>
-        <a onClick={this.props.changeTitle}>PhP</a>
-        <a onClick={this.props.changeTitle}>C++</a>
-        <a onClick={this.props.changeTitle}>Javascript, Html5, css, React</a>
-        <a onClick={this.props.changeTitle}>none</a>
+      <div className={className} onClick={changeTitle}>
+        <a>Javascript</a>
+        <a>PhP</a>
+        <a>C++</a>
+        <a>Javascript, Html5, css, React</a>
+        <a>None</a>
       </div>
     )
   }
@@ -18,4 +20,5 @@ export default class SkillsOptionsMenu extends Component {
 
 SkillsOptionsMenu.propTypes = {
   className: PropTypes.string,
+  changeTitle: PropTypes.func.isRequired,
 };

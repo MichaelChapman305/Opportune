@@ -15,15 +15,11 @@ export default class SearchFilter extends Component {
   }
 
   changeTitle(e) {
-    if (e.target.innerHTML === 'none') {
-      this.setState({
-        title: ''
-      }, this.props.hideFilter());
-    } else {
-      this.setState({
-        title: e.target.innerHTML
-      }, this.props.hideFilter());
-    }
+    const isOutsideHTML = e.target.innerHTML === 'none';
+
+    this.setState({
+      title: isOutsideHTML ? '' : e.target.innerHTML,
+    }, this.props.onClickFilter(''));
   }
 
   toggleFilter() {
@@ -60,7 +56,6 @@ SearchFilter.propTypes = {
   activeFilterTitle: PropTypes.string.isRequired,
   onClickFilter: PropTypes.func.isRequired,
   optionsMenu: PropTypes.func.isRequired,
-  hideFilter: PropTypes.func.isRequired,
 };
 
 

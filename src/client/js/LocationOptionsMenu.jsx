@@ -4,13 +4,15 @@ import PropTypes from 'prop-types';
 
 export default class LocationOptionsMenu extends Component {
   render() {
+    const { changeTitle, className } = this.props;
+
     return (
-      <div className={this.props.className}>
-        <a onClick={this.props.changeTitle}>NY</a>
-        <a onClick={this.props.changeTitle}>Washington DC</a>
-        <a onClick={this.props.changeTitle}>San Fran</a>
-        <a onClick={this.props.changeTitle}>Chicago</a>
-        <a onClick={this.props.changeTitle}>none</a>
+      <div className={className} onClick={changeTitle}>
+        <a>NY</a>
+        <a>Washington DC</a>
+        <a>San Fran</a>
+        <a>Chicago</a>
+        <a>None</a>
       </div>
     )
   }
@@ -18,4 +20,5 @@ export default class LocationOptionsMenu extends Component {
 
 LocationOptionsMenu.propTypes = {
   className: PropTypes.string,
+  changeTitle: PropTypes.func.isRequired,
 };

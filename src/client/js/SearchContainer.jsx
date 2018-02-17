@@ -17,24 +17,18 @@ export default class SearchContainer extends Component {
       activeFilterTitle: '',
     };
 
-    this.hideFilter = this.hideFilter.bind(this);
     this.onClickFilter = this.onClickFilter.bind(this);
   }
 
   componentDidMount() {
     document.addEventListener('click', (e) => {
       e.preventDefault();
+
       if (e.target.value !== 'filterButton') {
         this.setState({
           activeFilterTitle: ''
         });
       }
-    });
-  }
-
-  hideFilter(e) {
-    this.setState({
-      activeFilterTitle: ''
     });
   }
 
@@ -52,32 +46,28 @@ export default class SearchContainer extends Component {
         <SearchBar />
         <div className="SearchContainer__filters">
           <SearchFilter
-            defaultTitle={'Experience'}
+            defaultTitle="Experience"
             optionsMenu={ExperienceOptionsMenu}
             activeFilterTitle={activeFilterTitle}
             onClickFilter={this.onClickFilter}
-            hideFilter={this.hideFilter}
           />
           <SearchFilter
-            defaultTitle={'Location'}
+            defaultTitle="Location"
             optionsMenu={LocationOptionsMenu}
             activeFilterTitle={activeFilterTitle}
             onClickFilter={this.onClickFilter}
-            hideFilter={this.hideFilter}
           />
           <SearchFilter
-            defaultTitle={'Role'}
+            defaultTitle="Role"
             optionsMenu={RoleOptionsMenu}
             activeFilterTitle={activeFilterTitle}
             onClickFilter={this.onClickFilter}
-            hideFilter={this.hideFilter}
           />  
           <SearchFilter
-            defaultTitle={'Skills'}
+            defaultTitle="Skills"
             optionsMenu={SkillsOptionsMenu}
             activeFilterTitle={activeFilterTitle}
             onClickFilter={this.onClickFilter}
-            hideFilter={this.hideFilter}
           />
         </div>
       </div>
