@@ -14,6 +14,7 @@
 
     .SearchBar__input {
       font-family: CamphorThree;
+      color: #484848;
       width: 23em;
       height: 1.75em;
       font-size: 2.25em;
@@ -73,26 +74,23 @@
       font-size: 1.1em;
       margin-right: 1em;
       outline: none;
-      background-color: white;
+      background-color: white; 
 
-      
+      &:hover {
+        background-color: #dce0e0;
+        border-color: #dce0e0;
+      }
     }
 
     .SearchFilter__button--selected {
       background-color: #8977F8;
+      border-color: #8977F8;
       color: white;
-      font-family: CamphorThree;
-      line-height: 18px;
-      cursor: pointer;
-      letter-spacing: 0.2px;
-      width: 10em;
-      border-radius: 4px;
-      padding-top: 6px;
-      padding-bottom: 6px;
-      border: 1px solid #dce0e0;
-      font-size: 1.1em;
-      margin-right: 1em;
-      outline: none;
+
+      &:hover {
+        background-color: #8977F8;
+        border-color: #8977F8;
+      }
     }
     
     .SearchFilter__menu {
