@@ -21,6 +21,7 @@ const jobListing = new Schema({
   'description': String,
   'title': String,
   'location': String,
+  'updated_at': { type: Date, default: Date.now },
 });
 
 // Index all string fields in the jobListing schema
