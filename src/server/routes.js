@@ -35,7 +35,7 @@ router.get('/jobs', (req, res) => {
   }
 
   addToSearchQuery('$text', '$search', query.text);
-  addToSearchQuery('experience', '$in', quey.experienceLevels);
+  addToSearchQuery('experience', '$in', query.experienceLevels);
   addToSearchQuery('location', '$in', query.locations);
   addToSearchQuery('role', '$in', query.roles);
   addToSearchQuery('skills', '$in', query.skills);
