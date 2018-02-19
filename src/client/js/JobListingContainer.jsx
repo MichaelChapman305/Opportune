@@ -16,22 +16,20 @@ export default class JobListingContainer extends Component {
           <a>Showing {this.props.jobs.length} jobs</a>
           <a>Sort by</a>
         </div>
-        {this.props.jobs.map(job => {
-          return (
-            <JobListing 
-              key={job.company + '-' + job.id}
-              company={job.company}
-              title={job.title}                
-              applyUrl={job.url}
-              location={job.location}
-            />
-          );
-        })}
+        {this.props.jobs.map(job =>
+          <JobListing
+            key={`${job.company}-${job.id}`}
+            company={job.company}
+            title={job.title}
+            applyUrl={job.url}
+            location={job.location}
+          />
+        )}
       </div>
     );
   }
 }
 
 JobListingContainer.propTypes = {
-  jobs: PropTypes.Array,
+  jobs: PropTypes.array,
 };

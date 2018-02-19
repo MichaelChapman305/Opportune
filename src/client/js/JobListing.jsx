@@ -8,7 +8,7 @@ export default class JobListing extends Component {
       <div className="JobListing">
         <div className="JobListing__info">
           <h2 className="JobListing__title">
-            {this.props.title} at <b class="JobListing__company">{this.props.company}</b>
+            {this.props.title} at <b className="JobListing__company">{this.props.company}</b>
           </h2>
           <h3 className="JobListing__location">{this.props.location}</h3>
         </div>

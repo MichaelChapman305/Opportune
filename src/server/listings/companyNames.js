@@ -17,7 +17,7 @@ const LEVER_COMPANIES = {
   socialtables: 'Social Tables',
   nava: 'Nava',
   kensho: 'Kensho',
-  upside: 'Upside',
+  upside: 'Upside Travels',
   etsy: 'Etsy',
   1776: '1776',
   neuralink: 'Neuralink',
