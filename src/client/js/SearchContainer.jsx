@@ -30,7 +30,7 @@ export default class SearchContainer extends Component {
     });
   }
 
-   onClickFilter(filterTitle) {
+  onClickFilter(filterTitle) {
     // If a person click's the filter when they already have that filter opened,
     // we should reset the activeFilterTitle in order to close the filter's menu
     if (this.state.activeFilterTitle === filterTitle) {
@@ -66,7 +66,7 @@ export default class SearchContainer extends Component {
             optionsMenu={RoleOptionsMenu}
             activeFilterTitle={activeFilterTitle}
             onClickFilter={this.onClickFilter}
-          />  
+          />
           <SearchFilter
             defaultTitle="Skills"
             optionsMenu={SkillsOptionsMenu}
@@ -75,6 +75,6 @@ export default class SearchContainer extends Component {
           />
         </div>
       </div>
-    )
+    );
   }
 }

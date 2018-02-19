@@ -3,63 +3,68 @@
   grid-area: JobListingContainer;
   display: flex;
   flex-direction: column;
-  height: minmax(20em, auto);
+
+  .JobListingContainer__info,
+  .JobListing {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    flex: 0 0 auto;
+    align-self: center;
+  }
 
   .JobListingContainer__info {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    width: 50%;
     font-size: 18px;
     margin-bottom: 1em;
-    margin-left: 7.25em;
-    margin-right: 12em;
   }
 
   .JobListing {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-self: center;
     align-items: center;
+    width: 50%;
     background-color: white;
-    width: 26em;
-    height: 3.75em;
-    font-size: 28px;
-    box-shadow: 0px 0px .5px .75px rgba(125,125,125,.25);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+    padding: 1em;
     margin-bottom: 1em;
 
     .JobListing__info {
       display: flex;
       flex-direction: column;
-      margin-left: 1em;
+      width: 100%;
+    }
 
-      b {
-      	color: black;
-      }
+    .JobListing__title {
+      font-size: 18px;
+      margin-bottom: .4em;
+      width: 80%;
+    }
 
-      .JobListing__info--location {
-      	margin-top: .85em;
-      	font-size: 18px;
-      	color: lighten(#484848, 30%);
-      }
+    .JobListing__company {
+      font-family: Camphor;
+    }
+
+    .JobListing__location {
+      font-size: 16px;
+      color: #959595;
     }
 
     .JobListing__apply {
       font-family: CamphorThree;
       background-color: $primary-color;
       background: linear-gradient(to bottom, $primary-color 10%, #CE9FFC 90%);
+      font-weight: 600;
+      display: inline-block;
+      height: 40px;
+      line-height: 40px;
+      padding: 0 14px;
       color: white;
-      width: 7.25em;
-      height: 2em;
+      text-decoration: none;
       font-size: 18px;
       letter-spacing: 1.25px;
       outline: none;
-      margin-right: 3em;
       border-radius: 4px;
-      
-      &:hover {
-        cursor: pointer;
-      }
+
     }
   }
 }

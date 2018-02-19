@@ -25,6 +25,9 @@ input::-moz-focus-inner {
 body {
   background-color: $background-color;
   color: $text-color;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .app-container {

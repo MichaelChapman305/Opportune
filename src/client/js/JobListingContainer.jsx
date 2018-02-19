@@ -9,38 +9,33 @@ export default class JobListingContainer extends Component {
     super(props);
 
     this.state = {
-      jobListings: [{company: 'Yelp', jobTitle: 'Software Engineering', position: 'intern', location: "Tyson's Corner, VA", key: 1}, {company: 'Yelp', jobTitle: 'Software Engineering', position: 'intern', location: "Tyson's Corner, VA", key: 1}],
-      totalListings: 0
+      numJobs: 0,
     }
   }
 
-  componentDidMount() {
-    this.setState({
-      totalListings: this.state.jobListings.length
-    });
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.jobs.length !== this.state.numJobs) {
+      this.setState({
+        numJobs: nextProps.jobs.length,
+      });
+    }
   }
-
-  /*
-    Data retrieving API will go here
-    Data will be placed in jobListings array
-  */
 
   render() {
     return (
       <div className="JobListingContainer">
         <div className="JobListingContainer__info">
-          <a>Showing {this.state.totalListings} jobs</a>
+          <a>Showing {this.state.numJobs} jobs</a>
           <a>Sort by</a>
         </div>
-        {this.state.jobListings.map((listing) => {
+        {this.props.jobs.map(job => {
           return (
             <JobListing 
-              //These are to be changed to the actual return values
-              company={listing.company}
-              jobTitle={listing.jobTitle}                
-              position={listing.position}
-              location={listing.location}
-              key={listing.key}
+              key={job.company + '-' + job.id}
+              company={job.company}
+              title={job.title}                
+              applyUrl={job.url}
+              location={job.location}
             />
           );
         })}
@@ -48,3 +43,7 @@ export default class JobListingContainer extends Component {
     );
   }
 }
+
+JobListingContainer.propTypes = {
+  jobs: PropTypes.Array,
+};

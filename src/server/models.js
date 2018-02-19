@@ -21,6 +21,7 @@ const jobListing = new Schema({
   'description': String,
   'title': String,
   'location': String,
+  'url': String,
   'updated_at': { type: Date, default: Date.now },
 });
 

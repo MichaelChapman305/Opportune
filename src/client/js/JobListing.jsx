@@ -7,18 +7,28 @@ export default class JobListing extends Component {
     return (
       <div className="JobListing">
         <div className="JobListing__info">
-          <a>{this.props.jobTitle} {this.props.position} at <b>{this.props.company}</b></a>
-          <a className="JobListing__info--location">{this.props.location}</a>
+          <h2 className="JobListing__title">
+            {this.props.title} at <b class="JobListing__company">{this.props.company}</b>
+          </h2>
+          <h3 className="JobListing__location">{this.props.location}</h3>
         </div>
-        <button className="JobListing__apply">APPLY</button>
+        <a className="JobListing__apply" href={this.props.applyUrl}>APPLY</a>
       </div>
     );
   }
 }
 
 JobListing.propTypes = {
-  company: PropTypes.string.isRequired,
-  jobTitle: PropTypes.string.isRequired,
-  position: PropTypes.string.isRequired,
-  location: PropTypes.string.isRequired,
+  company: PropTypes.string,
+  title: PropTypes.string,
+  location: PropTypes.string,
+  applyUrl: PropTypes.string,
 };
+
+JobListing.defaultProps = {
+  company: 'Unknown',
+  title: 'Unknown',
+  location: 'Unknown',
+  applyUrl: '',
+};
+
