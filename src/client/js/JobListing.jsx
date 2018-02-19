@@ -12,7 +12,7 @@ export default class JobListing extends Component {
         </div>
         <button className="JobListing__apply">APPLY</button>
       </div>
-    )
+    );
   }
 }
 
@@ -20,5 +20,5 @@ JobListing.propTypes = {
   company: PropTypes.string.isRequired,
   jobTitle: PropTypes.string.isRequired,
   position: PropTypes.string.isRequired,
-  location: PropTypes.string.isRequired
-}
+  location: PropTypes.string.isRequired,
+};
