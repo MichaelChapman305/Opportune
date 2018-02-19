@@ -7,25 +7,13 @@ import JobListing from './JobListing.jsx';
 export default class JobListingContainer extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      numJobs: 0,
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.jobs.length !== this.state.numJobs) {
-      this.setState({
-        numJobs: nextProps.jobs.length,
-      });
-    }
   }
 
   render() {
     return (
       <div className="JobListingContainer">
         <div className="JobListingContainer__info">
-          <a>Showing {this.state.numJobs} jobs</a>
+          <a>Showing {this.props.jobs.length} jobs</a>
           <a>Sort by</a>
         </div>
         {this.props.jobs.map(job => {
