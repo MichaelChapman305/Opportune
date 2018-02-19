@@ -14,11 +14,11 @@
 
     .SearchBar__input {
       font-family: CamphorThree;
-      color: #484848;
+      color: $text-color;
       width: 23em;
       height: 1.75em;
       font-size: 2.25em;
-      background-color: #fafafa;
+      background-color: $background-color;
       border-right: none;
       border-left: none;
       border-top: none;
@@ -70,26 +70,26 @@
       border-radius: 4px;
       padding-top: 6px;
       padding-bottom: 6px;
-      border: 1px solid #dce0e0;
+      border: 1px solid $shadow-color;
       font-size: 1.1em;
       margin-right: 1em;
       outline: none;
       background-color: white; 
 
       &:hover {
-        background-color: #dce0e0;
-        border-color: #dce0e0;
+        background-color: $shadow-color;
+        border-color: $shadow-color;
       }
     }
 
     .SearchFilter__button--selected {
-      background-color: #8977F8;
-      border-color: #8977F8;
+      background-color: $primary-color;
+      border-color: $primary-color;
       color: white;
 
       &:hover {
-        background-color: #8977F8;
-        border-color: #8977F8;
+        background-color: $primary-color;
+        border-color: $primary-color;
       }
     }
     

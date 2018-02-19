@@ -21,9 +21,7 @@ export default class SearchContainer extends Component {
   }
 
   componentDidMount() {
-    document.addEventListener('click', (e) => {
-      e.preventDefault();
-      
+    document.addEventListener('click', (e) => {      
       if (e.target.value !== 'filterButton') {
         this.setState({
           activeFilterTitle: '',

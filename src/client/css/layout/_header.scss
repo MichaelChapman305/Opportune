@@ -14,7 +14,7 @@
   }
 
   .Header__title::first-letter {
-    background: linear-gradient(to bottom, #8977F8 10%, #CE9FFC 90%);
+    background: linear-gradient(to bottom, $primary-color 10%, #CE9FFC 90%);
     color: transparent;
     -webkit-background-clip: text;
     background-clip: text;

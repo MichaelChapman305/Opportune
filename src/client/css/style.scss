@@ -1,7 +1,5 @@
-@import './layout/camphor.scss';
-@import './layout/header.scss';
-@import './layout/search.scss';
-@import './layout/jobListings.scss';
+@import 'layout/camphor',
+        'utilities/variables';
 
 * {
   box-sizing: border-box;
@@ -25,20 +23,24 @@ input::-moz-focus-inner {
 }
 
 body {
-  background-color: #FAFAFA;
-  color: #484848;
+  background-color: $background-color;
+  color: $text-color;
 }
 
 .app-container {
   font-family: CamphorThree;
-  background-color: #FAFAFA;
+  background-color: $background-color;
   height: 100vh;
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;
-  grid-template-rows: 150px auto minmax(150px, auto);
+  grid-template-rows: 150px 175px minmax(150px, auto);
   grid-gap: 5px;
   grid-template-areas:
     "Header Header Header"
     "SearchContainer SearchContainer SearchContainer"
     "JobListingContainer JobListingContainer JobListingContainer";
 }
+
+@import 'layout/header',
+        'layout/search',
+        'layout/jobListings';
