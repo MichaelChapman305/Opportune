@@ -24,7 +24,7 @@ class Home extends Component {
   }
 
   searchListings(query) {
-    return fetch('/jobs/?query=' + JSON.stringify({text: query.target.value}))
+    return fetch('/jobs?query=' + JSON.stringify({ text: query.target.value }))
       .then(res => res.json())
       .then(json => this.setState({ jobs: json }));
   }
