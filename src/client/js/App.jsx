@@ -9,7 +9,7 @@ import Header from './Header.jsx';
 import SearchContainer from './SearchContainer.jsx';
 import JobListingContainer from './JobListingContainer.jsx';
 
-const JOBS_URI = '/jobs';
+const JOBS_URI = '/jobs/';
 
 class Home extends Component {
   constructor(props) {
@@ -19,6 +19,14 @@ class Home extends Component {
       jobs: [],
       searchText: '',
     }
+
+    this.searchListings = this.searchListings.bind(this);
+  }
+
+  searchListings(query) {
+    return fetch('/jobs/?query=' + JSON.stringify({text: query.target.value}))
+      .then(res => res.json())
+      .then(json => this.setState({ jobs: json }));
   }
 
   fetchJobs(query) {
@@ -35,7 +43,7 @@ class Home extends Component {
     return (
       <div className="app-container">
         <Header />
-        <SearchContainer searchText={this.state.searchText} />
+        <SearchContainer searchListings={this.searchListings} />
         <JobListingContainer jobs={this.state.jobs} />
       </div>
     );

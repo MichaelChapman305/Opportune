@@ -1,13 +1,12 @@
 const express = require('express');
 const router = express.Router();
-
 const JobListing = require('./models.js').JobListing;
 
 router.get('/', (req, res) => {
   res.sendFile('index.html', { root: '.' });
 });
 
-router.get('/jobs', (req, res) => {
+router.get('/jobs/', (req, res) => {
   const queryText = req.query.query;
   const searchQuery = {};
 
@@ -26,7 +25,7 @@ router.get('/jobs', (req, res) => {
     const addToSearchQuery = (field, queryOperator, item) => {
       if (item) {
         searchQuery[field] = {
-          queryOperator: item,
+          [queryOperator]: item,
         };
       }
     }
