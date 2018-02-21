@@ -16,8 +16,7 @@ router.get('/jobs', (req, res) => {
   let query = {};
 
   try {
-    const decodedQueryText = decodeURIComponent(queryText);
-    query = JSON.parse(decodedQueryText);
+    query = JSON.parse(queryText);
   }
   catch (e) {
     return res.status(400).send({ error: e });

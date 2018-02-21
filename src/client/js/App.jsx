@@ -17,14 +17,13 @@ class Home extends Component {
 
     this.state = {
       jobs: [],
-      searchText: '',
     }
 
     this.searchListings = this.searchListings.bind(this);
   }
 
   searchListings(query) {
-    return fetch('/jobs?query=' + JSON.stringify({ text: query.target.value }))
+    return fetch('/jobs?query=' + JSON.stringify({ text: query }))
       .then(res => res.json())
       .then(json => this.setState({ jobs: json }));
   }
@@ -43,7 +42,9 @@ class Home extends Component {
     return (
       <div className="app-container">
         <Header />
-        <SearchContainer searchListings={this.searchListings} />
+        <SearchContainer 
+          searchListings={this.searchListings}
+        />
         <JobListingContainer jobs={this.state.jobs} />
       </div>
     );
