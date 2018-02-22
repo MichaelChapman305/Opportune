@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const JobListing = require('./models.js').JobListing;
+const JobListing = require('./models.js');
 
 const ORDER_BY_SCORE = { 
   score: { 

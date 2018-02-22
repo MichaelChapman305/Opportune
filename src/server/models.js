@@ -16,13 +16,14 @@ db.once('open', () => {
 const Schema = mongoose.Schema;
 const jobListing = new Schema({
   id: String,
-  company: String,
-  experience: String,
-  description: String,
-  title: String,
-  location: String,
+  company: { type: String, trim: true },
+  experience: { type: String, trim: true },
+  description: { type: String, trim: true },
+  title: { type: String, trim: true },
+  location: { type: String, trim: true },
   url: String,
-  updated_at: { type: Date, default: Date.now },
+}, {
+  timestamps: true,
 });
 
 // Index important fields in the jobListing schema with search weights
@@ -37,7 +38,7 @@ jobListing.index(
   },
   {
     weights: {
-      company: 8,
+      company: 14,
       experience: 12,
       description: 1,
       title: 12,
@@ -48,4 +49,4 @@ jobListing.index(
 
 const JobListing = mongoose.model('JobListing', jobListing);
 
-module.exports.JobListing = JobListing;
+module.exports = JobListing;
