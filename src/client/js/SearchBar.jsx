@@ -22,7 +22,13 @@ export default class SearchBar extends Component {
 
     this.handleChange = debounce(searchText => {
       this.setState({ searchText }, () => this.props.searchListings(searchText));
-    }, 500) 
+    }, 500)
+
+    this.handle = this.handle.bind(this);
+  }
+
+  handle(e) {
+    this.handleChange(e.target.value);
   }
 
   render() {
@@ -31,7 +37,7 @@ export default class SearchBar extends Component {
         <img src="./images/search-icon.svg" alt="Search icon" />
         <input
           className="SearchBar__input"
-          onChange={e => this.handleChange(e.target.value)}
+          onChange={this.handle}
           type="search"
           placeholder="Find your dream job"
           autoFocus
