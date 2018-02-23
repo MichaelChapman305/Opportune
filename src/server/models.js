@@ -38,7 +38,7 @@ jobListing.index(
   },
   {
     weights: {
-      company: 14,
+      company: 12,
       experience: 12,
       description: 1,
       title: 12,
