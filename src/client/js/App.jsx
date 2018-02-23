@@ -17,8 +17,9 @@ class Home extends Component {
     super(props);
 
     this.state = {
+      isLoading: false,
       jobs: [],
-      showSubscription: false,
+      showSubscription: false
     };
 
     this.onToggleSubscription = this.onToggleSubscription.bind(this);
@@ -33,17 +34,19 @@ class Home extends Component {
 
   fetchJobs(query) {
     if (query) {
-      return fetch(`/jobs?query=${JSON.stringify({ text: query })}`)
-        .then(res => res.json())
-        .then(json => this.setState({ jobs: json }));
+    return fetch(`/jobs?query=${JSON.stringify({ text: query })}`)
+      .then(res => res.json())
+      .then(json => this.setState({ jobs: json }));
     }
     return fetch(JOBS_URI)
       .then(res => res.json())
-      .then(json => this.setState({ jobs: json }));
+      .then(json => this.setState({ jobs: json, isLoading: false }));
   }
 
   componentDidMount() {
-    this.fetchJobs();
+    this.setState({
+      isLoading: true
+    }, () => this.fetchJobs());
   }
 
   render() {
@@ -61,7 +64,8 @@ class Home extends Component {
             showSubscription={this.state.showSubscription}
           />
         }
-        {this.state.jobs.length === 0 ?
+        {this.state.isLoading && <div className='loading'></div> }
+        {this.state.jobs.length === 0 && !this.state.isLoading ?
           <div className="no-results">
             <h1>No search results found.</h1>
             <h3>How about trying <a>new graduate jobs in San Fransisco</a> or <a>roles at FinTech companies</a>?</h3>
