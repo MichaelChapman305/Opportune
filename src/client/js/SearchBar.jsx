@@ -21,7 +21,7 @@ export default class SearchBar extends Component {
     }
 
     this.handleChange = debounce(searchText => {
-      this.setState({ searchText }, () => this.props.searchListings(searchText));
+      this.setState({ searchText }, () => this.props.fetchJobs(searchText));
     }, 500)
 
     this.handle = this.handle.bind(this);

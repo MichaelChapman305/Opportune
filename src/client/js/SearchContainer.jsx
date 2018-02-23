@@ -48,7 +48,7 @@ export default class SearchContainer extends Component {
     return (
       <div className="SearchContainer">
         <SearchBar 
-        searchListings={this.props.searchListings}
+        fetchJobs={this.props.fetchJobs}
         />
         <div className="SearchContainer__filters">
           <SearchFilter

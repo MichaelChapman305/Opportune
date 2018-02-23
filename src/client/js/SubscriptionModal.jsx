@@ -18,15 +18,15 @@ export default class SubscriptionModal extends Component {
   render() {
     return (
       <div className="SubscriptionModal" onClick={this.onSubscriptionClick}>
-        <p>Want new weekly job listings delivered right to your inbox?</p>
+        <p>Get new weekly job listings delivered right to your inbox!</p>
         <form className="SubscriptionModal__form">
           <p>Email Address</p>
-          <input className="SubscriptionModal__form--email"></input>
+          <input className="SubscriptionModal__email"></input>
           <p>First Name</p>
-          <input className="SubscriptionModal__form--firstName"></input>
+          <input className="SubscriptionModal__firstName"></input>
           <p>Last Name</p>
-          <input className="SubscriptionModal__form--lastName"></input>
-          <div className="SubscriptionModal__form--submit" type="submit" value='subscription'><h4>SUBSCRIBE</h4></div>
+          <input className="SubscriptionModal__lastName"></input>
+          <div className="SubscriptionModal__submit" type="submit" value='subscription'><h4>SUBSCRIBE</h4></div>
         </form>
       </div>
     );
