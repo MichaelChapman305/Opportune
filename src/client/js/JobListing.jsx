@@ -12,7 +12,7 @@ export default class JobListing extends Component {
           </h2>
           <h3 className="JobListing__location">{this.props.location}</h3>
         </div>
-        <a className="JobListing__apply" href={this.props.applyUrl}>APPLY</a>
+        <a className="JobListing__apply" href={this.props.applyUrl} target="_blank">APPLY</a>
       </div>
     );
   }

@@ -7,6 +7,7 @@ const EXCLUDED_WORDS = [
   'qa',
   'quality',
   'mechanical',
+  'customer',
 ];
 
 function isEngineeringJob(title) {
