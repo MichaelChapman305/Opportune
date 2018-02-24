@@ -1,27 +1,9 @@
-const path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const merge = require('webpack-merge');
+const common = require('webpack.config-common.js');
 
-module.exports = {
-  entry: ['whatwg-fetch', './src/client/jsx/App.jsx'],
-  output: {
-    path: path.resolve(__dirname, './dist'),
-    filename: 'bundle.js',
-  },
-  module: {
-    loaders: [
-      {
-        test: /\.jsx?$/,
-        exclude: '/node_modules/',
-        loader: 'babel-loader',
-      },
-      {
-        test: /\.(s?)css$/,
-        exclude: '/node_modules/',
-        use: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader!sass-loader' }),
-      },
-    ],
-  },
-  plugins: [
-    new ExtractTextPlugin('style.css'),
-  ],
-};
+ module.exports = merge(common, {
+  devtool: 'inline-source-map',
+  devServer: {
+    contentBase: './dist'
+  }
+});
