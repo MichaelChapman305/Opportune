@@ -77,6 +77,7 @@ const GREENHOUSE_COMPANIES = {
   leanplum: 'Leanplum',
   brave: 'Brave',
   nuna: 'Nuna Health',
+  dropbox: 'Dropbox',
   braintree: 'Braintree',
   bluebeam: 'Bluebeam',
   datadog: 'Datadog',

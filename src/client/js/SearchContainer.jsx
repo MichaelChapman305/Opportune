@@ -75,6 +75,7 @@ export default class SearchContainer extends Component {
             activeFilterTitle={activeFilterTitle}
             onClickFilter={this.onClickFilter}
           />
+          <a className="SearchContainer__resetFilters">RESET FILTERS</a>
         </div>
       </div>
     );

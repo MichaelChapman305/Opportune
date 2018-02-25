@@ -9,8 +9,9 @@
   margin-right: 10em;
 
   .Header__title {
-    font-size: 4.8em;
-    font-weight: 300;
+    font-size: 3rem;
+    letter-spacing: .5px;
+    font-family: CamphorThree;
   }
 
   .Header__title::first-letter {
@@ -21,8 +22,9 @@
   }
 
   .Header__button {
-    font-size: 1.5em;
-    
+    font-size: 1.2rem;
+    font-family: Camphor;
+
     &:hover {
       cursor: pointer;
     }
@@ -30,6 +32,6 @@
 
   .Header__button--subscribe,
   .Header__button--donate {
-    margin-right: 1em;
+    margin-right: 1.8em;
   }
 }

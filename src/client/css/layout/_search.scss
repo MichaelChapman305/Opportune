@@ -11,20 +11,20 @@
   .SearchBar {
     display: flex;
     align-items: center;
+    position: relative;
 
     .SearchBar__input {
       font-family: CamphorThree;
       color: $text-color;
-      width: 23em;
-      height: 1.75em;
-      font-size: 2.25em;
-      background-color: $background-color;
-      border-right: none;
-      border-left: none;
-      border-top: none;
-      border-bottom: 1px solid black;
+      width: 30em;
+      box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+      height: 1.8em;
+      font-size: 1.6em;
+      padding-top: 0;
+      border: none;
       outline: none;
-      padding: 5px 0px 0 50px;
+      border-radius: 2px;
+      padding: 0px 0px 0px 8%;
       -moz-appearance: none;
 
       &::-webkit-search-decoration,
@@ -36,26 +36,26 @@
 
       &::-webkit-search-cancel-button {
         background-image: url('/images/search-cancel-icon.svg');
-        height: 18px;
-        width: 18px;
-        margin-top: .5em;
-        margin-right: .25em;
+        height: 16px;
+        width: 16px;
+        margin-right: .8em;
       }
     }
 
     img {
       position: absolute;
-      top: 10.5em;
+      width: 24px;
+      height: 24px;
+      left: 1.5%;
     }
   }
 
   .SearchContainer__filters {
     width: 100%;
     display: flex;
-    flex-direction: row;
-    justify-content: center;
     flex-wrap: nowrap;
     margin-top: 1em;
+    align-items: center;
 
     .SearchFilter {
       position: relative;
@@ -63,23 +63,28 @@
 
     .SearchFilter__button {
       font-family: CamphorThree;
-      line-height: 18px;
       cursor: pointer;
       letter-spacing: 0.2px;
-      width: 10em;
-      border-radius: 4px;
+      border-radius: 2px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, .05);
       padding-top: 6px;
       padding-bottom: 6px;
-      border: 1px solid $shadow-color;
-      font-size: 1.1em;
-      margin-right: 1em;
+      padding-left: 16px;
+      padding-right: 48px;
+      font-size: 1.2em;
+      margin-right: 1.3em;
       outline: none;
+      border: none;
       background-color: white; 
 
       &:hover {
         background-color: $shadow-color;
         border-color: $shadow-color;
       }
+    }
+
+    .SearchContainer__resetFilters {
+
     }
 
     .SearchFilter__button--selected {
