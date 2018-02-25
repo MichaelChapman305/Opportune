@@ -18,6 +18,7 @@ const LEVER_COMPANIES = {
   nava: 'Nava',
   kensho: 'Kensho',
   upside: 'Upside Travels',
+  crunchbase: 'Crunchbase',
   etsy: 'Etsy',
   codecademy: 'Codecademy',
   curiositymedia: 'Curiosity Media',
