@@ -81,3 +81,7 @@ export default class SearchContainer extends Component {
     );
   }
 }
+
+SearchContainer.propTypes = {
+  fetchJobs: PropTypes.func.isRequired,
+};

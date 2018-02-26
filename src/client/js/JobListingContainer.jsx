@@ -8,10 +8,7 @@ export default class JobListingContainer extends Component {
   render() {
     return (
       <div className="JobListingContainer">
-        <div className="JobListingContainer__info">
-          <a>Showing {this.props.jobs.length} jobs</a>
-          <a>Sort by</a>
-        </div>
+        <a className="JobListingContainer__amount">Showing {this.props.jobs.length} jobs</a>
         {this.props.jobs.map(job =>
           <JobListing
             key={`${job.company}-${job.id}`}

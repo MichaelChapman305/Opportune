@@ -16,3 +16,7 @@ export default class Header extends Component {
     )
   }
 }
+
+Header.propTypes = {
+  onToggleSubscription: PropTypes.func.isRequired,
+};

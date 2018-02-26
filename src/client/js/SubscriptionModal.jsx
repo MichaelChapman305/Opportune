@@ -32,3 +32,8 @@ export default class SubscriptionModal extends Component {
     );
   }
 }
+
+SubscriptionModal.propTypes = {
+  onToggleSubscription: PropTypes.func.isRequired,
+  showSubscription: PropTypes.bool,
+};

@@ -19,7 +19,7 @@ class Home extends Component {
     this.state = {
       isLoading: false,
       jobs: [],
-      showSubscription: false
+      showSubscription: false,
     };
 
     this.onToggleSubscription = this.onToggleSubscription.bind(this);
@@ -33,20 +33,22 @@ class Home extends Component {
   }
 
   fetchJobs(query) {
+    this.setState({
+      isLoading: true,
+    });
+
     if (query) {
     return fetch(`/jobs?query=${JSON.stringify({ text: query })}`)
       .then(res => res.json())
-      .then(json => this.setState({ jobs: json }));
+      .then(json => this.setState({ jobs: json, isLoading: false, }));
     }
     return fetch(JOBS_URI)
       .then(res => res.json())
-      .then(json => this.setState({ jobs: json, isLoading: false }));
+      .then(json => this.setState({ jobs: json, isLoading: false, }));
   }
 
   componentDidMount() {
-    this.setState({
-      isLoading: true
-    }, () => this.fetchJobs());
+    this.fetchJobs();
   }
 
   render() {

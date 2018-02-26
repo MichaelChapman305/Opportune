@@ -8,13 +8,11 @@ export default class SearchBar extends Component {
 
     this.state = {
       searchText: '',
-      isTyping: false
     }
 
     const debounce = (func, delay) => {
       let trackDebounce;
       return function() {
-        this.setState({ isTyping: true });
         const context = this;
         const args = arguments;
         clearTimeout(trackDebounce);
@@ -23,7 +21,7 @@ export default class SearchBar extends Component {
     }
 
     this.handleChange = debounce(searchText => {
-      this.setState({ searchText, isTyping: false }, () => this.props.fetchJobs(searchText));
+      this.setState({ searchText }, () => this.props.fetchJobs(searchText));
     }, 500)
 
     this.handle = this.handle.bind(this);
@@ -36,7 +34,6 @@ export default class SearchBar extends Component {
   render() {
     return (
       <div className="SearchBar">
-        {this.state.isTyping && <div className="loading"></div>}
         <img src="./images/search-icon.svg" alt="Search icon" />
         <input
           className="SearchBar__input"
@@ -49,3 +46,7 @@ export default class SearchBar extends Component {
     );
   }
 }
+
+SearchBar.propTypes = {
+  fetchJobs: PropTypes.func.isRequired,
+};
