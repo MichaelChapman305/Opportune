@@ -14,6 +14,7 @@ function getListingsFromGreenhouse(companyID) {
         id: job.id,
         company: companyNames.GREENHOUSE_COMPANIES[companyID],
         title: job.title,
+        role: listingUtilities.getRoleFromTitle(job.text),
         experience: listingUtilities.getExperienceLevelFromTitle(job.title),
         description: htmlToPlainText(job.content),
         location: job.location && job.location.name,

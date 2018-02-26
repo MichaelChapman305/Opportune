@@ -17,7 +17,8 @@ const Schema = mongoose.Schema;
 const jobListing = new Schema({
   id: String,
   company: { type: String, trim: true },
-  experience: { type: String, trim: true },
+  experience: String,
+  role: String,
   description: { type: String, trim: true },
   title: { type: String, trim: true },
   location: { type: String, trim: true },
@@ -31,6 +32,7 @@ const jobListing = new Schema({
 jobListing.index(
   {
     company: 'text',
+    role: 'text',
     experience: 'text',
     description: 'text',
     title: 'text',
@@ -39,6 +41,7 @@ jobListing.index(
   {
     weights: {
       company: 7,
+      role: 7,
       experience: 7,
       description: 2,
       title: 7,

@@ -13,6 +13,7 @@ const EXCLUDED_WORDS = [
   'value',
   'field',
   'sales',
+  'helpdesk',
 ];
 
 function isEngineeringJob(title) {
@@ -50,7 +51,33 @@ function getExperienceLevelFromTitle(title) {
   return 'Mid-level';
 }
 
+function getRoleFromTitle(title) {
+  title = title.toLowerCase();
+
+  if (/\bfront.?end\b|\bjavascript\b|\bui\b|\bweb\b/.test(title)) {
+    return 'Frontend';
+  }
+  else if (/\bback.?end\b|\bapi\b/.test(title)) {
+    return 'Backend';
+  }
+  else if (/\bfull.?stack\b/.test(title)) {
+    return 'Full-stack';
+  }
+  else if (/\b(machine|deep) learning\b|\bml\b|\bai\b/.test(title)) {
+    return 'Machine Learning';
+  }
+  else if (/\bdevops\b|\binfrastructure\b/.test(title)) {
+    return 'DevOps / Infrastructure';
+  } 
+  else if (/\bmobile\b|\bios\b|\bandroid\b/.test(title)) {
+    return 'Mobile';
+  }
+
+  return 'General';
+}
+
 module.exports = {
   isEngineeringJob,
   getExperienceLevelFromTitle,
+  getRoleFromTitle,
 };

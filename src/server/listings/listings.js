@@ -49,6 +49,10 @@ function updateDatabase(listings) {
 }
 
 function getCompanyListings(companies, getListingsFunc) {
+  if (!companies) {
+    return;
+  }
+
   const promises = [];
   const companyIDs = Object.keys(companies);
 
