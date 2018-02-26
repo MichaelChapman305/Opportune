@@ -6,56 +6,30 @@ export default class SearchFilter extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      title: '',
-    };
-
-    this.changeTitle = this.changeTitle.bind(this);
     this.toggleFilter = this.toggleFilter.bind(this);
   }
 
-  getFilterTitle() {
-    const { title } = this.state;
-
-    return title ? title : this.props.defaultTitle;
-  }
-
-  changeTitle(e) {
-    const isOutsideHTML = e.target.innerHTML === 'None';
-
-    this.setState({
-      title: isOutsideHTML ? '' : e.target.innerHTML,
-    }, this.props.onClickFilter(''));
-  }
-
   toggleFilter(e) {
-    const { onClickFilter } = this.props;
-    const filterTitle = this.getFilterTitle();
-
-    onClickFilter(filterTitle);
+    const { onClickFilter, title } = this.props;
+    onClickFilter(title);
   }
 
   render() {
     // To render a component that was passed as props, the component needs
     // to be PascalCase so "OptionsMenu" and not "optionsMenu"
-    const { activeFilterTitle, optionsMenu: OptionsMenu } = this.props;
-    const { title } = this.state;
-
-    const filterTitle = this.getFilterTitle();
-    const isMenuShown = activeFilterTitle === filterTitle;
-    const isItemSelected = (title && title !== 'None') || isMenuShown;
+    const { title, activeFilterTitle, optionsMenu: OptionsMenu } = this.props;
+    const isMenuShown = activeFilterTitle === title;
 
     return (
       <div className="SearchFilter">
         <button
-          className={'SearchFilter__button' + (isItemSelected ? ' SearchFilter__button--selected' : '')}
-          value="filterButton"
+          className={'SearchFilter__button' + (isMenuShown ? ' SearchFilter__button--selected' : '')}
           onClick={this.toggleFilter}
         >
-          {filterTitle}
+          {title}
         </button>
         {isMenuShown && 
-          <OptionsMenu className="SearchFilter__menu" changeTitle={this.changeTitle} />
+          <OptionsMenu className="SearchFilter__menu" />
         }
       </div>
     );
@@ -63,7 +37,7 @@ export default class SearchFilter extends Component {
 }
 
 SearchFilter.propTypes = {
-  defaultTitle: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
   activeFilterTitle: PropTypes.string.isRequired,
   onClickFilter: PropTypes.func.isRequired,
   optionsMenu: PropTypes.func.isRequired,

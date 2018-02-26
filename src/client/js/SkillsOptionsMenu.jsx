@@ -7,7 +7,7 @@ export default class SkillsOptionsMenu extends Component {
     const { changeTitle, className } = this.props;
 
     return (
-      <div className={className} onClick={changeTitle}>
+      <div className={className}>
         <a>Javascript</a>
         <a>PhP</a>
         <a>C++</a>
@@ -20,5 +20,4 @@ export default class SkillsOptionsMenu extends Component {
 
 SkillsOptionsMenu.propTypes = {
   className: PropTypes.string,
-  changeTitle: PropTypes.func.isRequired,
 };

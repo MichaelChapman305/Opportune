@@ -7,7 +7,7 @@ export default class RoleOptionsMenu extends Component {
     const { changeTitle, className } = this.props;
 
     return (
-      <div className={className} onClick={changeTitle}>
+      <div className={className}>
         <a>Frontend</a>
         <a>Backend</a>
         <a>Fullstack</a>
@@ -19,5 +19,4 @@ export default class RoleOptionsMenu extends Component {
 
 RoleOptionsMenu.propTypes = {
   className: PropTypes.string,
-  changeTitle: PropTypes.func.isRequired,
 };

@@ -7,7 +7,7 @@ export default class LocationOptionsMenu extends Component {
     const { changeTitle, className } = this.props;
 
     return (
-      <div className={className} onClick={changeTitle}>
+      <div className={className}>
         <a>NY</a>
         <a>Washington DC</a>
         <a>San Fran</a>
@@ -20,5 +20,4 @@ export default class LocationOptionsMenu extends Component {
 
 LocationOptionsMenu.propTypes = {
   className: PropTypes.string,
-  changeTitle: PropTypes.func.isRequired,
 };

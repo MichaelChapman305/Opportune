@@ -20,15 +20,7 @@ export default class SearchContainer extends Component {
     this.onClickFilter = this.onClickFilter.bind(this);
   }
 
-  componentDidMount() {
-    document.addEventListener('click', (e) => {      
-      if (e.target.value !== 'filterButton') {
-        this.setState({
-          activeFilterTitle: '',
-        });
-      }
-    });
-  }
+  //Add onClick event listener
 
   onClickFilter(filterTitle) {
     // If a person click's the filter when they already have that filter opened,
@@ -48,32 +40,32 @@ export default class SearchContainer extends Component {
     return (
       <div className="SearchContainer">
         <SearchBar 
-        fetchJobs={this.props.fetchJobs}
+          fetchJobs={this.props.fetchJobs}
         />
         <div className="SearchContainer__filters">
           <SearchFilter
-            defaultTitle="Experience"
+            title="Experience"
             optionsMenu={ExperienceOptionsMenu}
-            activeFilterTitle={activeFilterTitle}
             onClickFilter={this.onClickFilter}
+            activeFilterTitle={activeFilterTitle}
           />
           <SearchFilter
-            defaultTitle="Location"
+            title="Location"
             optionsMenu={LocationOptionsMenu}
-            activeFilterTitle={activeFilterTitle}
             onClickFilter={this.onClickFilter}
+            activeFilterTitle={activeFilterTitle}
           />
           <SearchFilter
-            defaultTitle="Role"
+            title="Role"
             optionsMenu={RoleOptionsMenu}
-            activeFilterTitle={activeFilterTitle}
             onClickFilter={this.onClickFilter}
+            activeFilterTitle={activeFilterTitle}
           />
           <SearchFilter
-            defaultTitle="Skills"
+            title="Skills"
             optionsMenu={SkillsOptionsMenu}
-            activeFilterTitle={activeFilterTitle}
             onClickFilter={this.onClickFilter}
+            activeFilterTitle={activeFilterTitle}
           />
           <a className="SearchContainer__resetFilters">RESET FILTERS</a>
         </div>

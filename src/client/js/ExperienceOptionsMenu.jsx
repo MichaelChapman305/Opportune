@@ -7,7 +7,7 @@ export default class ExperienceOptionsMenu extends Component {
     const { changeTitle, className } = this.props;
 
     return (
-      <div className={className} onClick={changeTitle}>
+      <div className={className}>
         <a>Intern</a>
         <a>New Graduate</a>
         <a>Senior</a>
@@ -20,5 +20,4 @@ export default class ExperienceOptionsMenu extends Component {
 
 ExperienceOptionsMenu.propTypes = {
   className: PropTypes.string,
-  changeTitle: PropTypes.func.isRequired,
 };
