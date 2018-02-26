@@ -38,13 +38,13 @@ class Home extends Component {
     });
 
     if (query) {
-    return fetch(`/jobs?query=${JSON.stringify({ text: query })}`)
-      .then(res => res.json())
-      .then(json => this.setState({ jobs: json, isLoading: false, }));
+      return fetch(`/jobs?query=${JSON.stringify({ text: query })}`)
+        .then(res => res.json())
+        .then(json => this.setState({ jobs: json, isLoading: false }));
     }
     return fetch(JOBS_URI)
       .then(res => res.json())
-      .then(json => this.setState({ jobs: json, isLoading: false, }));
+      .then(json => this.setState({ jobs: json, isLoading: false }));
   }
 
   componentDidMount() {
@@ -66,14 +66,16 @@ class Home extends Component {
             showSubscription={this.state.showSubscription}
           />
         }
-        {this.state.isLoading && <div className='loading'></div> }
         {this.state.jobs.length === 0 && !this.state.isLoading ?
           <div className="no-results">
             <h1>No search results found.</h1>
             <h3>How about trying <a>new graduate jobs in San Fransisco</a> or <a>roles at FinTech companies</a>?</h3>
           </div>
           :
-          <JobListingContainer jobs={this.state.jobs} />
+          <JobListingContainer 
+            jobs={this.state.jobs} 
+            isLoading={this.state.isLoading}
+          />
         }
       </div>
     );

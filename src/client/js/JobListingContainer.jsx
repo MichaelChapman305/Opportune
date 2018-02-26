@@ -8,6 +8,7 @@ export default class JobListingContainer extends Component {
   render() {
     return (
       <div className="JobListingContainer">
+        {this.props.isLoading && <div className="loading" />}
         <a className="JobListingContainer__amount">Showing {this.props.jobs.length} jobs</a>
         {this.props.jobs.map(job =>
           <JobListing
@@ -25,4 +26,5 @@ export default class JobListingContainer extends Component {
 
 JobListingContainer.propTypes = {
   jobs: PropTypes.array,
+  isLoading: PropTypes.bool,
 };
