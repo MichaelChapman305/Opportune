@@ -31,7 +31,7 @@ export default class SearchFilter extends Component {
         {isMenuShown &&
           <OptionsMenu 
             className="SearchFilter__menu" 
-            addToken={this.props.addToken}
+            addSearchToken={this.props.addSearchToken}
             title={title}
           />
         }
@@ -45,5 +45,5 @@ SearchFilter.propTypes = {
   activeFilterTitle: PropTypes.string.isRequired,
   onClickFilter: PropTypes.func.isRequired,
   optionsMenu: PropTypes.func.isRequired,
-  addToken: PropTypes.func.isRequired,
+  addSearchToken: PropTypes.func.isRequired,
 };

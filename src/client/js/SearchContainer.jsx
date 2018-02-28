@@ -81,21 +81,21 @@ export default class SearchContainer extends Component {
             optionsMenu={LocationOptionsMenu}
             onClickFilter={this.onClickFilter}
             activeFilterTitle={activeFilterTitle}
-            addToken={this.addSearchToken}
+            addSearchToken={this.addSearchToken}
           />
           <SearchFilter
             title="Role"
             optionsMenu={RoleOptionsMenu}
             onClickFilter={this.onClickFilter}
             activeFilterTitle={activeFilterTitle}
-            addToken={this.addSearchToken}
+            addSearchToken={this.addSearchToken}
           />
           <SearchFilter
             title="Skills"
             optionsMenu={SkillsOptionsMenu}
             onClickFilter={this.onClickFilter}
             activeFilterTitle={activeFilterTitle}
-            addToken={this.addSearchToken}
+            addSearchToken={this.addSearchToken}
           />
           <a className="SearchContainer__resetFilters" onClick={this.removeAllTokens}>RESET FILTERS</a>
         </div>
@@ -106,7 +106,7 @@ export default class SearchContainer extends Component {
                 key={`${token.value}-${token.type}`}
                 value={token.value}
                 type={token.type}
-                removeToken={this.removeSearchToken}
+                removeSearchToken={this.removeSearchToken}
               />
             )}  
           </div> 
