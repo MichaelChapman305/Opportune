@@ -36,7 +36,7 @@ body {
   height: 100vh;
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
-  grid-template-rows: 175px 175px minmax(150px, auto);
+  grid-template-rows: 175px fit-content(0) minmax(150px, auto);
   grid-gap: 5px;
   grid-template-areas:
     "Header Header Header"

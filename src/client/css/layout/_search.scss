@@ -35,10 +35,14 @@
       }
 
       &::-webkit-search-cancel-button {
-        background-image: url('/images/search-cancel-icon.svg');
+        background-image: url('/images/cancel-icon.svg');
         height: 16px;
         width: 16px;
         margin-right: .8em;
+
+        &:hover {
+          cursor: pointer;
+        }
       }
     }
 
@@ -51,7 +55,6 @@
   }
 
   .SearchContainer__filters {
-    width: 100%;
     display: flex;
     flex-wrap: nowrap;
     margin-top: 1em;
@@ -84,7 +87,10 @@
     }
 
     .SearchContainer__resetFilters {
-
+      
+      &:hover {
+        cursor: pointer;
+      }
     }
 
     .SearchFilter__button--selected {
@@ -119,6 +125,42 @@
         &:hover {
           cursor: pointer;
           background-color: #E5E5E5;
+        }
+      }
+    }
+  }
+
+  .SearchContainer__tokens {
+    margin-top: 2em;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    width: 50em;
+    padding-left: 10%;
+
+    .SearchToken {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      margin-right: 1em;
+      margin-bottom: 1em;
+      padding: 1em .5em 1em .5em;
+      height: 1em;
+      font-size: 15px;
+      background-color: $primary-color;
+      color: white;
+      border-radius: 3px;
+
+      img {
+        margin-left: 1em;
+        width: 8px;
+        height: 8px;
+        color: white;
+
+        &:hover {
+          cursor: pointer;
         }
       }
     }

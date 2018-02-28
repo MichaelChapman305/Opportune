@@ -3,11 +3,23 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
 export default class SkillsOptionsMenu extends Component {
+  
+  constructor(props) {
+    super(props);
+
+    this.onAddToken = this.onAddToken.bind(this);
+  }
+  
+  onAddToken(e) {
+    const { addSearchToken, title } = this.props;
+    addSearchToken(e.target.innerHTML, title);
+  }
+
   render() {
-    const { changeTitle, className } = this.props;
+    const { className } = this.props;
 
     return (
-      <div className={className}>
+      <div className={className} onClick={this.onAddToken}>
         <a>Javascript</a>
         <a>PhP</a>
         <a>C++</a>
@@ -20,4 +32,5 @@ export default class SkillsOptionsMenu extends Component {
 
 SkillsOptionsMenu.propTypes = {
   className: PropTypes.string,
+  addSearchToken: PropTypes.func,
 };

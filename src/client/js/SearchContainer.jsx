@@ -8,6 +8,7 @@ import ExperienceOptionsMenu from './ExperienceOptionsMenu.jsx';
 import LocationOptionsMenu from './LocationOptionsMenu.jsx';
 import RoleOptionsMenu from './RoleOptionsMenu.jsx';
 import SkillsOptionsMenu from './SkillsOptionsMenu.jsx';
+import SearchToken from './SearchToken.jsx';
 
 export default class SearchContainer extends Component {
   constructor(props) {
@@ -15,12 +16,37 @@ export default class SearchContainer extends Component {
 
     this.state = {
       activeFilterTitle: '',
+      searchTokens: [],
     };
 
+    this.removeAllTokens = this.removeAllTokens.bind(this);
+    this.removeSearchToken = this.removeSearchToken.bind(this);
+    this.addSearchToken = this.addSearchToken.bind(this);
     this.onClickFilter = this.onClickFilter.bind(this);
   }
 
-  //Add onClick event listener
+  addSearchToken(value, type) {
+    const searchToken = { 
+      value: value, 
+      type: type,
+    };
+
+    this.setState(prevState => ({
+      searchTokens: prevState.searchTokens.concat([searchToken]),
+    }));
+  }
+
+  removeSearchToken(value) {
+    this.setState(prevState => ({
+      searchTokens: prevState.searchTokens.filter(item => item.value !== value),
+    }));
+  }
+
+  removeAllTokens() {
+    this.setState({
+      searchTokens: [],
+    });
+  }
 
   onClickFilter(filterTitle) {
     // If a person click's the filter when they already have that filter opened,
@@ -35,7 +61,7 @@ export default class SearchContainer extends Component {
   }
 
   render() {
-    const { activeFilterTitle } = this.state;
+    const { activeFilterTitle, searchTokens } = this.state;
 
     return (
       <div className="SearchContainer">
@@ -48,27 +74,43 @@ export default class SearchContainer extends Component {
             optionsMenu={ExperienceOptionsMenu}
             onClickFilter={this.onClickFilter}
             activeFilterTitle={activeFilterTitle}
+            addSearchToken={this.addSearchToken}
           />
           <SearchFilter
             title="Location"
             optionsMenu={LocationOptionsMenu}
             onClickFilter={this.onClickFilter}
             activeFilterTitle={activeFilterTitle}
+            addToken={this.addSearchToken}
           />
           <SearchFilter
             title="Role"
             optionsMenu={RoleOptionsMenu}
             onClickFilter={this.onClickFilter}
             activeFilterTitle={activeFilterTitle}
+            addToken={this.addSearchToken}
           />
           <SearchFilter
             title="Skills"
             optionsMenu={SkillsOptionsMenu}
             onClickFilter={this.onClickFilter}
             activeFilterTitle={activeFilterTitle}
+            addToken={this.addSearchToken}
           />
-          <a className="SearchContainer__resetFilters">RESET FILTERS</a>
+          <a className="SearchContainer__resetFilters" onClick={this.removeAllTokens}>RESET FILTERS</a>
         </div>
+        {searchTokens.length > 0 &&
+          <div className="SearchContainer__tokens">          
+            {searchTokens.map(token =>
+              <SearchToken 
+                key={`${token.value}-${token.type}`}
+                value={token.value}
+                type={token.type}
+                removeToken={this.removeSearchToken}
+              />
+            )}  
+          </div> 
+        }      
       </div>
     );
   }

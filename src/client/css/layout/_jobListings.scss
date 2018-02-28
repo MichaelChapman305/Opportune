@@ -13,6 +13,7 @@
     
   h1 {
     margin-bottom: 1em;
+    margin-top: 3em;
   }
   h3 a {
     color: $primary-color;
@@ -24,6 +25,7 @@
   grid-area: JobListingContainer;
   display: flex;
   flex-direction: column;
+  margin-top: 3em;
 
   .JobListingContainer__amount {
     margin-bottom: 1.5em;

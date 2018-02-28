@@ -28,8 +28,12 @@ export default class SearchFilter extends Component {
         >
           {title}
         </button>
-        {isMenuShown && 
-          <OptionsMenu className="SearchFilter__menu" />
+        {isMenuShown &&
+          <OptionsMenu 
+            className="SearchFilter__menu" 
+            addToken={this.props.addToken}
+            title={title}
+          />
         }
       </div>
     );
@@ -41,4 +45,5 @@ SearchFilter.propTypes = {
   activeFilterTitle: PropTypes.string.isRequired,
   onClickFilter: PropTypes.func.isRequired,
   optionsMenu: PropTypes.func.isRequired,
+  addToken: PropTypes.func.isRequired,
 };
