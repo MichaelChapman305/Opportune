@@ -7,6 +7,7 @@ const EXCLUDED_WORDS = [
   'qa',
   'quality',
   'mechanical',
+  'construction',
   'customer',
   'solution',
   'solutions',

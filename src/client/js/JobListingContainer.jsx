@@ -9,22 +9,21 @@ export default class JobListingContainer extends Component {
     return (
       <div className="JobListingContainer">
         {this.props.isLoading && <div className="loading" />}
-        <a className="JobListingContainer__amount">Showing {this.props.jobs.length} jobs</a>
+        <a className="JobListingContainer__amount">Showing <b>{this.props.jobs.length}</b> jobs</a>
         {this.props.jobs.map(job =>
-          <JobListing
+          (<JobListing
             key={`${job.company}-${job.id}`}
             company={job.company}
             title={job.title}
             applyUrl={job.url}
             location={job.location}
-          />
-        )}
+          />))}
       </div>
     );
   }
 }
 
 JobListingContainer.propTypes = {
-  jobs: PropTypes.array,
+  jobs: PropTypes.arrayOf(PropTypes.object),
   isLoading: PropTypes.bool,
 };

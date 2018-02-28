@@ -6,34 +6,40 @@ export default class SearchFilter extends Component {
   constructor(props) {
     super(props);
 
-    this.toggleFilter = this.toggleFilter.bind(this);
+    this.onClickFilter = this.onClickFilter.bind(this);
+    this.onClickMenuOption = this.onClickMenuOption.bind(this);
   }
 
-  toggleFilter(e) {
-    const { onClickFilter, title } = this.props;
-    onClickFilter(title);
+  onClickFilter(e) {
+    const { setActiveFilter, title } = this.props;
+    setActiveFilter(title);
+  }
+
+  onClickMenuOption(e) {
+    const { addSearchToken, title } = this.props;
+    addSearchToken(e.target.innerHTML, title);
   }
 
   render() {
-    // To render a component that was passed as props, the component needs
-    // to be PascalCase so "OptionsMenu" and not "optionsMenu"
-    const { title, activeFilterTitle, optionsMenu: OptionsMenu } = this.props;
+    const { title, activeFilterTitle, optionsMenu } = this.props;
     const isMenuShown = activeFilterTitle === title;
 
     return (
       <div className="SearchFilter">
         <button
           className={'SearchFilter__button' + (isMenuShown ? ' SearchFilter__button--selected' : '')}
-          onClick={this.toggleFilter}
+          onClick={this.onClickFilter}
         >
           {title}
         </button>
-        {isMenuShown &&
-          <OptionsMenu 
-            className="SearchFilter__menu" 
-            addSearchToken={this.props.addSearchToken}
-            title={title}
-          />
+        {isMenuShown && 
+          <div className="SearchFilter__menu">
+          {optionsMenu.map(menuOption =>
+            <a key={`${title}-${menuOption}`} onClick={this.onClickMenuOption}>
+              {menuOption}
+            </a>
+          )}
+          </div>
         }
       </div>
     );
@@ -43,7 +49,6 @@ export default class SearchFilter extends Component {
 SearchFilter.propTypes = {
   title: PropTypes.string.isRequired,
   activeFilterTitle: PropTypes.string.isRequired,
-  onClickFilter: PropTypes.func.isRequired,
-  optionsMenu: PropTypes.func.isRequired,
+  setActiveFilter: PropTypes.func.isRequired,
   addSearchToken: PropTypes.func.isRequired,
 };
