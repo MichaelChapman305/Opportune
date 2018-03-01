@@ -1,3 +1,16 @@
+.Arrow {
+  display: inline-block;
+  margin-left: 1em;
+  margin-right: 1em;
+  vertical-align: middle;
+  height: 16px;
+  width: 16px;
+}
+
+.Arrow--selected {
+  transform: rotate(180deg);
+}
+
 .SearchContainer {
   grid-area: SearchContainer;
   display: flex;
@@ -73,12 +86,12 @@
       padding-top: 6px;
       padding-bottom: 6px;
       padding-left: 16px;
-      padding-right: 48px;
       font-size: 1.2em;
       margin-right: 1.3em;
       outline: none;
       border: none;
-      background-color: white; 
+      color: #484848;
+      background-color: white;
 
       &:hover {
         background-color: $shadow-color;
@@ -87,10 +100,7 @@
     }
 
     .SearchContainer__resetFilters {
-      
-      &:hover {
-        cursor: pointer;
-      }
+      cursor: pointer;
     }
 
     .SearchFilter__button--selected {

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
+import Arrow from './Arrow.jsx';
+
 export default class SearchFilter extends Component {
   constructor(props) {
     super(props);
@@ -31,6 +33,7 @@ export default class SearchFilter extends Component {
           onClick={this.onClickFilter}
         >
           {title}
+          <Arrow fill={isMenuShown ? '#ffffff' : '#484848'} isExpanded={isMenuShown}></Arrow>
         </button>
         {isMenuShown && 
           <div className="SearchFilter__menu">
