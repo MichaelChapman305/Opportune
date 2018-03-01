@@ -104,7 +104,7 @@ const GREENHOUSE_COMPANIES = {
   helix: 'Helix',
   drw: 'DRW Holdings',
   edx: 'Edx',
-  mist: 'Mist',
+  mistsystems: 'Mist',
   casper: 'Casper',
   slack: 'Slack',
   stripe: 'Stripe',
