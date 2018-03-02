@@ -25,23 +25,37 @@ export default class SearchBar extends Component {
     }, 500)
 
     this.handle = this.handle.bind(this);
+    this.removeText = this.removeText.bind(this);
+    this.TextInput;
   }
 
   handle(e) {
     this.handleChange(e.target.value);
   }
 
+  removeText() {
+    this.textInput.value = '';
+
+    this.setState({
+      searchText: '',
+    }, this.handleChange(''));
+  }
+
   render() {
     return (
       <div className="SearchBar">
-        <img src="./images/search-icon.svg" alt="Search icon" />
+        <img className="searchBar__icon "src="./images/search-icon.svg" alt="Search icon" />
         <input
           className="SearchBar__input"
+          ref={input => this.textInput = input}
           onChange={this.handle}
           type="search"
           placeholder="Find your dream job"
           autoFocus
         />
+        {this.state.searchText.length > 0 &&
+          <img className="searchBar__cancel" src="./images/cancel-icon.svg" alt="Cancel icon" onClick={this.removeText} />
+        }
       </div>
     );
   }

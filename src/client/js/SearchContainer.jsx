@@ -11,7 +11,7 @@ const EXPERIENCE_OPTIONS = [
   'New graduate',
   'Mid-level',
   'Senior',
-  'Management'
+  'Management',
 ];
 
 const LOCATION_OPTIONS = [
@@ -21,7 +21,7 @@ const LOCATION_OPTIONS = [
   'Washington, D.C.',
   'Pittsburgh, PA',
   'Chicago, IL',
-  'Remote'
+  'Remote',
 ];
 
 const ROLE_OPTIONS = [
@@ -30,7 +30,7 @@ const ROLE_OPTIONS = [
   'Backend',
   'Mobile',
   'DevOps / Infra',
-  'Machine learning'
+  'Machine learning',
 ];
 
 const SKILL_OPTIONS = [
@@ -60,11 +60,11 @@ export default class SearchContainer extends Component {
 
   addSearchToken(value, type) {
     const { searchTokens } = this.state;
-    const searchToken = { 
-      value: value, 
-      type: type,
+    const searchToken = {
+      value,
+      type,
     };
-    
+
     for (let i = 0, len = searchTokens.length; i < len; i++) {
       if (value === searchTokens[i].value) {
         return;
@@ -105,7 +105,7 @@ export default class SearchContainer extends Component {
 
     return (
       <div className="SearchContainer">
-        <SearchBar 
+        <SearchBar
           fetchJobs={this.props.fetchJobs}
         />
         <div className="SearchContainer__filters">
@@ -140,17 +140,16 @@ export default class SearchContainer extends Component {
           <a className="SearchContainer__resetFilters" onClick={this.removeAllTokens}>RESET FILTERS</a>
         </div>
         {searchTokens.length > 0 &&
-          <div className="SearchContainer__tokens">          
+          <div className="SearchContainer__tokens">
             {searchTokens.map(token =>
-              <SearchToken 
+              (<SearchToken
                 key={`${token.value}-${token.type}`}
                 value={token.value}
                 type={token.type}
                 removeSearchToken={this.removeSearchToken}
-              />
-            )}  
-          </div> 
-        }      
+              />))}
+          </div>
+        }
       </div>
     );
   }

@@ -46,24 +46,22 @@
       &::-webkit-search-cancel-button {
         -webkit-appearance: none;
       }
-
-      &::-webkit-search-cancel-button {
-        background-image: url('/images/cancel-icon.svg');
-        height: 16px;
-        width: 16px;
-        margin-right: .8em;
-
-        &:hover {
-          cursor: pointer;
-        }
-      }
     }
 
-    img {
+    .searchBar__icon {
       position: absolute;
       width: 24px;
       height: 24px;
       left: 1.5%;
+    }
+
+    .searchBar__cancel {
+      position: absolute;
+      right: 1.5%;
+
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 
