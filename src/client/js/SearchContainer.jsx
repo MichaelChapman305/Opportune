@@ -59,10 +59,17 @@ export default class SearchContainer extends Component {
   }
 
   addSearchToken(value, type) {
+    const { searchTokens } = this.state;
     const searchToken = { 
       value: value, 
       type: type,
     };
+    
+    for (let i = 0, len = searchTokens.length; i < len; i++) {
+      if (value === searchTokens[i].value) {
+        return;
+      }
+    }
 
     this.setState(prevState => ({
       searchTokens: prevState.searchTokens.concat([searchToken]),
