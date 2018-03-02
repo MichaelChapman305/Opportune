@@ -6,37 +6,12 @@ export default class SearchBar extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      searchText: '',
-    }
-
-    const debounce = (func, delay) => {
-      let trackDebounce;
-      return function() {
-        const context = this;
-        const args = arguments;
-        clearTimeout(trackDebounce);
-        trackDebounce = setTimeout(() => func.apply(context, args), delay);
-      }
-    }
-
-    this.handleChange = debounce(this.props.fetchJobs, 500);
-
-    this.handle = this.handle.bind(this);
-    this.removeText = this.removeText.bind(this);
+    this.clearSearch = this.clearSearch.bind(this);
   }
 
-  handle(e) {
-    this.setState({ searchText: e.target.value });
-    this.handleChange(e.target.value);
-  }
-
-  removeText() {
+  clearSearch() {
     this.textInput.value = '';
-
-    this.setState({
-      searchText: '',
-    }, this.handleChange(''));
+    this.props.removeSearchText();
   }
 
   render() {
@@ -46,13 +21,13 @@ export default class SearchBar extends Component {
         <input
           className="SearchBar__input"
           ref={input => this.textInput = input}
-          onChange={this.handle}
+          onChange={this.props.handleSearch}
           type="search"
           placeholder="Find your dream job"
           autoFocus
         />
-        {this.state.searchText.length > 0 &&
-          <img className="searchBar__cancel" src="./images/cancel-icon.svg" alt="Cancel icon" onClick={this.removeText} />
+        {this.props.searchText.length > 0 &&
+          <img className="searchBar__cancel" src="./images/cancel-icon.svg" alt="Cancel icon" onClick={this.clearSearch}  />
         }
       </div>
     );
@@ -60,5 +35,6 @@ export default class SearchBar extends Component {
 }
 
 SearchBar.propTypes = {
-  fetchJobs: PropTypes.func.isRequired,
+  handleSearch: PropTypes.func.isRequired,
+  removeSearchText: PropTypes.func.isRequired,
 };

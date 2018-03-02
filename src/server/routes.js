@@ -30,19 +30,19 @@ router.get('/jobs', (req, res) => {
 
   const searchQuery = {};
   const addToSearchQuery = (field, queryOperator, item) => {
-    if (item) {
+    if (item && item.length > 0) {
       searchQuery[field] = {
         [queryOperator]: item,
       };
     }
   };
 
-  addToSearchQuery('$text', '$search', `\"${query.text}\"`);
+  addToSearchQuery('$text', '$search', query.text && `\"${query.text}\"`);
   addToSearchQuery('experience', '$in', query.experienceLevels);
   addToSearchQuery('location', '$in', query.locations);
   addToSearchQuery('role', '$in', query.roles);
   addToSearchQuery('skills', '$in', query.skills);
-
+ 
   if (query.text) {
     // If we do a full-text search, then we want to order the results by decreasing text score
     // and also filter out the results to only show relevent searches by matching on a text
@@ -75,8 +75,8 @@ router.get('/jobs', (req, res) => {
       },
     ]).exec().then(items => res.send(items));
   }
-
-  return JobListing.find(searchQuery).exec().then(items => res.send(items));
+  console.log(searchQuery);
+  return JobListing.find(searchQuery, function(err, items) { console.log(items); res.send(items); });
 });
 
 module.exports = router;

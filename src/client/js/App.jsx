@@ -32,19 +32,41 @@ class Home extends Component {
     });
   }
 
-  fetchJobs(query) {
+  fetchJobs(text = '', tokens = []) {
     this.setState({
       isLoading: true,
     });
+    
+    const searchFilter = {
+      experienceLevels: [],
+      locations: [],
+      roles: [],
+      skills: [],
+      text: text,
+    };
 
-    if (query) {
-      return fetch(`/jobs?query=${JSON.stringify({ text: query })}`)
+    for (let i = 0, len = tokens.length; i < len; i++) {
+      const token = tokens[i];
+      
+      if (token.type === 'Experience') {
+        searchFilter.experienceLevels.push(token.value);
+      } else if (token.type === 'Location') {
+        searchFilter.locations.push(token.value);
+      } else if (token.type === 'Role') {
+        searchFilter.roles.push(token.value);
+      } else if (token.type === 'Skills') {
+        searchFilter.skills.push(token.value);
+      }
+    }
+
+    if (text || tokens) {
+      return fetch(`/jobs?query=${JSON.stringify( searchFilter )}`)
         .then(res => res.json())
         .then(json => this.setState({ jobs: json, isLoading: false }));
     }
     return fetch(JOBS_URI)
       .then(res => res.json())
-      .then(json => this.setState({ jobs: json, isLoading: false }));
+      .then(json => this.setState({ jobs: json, isLoading: false }));   
   }
 
   componentDidMount() {

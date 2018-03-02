@@ -10,8 +10,8 @@ export default class SearchToken extends Component {
   }
 
   onRemoveToken() {
-    const { value, removeSearchToken } = this.props;
-    removeSearchToken(value);
+    const { type, value, removeSearchToken } = this.props;
+    removeSearchToken(value, type);
   }
 
   render() {

@@ -50,12 +50,45 @@ export default class SearchContainer extends Component {
     this.state = {
       activeFilterTitle: '',
       searchTokens: [],
+      searchText: '',
     };
 
+    const debounce = (func, delay) => {
+      let trackDebounce;
+      return function() {
+        const context = this;
+        const args = arguments;
+        clearTimeout(trackDebounce);
+        trackDebounce = setTimeout(() => func.apply(context, args), delay);
+      }
+    }
+
+    this.debouncedFetchJobs = debounce(this.handleChange, 500);
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
+    this.removeSearchText = this.removeSearchText.bind(this);
     this.removeAllTokens = this.removeAllTokens.bind(this);
     this.removeSearchToken = this.removeSearchToken.bind(this);
     this.addSearchToken = this.addSearchToken.bind(this);
     this.setActiveFilter = this.setActiveFilter.bind(this);
+  }
+
+  handleChange() {
+    const { searchText, searchTokens } = this.state;
+    this.props.fetchJobs(searchText, searchTokens);
+  }
+  
+  handleSearch(e) {
+    this.setState({ 
+      searchText: e.target.value 
+    }, this.debouncedFetchJobs());
+  }
+
+  removeSearchText() {
+    this.setState({
+      searchText: '',
+    }, this.debouncedFetchJobs());
   }
 
   addSearchToken(value, type) {
@@ -73,19 +106,19 @@ export default class SearchContainer extends Component {
 
     this.setState(prevState => ({
       searchTokens: prevState.searchTokens.concat([searchToken]),
-    }));
+    }), this.debouncedFetchJobs());
   }
 
-  removeSearchToken(value) {
+  removeSearchToken(value, type) {
     this.setState(prevState => ({
       searchTokens: prevState.searchTokens.filter(item => item.value !== value),
-    }));
+    }), this.debouncedFetchJobs());
   }
 
   removeAllTokens() {
     this.setState({
       searchTokens: [],
-    });
+    }, this.debouncedFetchJobs());
   }
 
   setActiveFilter(filterTitle) {
@@ -106,7 +139,9 @@ export default class SearchContainer extends Component {
     return (
       <div className="SearchContainer">
         <SearchBar
-          fetchJobs={this.props.fetchJobs}
+          searchText={this.state.searchText}
+          removeSearchText={this.removeSearchText}
+          handleSearch={this.handleSearch}
         />
         <div className="SearchContainer__filters">
           <SearchFilter
