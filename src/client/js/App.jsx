@@ -47,7 +47,7 @@ class Home extends Component {
 
     for (let i = 0, len = tokens.length; i < len; i++) {
       const token = tokens[i];
-      
+
       if (token.type === 'Experience') {
         searchFilter.experienceLevels.push(token.value);
       } else if (token.type === 'Location') {
@@ -71,6 +71,14 @@ class Home extends Component {
 
   componentDidMount() {
     this.fetchJobs();
+  }
+
+  shouldComponentUpdate(search, nextJobs) {
+    if (this.state.jobs.length === 0 && nextJobs.jobs.length === 0) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
   render() {
