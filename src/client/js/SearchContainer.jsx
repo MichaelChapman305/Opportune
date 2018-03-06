@@ -140,6 +140,10 @@ export default class SearchContainer extends Component {
 
     return (
       <div className="SearchContainer">
+        {this.state.activeFilterTitle.length > 0 && 
+          <div className="SearchContainer__overlay">
+          </div>
+        }
         <SearchBar
           searchText={this.state.searchText}
           removeSearchText={this.removeSearchText}

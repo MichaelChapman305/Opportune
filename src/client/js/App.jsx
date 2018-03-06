@@ -90,10 +90,13 @@ class Home extends Component {
         <SearchContainer
           fetchJobs={this.fetchJobs}
         />
-        {this.state.showSubscription &&
-          <SubscriptionModal
-            onToggleSubscription={this.onToggleSubscription}
-          />
+        {this.state.showSubscription && 
+          <div>
+            <div className="Subscription__overlay"></div>
+            <SubscriptionModal
+              onToggleSubscription={this.onToggleSubscription}
+            />
+          </div>
         }
         {this.state.jobs.length === 0 && !this.state.isLoading ?
           <div className="no-results">

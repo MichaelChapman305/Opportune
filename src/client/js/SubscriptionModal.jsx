@@ -31,5 +31,4 @@ export default onClickOutside(SubscriptionModal);
 
 SubscriptionModal.propTypes = {
   onToggleSubscription: PropTypes.func.isRequired,
-  //showSubscription: PropTypes.bool,
 };
