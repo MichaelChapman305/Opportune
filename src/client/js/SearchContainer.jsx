@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
+import onClickOutside from 'react-onclickoutside';
 
 import SearchBar from './SearchBar.jsx';
 import SearchFilter from './SearchFilter.jsx';
@@ -134,6 +135,7 @@ export default class SearchContainer extends Component {
   }
 
   render() {
+    const EnhancedSearchFilter = onClickOutside(SearchFilter);
     const { activeFilterTitle, searchTokens } = this.state;
 
     return (
@@ -144,28 +146,28 @@ export default class SearchContainer extends Component {
           handleSearch={this.handleSearch}
         />
         <div className="SearchContainer__filters">
-          <SearchFilter
+          <EnhancedSearchFilter
             title="Experience"
             optionsMenu={EXPERIENCE_OPTIONS}
             setActiveFilter={this.setActiveFilter}
             activeFilterTitle={activeFilterTitle}
             addSearchToken={this.addSearchToken}
           />
-          <SearchFilter
+          <EnhancedSearchFilter
             title="Location"
             optionsMenu={LOCATION_OPTIONS}
             setActiveFilter={this.setActiveFilter}
             activeFilterTitle={activeFilterTitle}
             addSearchToken={this.addSearchToken}
           />
-          <SearchFilter
+          <EnhancedSearchFilter
             title="Role"
             optionsMenu={ROLE_OPTIONS}
             setActiveFilter={this.setActiveFilter}
             activeFilterTitle={activeFilterTitle}
             addSearchToken={this.addSearchToken}
           />
-          <SearchFilter
+          <EnhancedSearchFilter
             title="Skills"
             optionsMenu={SKILL_OPTIONS}
             setActiveFilter={this.setActiveFilter}

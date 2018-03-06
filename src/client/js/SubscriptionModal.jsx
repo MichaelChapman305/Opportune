@@ -1,23 +1,16 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
+import onClickOutside from 'react-onclickoutside';
 
-export default class SubscriptionModal extends Component {
-  constructor(props) {
-    super(props);
-
-    this.onSubscriptionClick = this.onSubscriptionClick.bind(this);
-  }
-
-  onSubscriptionClick(e) {
-    if (e.target.className === 'SubscriptionModal') {
-      this.props.onToggleSubscription();
-    }
+class SubscriptionModal extends Component {
+  handleClickOutside(event){
+    this.props.onToggleSubscription();
   }
 
   render() {
     return (
-      <div className="SubscriptionModal" onClick={this.onSubscriptionClick}>
+      <div className="SubscriptionModal">
         <p>Get new weekly job listings delivered right to your inbox!</p>
         <form className="SubscriptionModal__form">
           <p>Email Address</p>
@@ -33,7 +26,10 @@ export default class SubscriptionModal extends Component {
   }
 }
 
+
+export default onClickOutside(SubscriptionModal);
+
 SubscriptionModal.propTypes = {
   onToggleSubscription: PropTypes.func.isRequired,
-  showSubscription: PropTypes.bool,
+  //showSubscription: PropTypes.bool,
 };

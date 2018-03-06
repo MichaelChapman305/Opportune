@@ -20,6 +20,7 @@ class Home extends Component {
       isLoading: false,
       jobs: [],
       showSubscription: false,
+      text: '',
     };
 
     this.onToggleSubscription = this.onToggleSubscription.bind(this);
@@ -27,14 +28,13 @@ class Home extends Component {
   }
 
   onToggleSubscription() {
-    this.setState({
-      showSubscription: !this.state.showSubscription,
-    });
+    this.setState({ showSubscription: !this.state.showSubscription });
   }
 
   fetchJobs(text = '', tokens = []) {
     this.setState({
       isLoading: true,
+      text: text,
     });
     
     const searchFilter = {
@@ -74,7 +74,7 @@ class Home extends Component {
   }
 
   shouldComponentUpdate(search, nextJobs) {
-    if (this.state.jobs.length === 0 && nextJobs.jobs.length === 0) {
+    if (this.state.jobs.length === 0 && nextJobs.jobs.length === 0 && this.state.text.length > 0) {
       return false;
     } else {
       return true;
@@ -93,7 +93,6 @@ class Home extends Component {
         {this.state.showSubscription &&
           <SubscriptionModal
             onToggleSubscription={this.onToggleSubscription}
-            showSubscription={this.state.showSubscription}
           />
         }
         {this.state.jobs.length === 0 && !this.state.isLoading ?

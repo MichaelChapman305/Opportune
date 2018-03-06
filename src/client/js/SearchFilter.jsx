@@ -12,14 +12,20 @@ export default class SearchFilter extends Component {
     this.onClickMenuOption = this.onClickMenuOption.bind(this);
   }
 
-  onClickFilter(e) {
+  onClickFilter(event) {
     const { setActiveFilter, title } = this.props;
     setActiveFilter(title);
   }
 
-  onClickMenuOption(e) {
+  onClickMenuOption(event) {
     const { addSearchToken, title } = this.props;
-    addSearchToken(e.target.innerHTML, title);
+    addSearchToken(event.target.innerHTML, title);
+  }
+
+  handleClickOutside(event) {
+    if (event.target.className !== 'SearchFilter__button' && event.target.className.animVal !== 'Arrow' && event.target.type !== 'a') {
+      this.props.setActiveFilter('');
+    }
   }
 
   render() {
@@ -38,7 +44,7 @@ export default class SearchFilter extends Component {
         {isMenuShown && 
           <div className="SearchFilter__menu">
           {optionsMenu.map(menuOption =>
-            <a key={`${title}-${menuOption}`} onClick={this.onClickMenuOption}>
+            <a type='a' key={`${title}-${menuOption}`} onClick={this.onClickMenuOption}>
               {menuOption}
             </a>
           )}
