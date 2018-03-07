@@ -26,7 +26,6 @@ class SubscriptionModal extends Component {
   }
 }
 
-
 export default onClickOutside(SubscriptionModal);
 
 SubscriptionModal.propTypes = {

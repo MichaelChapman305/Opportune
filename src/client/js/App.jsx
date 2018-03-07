@@ -73,12 +73,12 @@ class Home extends Component {
     this.fetchJobs();
   }
 
-  shouldComponentUpdate(search, nextJobs) {
-    if (this.state.jobs.length === 0 && nextJobs.jobs.length === 0 && this.state.text.length > 0) {
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.state.jobs.length === 0 && nextState.jobs.length === 0 && this.state.text.length > 0) {
       return false;
-    } else {
-      return true;
-    }
+    } 
+    
+    return true;
   }
 
   render() {
@@ -87,9 +87,7 @@ class Home extends Component {
         <Header
           onToggleSubscription={this.onToggleSubscription}
         />
-        <SearchContainer
-          fetchJobs={this.fetchJobs}
-        />
+        <SearchContainer fetchJobs={this.fetchJobs} />
         {this.state.showSubscription && 
           <div>
             <div className="Subscription__overlay"></div>
