@@ -31,16 +31,18 @@
   align-items: center;
   justify-self: center;
   align-self: start;
+  width: 100%;
 
   .SearchBar {
     display: flex;
     align-items: center;
     position: relative;
+    width: 55%;
 
     .SearchBar__input {
       font-family: CamphorThree;
       color: $text-color;
-      width: 30em;
+      width: 100%;
       box-shadow: 0 0 10px rgba(0, 0, 0, .1);
       height: 1.8em;
       font-size: 1.6em;
