@@ -5,6 +5,13 @@ import 'whatwg-fetch';
 
 import '../css/style.scss';
 
+import {
+  EXPERIENCE_FILTER_TITLE,
+  LOCATION_FILTER_TITLE,
+  ROLE_FILTER_TITLE,
+  SKILLS_FILTER_TITLE,
+} from './searchConstants.js';
+
 import Header from './Header.jsx';
 import SearchContainer from './SearchContainer.jsx';
 import JobListingContainer from './JobListingContainer.jsx';
@@ -18,34 +25,19 @@ class Home extends Component {
 
     this.state = {
       isLoading: false,
+      isSubscriptionModalShown: false,
       jobs: [],
-      showSubscription: false,
       text: '',
     };
 
-    this.handleSubscription = this.handleSubscription.bind(this);
     this.onToggleSubscription = this.onToggleSubscription.bind(this);
     this.fetchJobs = this.fetchJobs.bind(this);
   }
 
   onToggleSubscription() {
-    this.setState({ showSubscription: !this.state.showSubscription });
-  }
-
-  handleSubscription(event) {
-    const form = new FormData(event.target);
-
-    fetch('/subscribe', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email: form.get('email'),
-        firstName: form.get('firstName'),
-        lastName: form.get('lastName'),
-      }),
-    })
+    this.setState(prevState => ({
+      isSubscriptionModalShown: !prevState.isSubscriptionModalShown,
+    }));
   }
 
   fetchJobs(text = '', tokens = []) {
@@ -54,7 +46,7 @@ class Home extends Component {
       text,
     });
 
-    const searchFilter = {
+    const searchQuery = {
       experienceLevels: [],
       locations: [],
       roles: [],
@@ -65,23 +57,19 @@ class Home extends Component {
     for (let i = 0, len = tokens.length; i < len; i++) {
       const token = tokens[i];
 
-      if (token.type === 'Experience') {
-        searchFilter.experienceLevels.push(token.value);
-      } else if (token.type === 'Location') {
-        searchFilter.locations.push(token.value);
-      } else if (token.type === 'Role') {
-        searchFilter.roles.push(token.value);
-      } else if (token.type === 'Skills') {
-        searchFilter.skills.push(token.value);
+      if (token.type === EXPERIENCE_FILTER_TITLE) {
+        searchQuery.experienceLevels.push(token.value);
+      } else if (token.type === LOCATION_FILTER_TITLE) {
+        searchQuery.locations.push(token.value);
+      } else if (token.type === ROLE_FILTER_TITLE) {
+        searchQuery.roles.push(token.value);
+      } else if (token.type === SKILLS_FILTER_TITLE) {
+        searchQuery.skills.push(token.value);
       }
     }
 
-    if (text || tokens) {
-      return fetch(`/jobs?query=${JSON.stringify(searchFilter)}`)
-        .then(res => res.json())
-        .then(json => this.setState({ jobs: json, isLoading: false }));
-    }
-    return fetch(JOBS_URI)
+    const queryParam = (text || tokens) ? `?query=${JSON.stringify(searchQuery)}` : '';
+    return fetch(`/jobs${queryParam}`)
       .then(res => res.json())
       .then(json => this.setState({ jobs: json, isLoading: false }));
   }
@@ -91,7 +79,9 @@ class Home extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    if (this.state.jobs.length === 0 && nextState.jobs.length === 0 && this.state.text.length > 0) {
+    const { jobs, text } = this.state;
+
+    if (jobs.length === 0 && nextState.jobs.length === 0 && text.length > 0) {
       return false;
     }
 
@@ -99,22 +89,19 @@ class Home extends Component {
   }
 
   render() {
+    const { jobs, isLoading, isSubscriptionModalShown } = this.state;
+
     return (
       <div className="app-container">
-        <Header
-          onToggleSubscription={this.onToggleSubscription}
-        />
+        <Header onToggleSubscription={this.onToggleSubscription} />
         <SearchContainer fetchJobs={this.fetchJobs} />
-        {this.state.showSubscription &&
+        {isSubscriptionModalShown &&
           <div>
             <div className="Subscription__overlay" />
-            <SubscriptionModal
-              onToggleSubscription={this.onToggleSubscription}
-              handleSubscription={this.handleSubscription}
-            />
+            <SubscriptionModal onToggleSubscription={this.onToggleSubscription} />
           </div>
         }
-        {this.state.jobs.length === 0 && !this.state.isLoading ?
+        {jobs.length === 0 && !isLoading ?
           <div className="no-results">
             <h1>No search results found.</h1>
             <h3>How about trying <a>new graduate jobs in San Fransisco</a> or <a>roles at FinTech companies</a>?</h3>

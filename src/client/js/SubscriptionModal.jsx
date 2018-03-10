@@ -4,13 +4,35 @@ import PropTypes from 'prop-types';
 import onClickOutside from 'react-onclickoutside';
 
 class SubscriptionModal extends Component {
-  handleClickOutside(event){
+  constructor(props) {
+    super(props);
+
+    this.handleSubscription = this.handleSubscription.bind(this);
+  }
+
+  handleClickOutside(event) {
     this.props.onToggleSubscription();
+  }
+
+  handleSubscription(event) {
+    const form = new FormData(event.target);
+
+    fetch('/subscribe', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: form.get('email'),
+        firstName: form.get('firstName'),
+        lastName: form.get('lastName'),
+      }),
+    })
   }
 
   render() {
     return (
-      <div className="SubscriptionModal" onSubmit={this.props.handleSubscription}>
+      <div className="SubscriptionModal" onSubmit={this.handleSubscription}>
         <p>Get new weekly job listings delivered right to your inbox!</p>
         <form className="SubscriptionModal__form">
           <p>Email Address</p>
@@ -26,9 +48,8 @@ class SubscriptionModal extends Component {
   }
 }
 
-export default onClickOutside(SubscriptionModal);
-
 SubscriptionModal.propTypes = {
   onToggleSubscription: PropTypes.func.isRequired,
-  handleSubscription: PropTypes.func.isRequired,
 };
+
+export default onClickOutside(SubscriptionModal);

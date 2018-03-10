@@ -3,46 +3,11 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import onClickOutside from 'react-onclickoutside';
 
+import * as searchConstants from './searchConstants.js';
+
 import SearchBar from './SearchBar.jsx';
 import SearchFilter from './SearchFilter.jsx';
 import SearchToken from './SearchToken.jsx';
-
-const EXPERIENCE_OPTIONS = [
-  'Intern',
-  'New graduate',
-  'Mid-level',
-  'Senior',
-  'Management',
-];
-
-const LOCATION_OPTIONS = [
-  'San Francisco, CA',
-  'New York City, NY',
-  'Seattle, WA',
-  'Washington, D.C.',
-  'Pittsburgh, PA',
-  'Chicago, IL',
-  'Remote',
-];
-
-const ROLE_OPTIONS = [
-  'Full-stack',
-  'Frontend',
-  'Backend',
-  'Mobile',
-  'DevOps / Infra',
-  'Machine learning',
-];
-
-const SKILL_OPTIONS = [
-  'JavaScript',
-  'Python',
-  'Go',
-  'Java',
-  'C++',
-  'iOS',
-  'Android',
-];
 
 export default class SearchContainer extends Component {
   constructor(props) {
@@ -82,7 +47,7 @@ export default class SearchContainer extends Component {
   
   handleSearch(e) {
     this.setState({ 
-      searchText: e.target.value 
+      searchText: e.target.value,
     }, this.debouncedFetchJobs());
   }
 
@@ -117,6 +82,10 @@ export default class SearchContainer extends Component {
   }
 
   removeAllTokens() {
+    if (this.state.searchTokens.length === 0) {
+      return;
+    }
+
     this.setState({
       searchTokens: [],
     }, this.debouncedFetchJobs());
@@ -151,29 +120,29 @@ export default class SearchContainer extends Component {
         />
         <div className="SearchContainer__filters">
           <EnhancedSearchFilter
-            title="Experience"
-            optionsMenu={EXPERIENCE_OPTIONS}
+            title={searchConstants.EXPERIENCE_FILTER_TITLE}
+            optionsMenu={searchConstants.EXPERIENCE_OPTIONS}
             setActiveFilter={this.setActiveFilter}
             activeFilterTitle={activeFilterTitle}
             addSearchToken={this.addSearchToken}
           />
           <EnhancedSearchFilter
-            title="Location"
-            optionsMenu={LOCATION_OPTIONS}
+            title={searchConstants.LOCATION_FILTER_TITLE}
+            optionsMenu={searchConstants.LOCATION_OPTIONS}
             setActiveFilter={this.setActiveFilter}
             activeFilterTitle={activeFilterTitle}
             addSearchToken={this.addSearchToken}
           />
           <EnhancedSearchFilter
-            title="Role"
-            optionsMenu={ROLE_OPTIONS}
+            title={searchConstants.ROLE_FILTER_TITLE}
+            optionsMenu={searchConstants.ROLE_OPTIONS}
             setActiveFilter={this.setActiveFilter}
             activeFilterTitle={activeFilterTitle}
             addSearchToken={this.addSearchToken}
           />
           <EnhancedSearchFilter
-            title="Skills"
-            optionsMenu={SKILL_OPTIONS}
+            title={searchConstants.SKILLS_FILTER_TITLE}
+            optionsMenu={searchConstants.SKILL_OPTIONS}
             setActiveFilter={this.setActiveFilter}
             activeFilterTitle={activeFilterTitle}
             addSearchToken={this.addSearchToken}
