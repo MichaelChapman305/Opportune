@@ -47,10 +47,12 @@
       padding-left: 5px;
     }
 
-    div {
+    .SubscriptionModal__submit {
       font-family: CamphorThree;
-      width: 10em;
+      width: 10.5em;
       height: 2.5em;
+      font-size: 18px;
+      font-weight: bold;
       background-color: white;
       color: black;
       display: flex;

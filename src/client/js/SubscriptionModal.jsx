@@ -10,16 +10,16 @@ class SubscriptionModal extends Component {
 
   render() {
     return (
-      <div className="SubscriptionModal">
+      <div className="SubscriptionModal" onSubmit={this.props.handleSubscription}>
         <p>Get new weekly job listings delivered right to your inbox!</p>
         <form className="SubscriptionModal__form">
           <p>Email Address</p>
-          <input className="SubscriptionModal__email"></input>
+          <input name="email" type="text" className="SubscriptionModal__email"></input>
           <p>First Name</p>
-          <input className="SubscriptionModal__firstName"></input>
+          <input name="firstName" type="text" className="SubscriptionModal__firstName"></input>
           <p>Last Name</p>
-          <input className="SubscriptionModal__lastName"></input>
-          <div className="SubscriptionModal__submit" type="submit" value='subscription'><h4>SUBSCRIBE</h4></div>
+          <input name="lastName" type="text" className="SubscriptionModal__lastName"></input>
+          <button className="SubscriptionModal__submit" type="submit" value='subscription'>SUBSCRIBE</button>
         </form>
       </div>
     );
@@ -30,4 +30,5 @@ export default onClickOutside(SubscriptionModal);
 
 SubscriptionModal.propTypes = {
   onToggleSubscription: PropTypes.func.isRequired,
+  handleSubscription: PropTypes.func.isRequired,
 };

@@ -23,12 +23,33 @@ class Home extends Component {
       text: '',
     };
 
+    this.handleSubscription = this.handleSubscription.bind(this);
     this.onToggleSubscription = this.onToggleSubscription.bind(this);
     this.fetchJobs = this.fetchJobs.bind(this);
   }
 
   onToggleSubscription() {
     this.setState({ showSubscription: !this.state.showSubscription });
+  }
+
+  handleSubscription(event) {
+    const form = new FormData(event.target);
+
+    fetch('/subscribe', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: form.get('email'),
+        firstName: form.get('firstName'),
+        lastName: form.get('lastName'),
+      })
+    }).then(res => {
+      console.log(res)
+    }).catch(err => {
+      console.log(err)
+    })
   }
 
   fetchJobs(text = '', tokens = []) {
@@ -93,6 +114,7 @@ class Home extends Component {
             <div className="Subscription__overlay"></div>
             <SubscriptionModal
               onToggleSubscription={this.onToggleSubscription}
+              handleSubscription={this.handleSubscription}
             />
           </div>
         }
