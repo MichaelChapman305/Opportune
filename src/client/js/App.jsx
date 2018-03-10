@@ -38,24 +38,20 @@ class Home extends Component {
     fetch('/subscribe', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         email: form.get('email'),
         firstName: form.get('firstName'),
         lastName: form.get('lastName'),
-      })
-    }).then(res => {
-      console.log(res)
-    }).catch(err => {
-      console.log(err)
+      }),
     })
   }
 
   fetchJobs(text = '', tokens = []) {
     this.setState({
       isLoading: true,
-      text: text,
+      text,
     });
 
     const searchFilter = {
@@ -63,7 +59,7 @@ class Home extends Component {
       locations: [],
       roles: [],
       skills: [],
-      text: text,
+      text,
     };
 
     for (let i = 0, len = tokens.length; i < len; i++) {
@@ -81,7 +77,7 @@ class Home extends Component {
     }
 
     if (text || tokens) {
-      return fetch(`/jobs?query=${JSON.stringify( searchFilter )}`)
+      return fetch(`/jobs?query=${JSON.stringify(searchFilter)}`)
         .then(res => res.json())
         .then(json => this.setState({ jobs: json, isLoading: false }));
     }
@@ -111,7 +107,7 @@ class Home extends Component {
         <SearchContainer fetchJobs={this.fetchJobs} />
         {this.state.showSubscription &&
           <div>
-            <div className="Subscription__overlay"></div>
+            <div className="Subscription__overlay" />
             <SubscriptionModal
               onToggleSubscription={this.onToggleSubscription}
               handleSubscription={this.handleSubscription}
