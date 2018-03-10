@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 const JobListing = require('./models.js');
 
-const ORDER_BY_SCORE = { 
-  score: { 
+const ORDER_BY_SCORE = {
+  score: {
     $meta: 'textScore',
   }
 };
@@ -42,7 +42,7 @@ router.get('/jobs', (req, res) => {
   addToSearchQuery('location', '$in', query.locations);
   addToSearchQuery('role', '$in', query.roles);
   addToSearchQuery('skills', '$in', query.skills);
- 
+
   if (query.text) {
     // If we do a full-text search, then we want to order the results by decreasing text score
     // and also filter out the results to only show relevent searches by matching on a text
@@ -75,8 +75,7 @@ router.get('/jobs', (req, res) => {
       },
     ]).exec().then(items => res.send(items));
   }
-  console.log(searchQuery);
-  return JobListing.find(searchQuery, function(err, items) { console.log(items); res.send(items); });
+  return JobListing.find(searchQuery, function(err, items) { res.send(items); });
 });
 
 module.exports = router;

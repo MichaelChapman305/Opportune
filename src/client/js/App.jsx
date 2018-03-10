@@ -36,7 +36,7 @@ class Home extends Component {
       isLoading: true,
       text: text,
     });
-    
+
     const searchFilter = {
       experienceLevels: [],
       locations: [],
@@ -66,7 +66,7 @@ class Home extends Component {
     }
     return fetch(JOBS_URI)
       .then(res => res.json())
-      .then(json => this.setState({ jobs: json, isLoading: false }));   
+      .then(json => this.setState({ jobs: json, isLoading: false }));
   }
 
   componentDidMount() {
@@ -76,8 +76,8 @@ class Home extends Component {
   shouldComponentUpdate(nextProps, nextState) {
     if (this.state.jobs.length === 0 && nextState.jobs.length === 0 && this.state.text.length > 0) {
       return false;
-    } 
-    
+    }
+
     return true;
   }
 
@@ -88,7 +88,7 @@ class Home extends Component {
           onToggleSubscription={this.onToggleSubscription}
         />
         <SearchContainer fetchJobs={this.fetchJobs} />
-        {this.state.showSubscription && 
+        {this.state.showSubscription &&
           <div>
             <div className="Subscription__overlay"></div>
             <SubscriptionModal
@@ -102,8 +102,8 @@ class Home extends Component {
             <h3>How about trying <a>new graduate jobs in San Fransisco</a> or <a>roles at FinTech companies</a>?</h3>
           </div>
           :
-          <JobListingContainer 
-            jobs={this.state.jobs} 
+          <JobListingContainer
+            jobs={this.state.jobs}
             isLoading={this.state.isLoading}
           />
         }
