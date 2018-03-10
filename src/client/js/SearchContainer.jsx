@@ -105,16 +105,12 @@ export default class SearchContainer extends Component {
 
   render() {
     const EnhancedSearchFilter = onClickOutside(SearchFilter);
-    const { activeFilterTitle, searchTokens } = this.state;
+    const { activeFilterTitle, searchText, searchTokens } = this.state;
 
     return (
       <div className="SearchContainer">
-        {this.state.activeFilterTitle.length > 0 && 
-          <div className="SearchContainer__overlay">
-          </div>
-        }
         <SearchBar
-          searchText={this.state.searchText}
+          searchText={searchText}
           removeSearchText={this.removeSearchText}
           handleSearch={this.handleSearch}
         />

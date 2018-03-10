@@ -17,7 +17,7 @@ export default class SearchBar extends Component {
   render() {
     return (
       <div className="SearchBar">
-        <img className="searchBar__icon "src="./images/search-icon.svg" alt="Search icon" />
+        <img className="SearchBar__searchIcon "src="./images/search-icon.svg" alt="Search icon" />
         <input
           className="SearchBar__input"
           ref={input => this.textInput = input}
@@ -27,7 +27,7 @@ export default class SearchBar extends Component {
           autoFocus
         />
         {this.props.searchText.length > 0 &&
-          <img className="searchBar__cancel" src="./images/cancel-icon.svg" alt="Cancel icon" onClick={this.clearSearch}  />
+          <img className="SearchBar__cancelIcon" src="./images/cancel-icon.svg" alt="Cancel icon" onClick={this.clearSearch}  />
         }
       </div>
     );

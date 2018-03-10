@@ -1,9 +1,12 @@
 const express = require('express');
-const router = express.Router();
-const JobListing = require('./models.js');
 const request = require('superagent');
+const bodyParser = require('body-parser');
 
-router.use(require("body-parser").json());
+const routes = require('../shared/routes.js');
+const JobListing = require('./models.js');
+
+const router = express.Router();
+router.use(bodyParser.json());
 
 const ORDER_BY_SCORE = {
   score: {
@@ -11,7 +14,7 @@ const ORDER_BY_SCORE = {
   }
 };
 
-router.post('/subscribe', (req, res) => {
+router.post(routes.SUBSCRIBE_URI, (req, res) => {
   request
     .post('https://us12.api.mailchimp.com/3.0/lists/' + process.env.MAILCHIMP_LIST + '/members/')
     .set('Content-Type', 'application/json;charset=utf-8')
@@ -33,11 +36,11 @@ router.post('/subscribe', (req, res) => {
     });
 });
 
-router.get('/', (req, res) => {
+router.get(routes.HOME_URI, (req, res) => {
   res.sendFile('index.html', { root: '.' });
 });
 
-router.get('/jobs', (req, res) => {
+router.get(routes.JOBS_URI, (req, res) => {
   const queryText = req.query.query;
 
   if (!queryText) {
@@ -100,7 +103,8 @@ router.get('/jobs', (req, res) => {
       },
     ]).exec().then(items => res.send(items));
   }
-  return JobListing.find(searchQuery, function(err, items) { res.send(items); });
+
+  return JobListing.find(searchQuery).exec().then(items => res.send(items));
 });
 
 module.exports = router;

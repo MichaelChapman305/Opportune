@@ -5,6 +5,7 @@ import 'whatwg-fetch';
 
 import '../css/style.scss';
 
+import { JOBS_URI } from '../../shared/routes.js';
 import {
   EXPERIENCE_FILTER_TITLE,
   LOCATION_FILTER_TITLE,
@@ -16,8 +17,6 @@ import Header from './Header.jsx';
 import SearchContainer from './SearchContainer.jsx';
 import JobListingContainer from './JobListingContainer.jsx';
 import SubscriptionModal from './SubscriptionModal.jsx';
-
-const JOBS_URI = '/jobs';
 
 class Home extends Component {
   constructor(props) {
@@ -69,7 +68,7 @@ class Home extends Component {
     }
 
     const queryParam = (text || tokens) ? `?query=${JSON.stringify(searchQuery)}` : '';
-    return fetch(`/jobs${queryParam}`)
+    return fetch(`${JOBS_URI}${queryParam}`)
       .then(res => res.json())
       .then(json => this.setState({ jobs: json, isLoading: false }));
   }
@@ -108,8 +107,8 @@ class Home extends Component {
           </div>
           :
           <JobListingContainer
-            jobs={this.state.jobs}
-            isLoading={this.state.isLoading}
+            jobs={jobs}
+            isLoading={isLoading}
           />
         }
       </div>

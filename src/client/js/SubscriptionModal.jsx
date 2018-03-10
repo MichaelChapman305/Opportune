@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import onClickOutside from 'react-onclickoutside';
 
+import { SUBSCRIBE_URI } from '../../shared/routes.js';
+
 class SubscriptionModal extends Component {
   constructor(props) {
     super(props);
@@ -17,7 +19,7 @@ class SubscriptionModal extends Component {
   handleSubscription(event) {
     const form = new FormData(event.target);
 
-    fetch('/subscribe', {
+    fetch(SUBSCRIBE_URI, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
