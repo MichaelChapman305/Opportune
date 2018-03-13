@@ -23,7 +23,12 @@ export default class SearchFilter extends Component {
   }
 
   handleClickOutside(event) {
-    if (event.target.className !== 'SearchFilter__button' && event.target.className.animVal !== 'Arrow' && event.target.type !== 'a') {
+    const target = event.target;
+    const isFilter = target.className === 'SearchFilter__button' || 
+                     target.className.animVal === 'Arrow';
+    const isFilterMenu = target.parentElement.className === 'SearchFilter__menu';
+
+    if (!isFilter && !isFilterMenu) {
       this.props.setActiveFilter('');
     }
   }
@@ -42,13 +47,13 @@ export default class SearchFilter extends Component {
           <Arrow fill={isMenuShown ? '#ffffff' : '#484848'} isExpanded={isMenuShown}></Arrow>
         </button>
         {isMenuShown && 
-          <div className="SearchFilter__menu">
+          <ul className="SearchFilter__menu">
           {optionsMenu.map(menuOption =>
-            <a type='a' key={`${title}-${menuOption}`} onClick={this.onClickMenuOption}>
+            <li key={`${title}-${menuOption}`} onClick={this.onClickMenuOption}>
               {menuOption}
-            </a>
+            </li>
           )}
-          </div>
+          </ul>
         }
       </div>
     );

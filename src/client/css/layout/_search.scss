@@ -125,22 +125,26 @@
     }
 
     .SearchFilter__menu {
+      list-style-type: none;
+      font-family: Camphor;
       position: absolute;
       top: 48px !important;
       display: flex;
+      z-index: 3000;
       flex-direction: column;
       justify-content: space-evenly;
-      background-color: white;
       width: 11em;
       height: auto;
       background-color: white;
-      box-shadow: .5px .5px 1px .5px rgba(125,125,125,.25);
+      box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+      border-radius: 2px;
 
-      a {
+      li {
         padding-top: 10px;
         padding-bottom: 10px;
         padding-left: 20px;
         padding-right: 1px;
+        z-index: 3000;
 
         &:hover {
           cursor: pointer;

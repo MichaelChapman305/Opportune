@@ -34,10 +34,10 @@
 
   .Header__items {
     list-style-type: none;
-  }
 
-  .Header__items > li {
-    margin-right: 1.8em;
-    display: inline;
+    li {
+      margin-right: 1.8em;
+      display: inline;
+    }
   }
 }
