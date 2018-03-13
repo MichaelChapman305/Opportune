@@ -7,11 +7,17 @@ export default class Header extends Component {
     return (
       <div className="Header">
         <h1 className="Header__title">Opportune</h1>
-        <div>
-          <a className="Header__button Header__button--subscribe" onClick={this.props.onToggleSubscription}>Subscribe</a>
-          <a className="Header__button Header__button--donate">Donate</a>
-          <a className="Header__button Header__button--contact">Contact</a>
-        </div>
+        <ul className="Header__items">
+          <li>
+            <a className="Header__button" onClick={this.props.onToggleSubscription}>Subscribe</a>
+          </li>
+          <li>
+            <a className="Header__button">Donate</a>
+          </li>
+          <li>
+            <a className="Header__button" href="mailto:hello@opportunecareers.com">Contact</a>
+          </li>
+        </ul>
       </div>
     )
   }

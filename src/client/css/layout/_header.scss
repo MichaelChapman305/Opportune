@@ -24,14 +24,20 @@
   .Header__button {
     font-size: 1.2rem;
     font-family: Camphor;
+    text-decoration: none;
+    color: $text-color;
 
     &:hover {
       cursor: pointer;
     }
   }
 
-  .Header__button--subscribe,
-  .Header__button--donate {
+  .Header__items {
+    list-style-type: none;
+  }
+
+  .Header__items > li {
     margin-right: 1.8em;
+    display: inline;
   }
 }
