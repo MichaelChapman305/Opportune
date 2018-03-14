@@ -12,7 +12,7 @@ export default class Header extends Component {
             <a className="Header__button" onClick={this.props.onToggleSubscription}>Subscribe</a>
           </li>
           <li>
-            <a className="Header__button">Donate</a>
+            <a className="Header__button" href="https://www.buymeacoffee.com/oZfAMy0mC" target="_blank">Donate</a>
           </li>
           <li>
             <a className="Header__button" href="mailto:hello@opportunecareers.com">Contact</a>
