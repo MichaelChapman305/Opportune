@@ -22,6 +22,7 @@ const jobListing = new Schema({
   description: { type: String, trim: true },
   title: { type: String, trim: true },
   location: { type: String, trim: true },
+  skills: [String],
   url: String,
 }, {
   timestamps: true,
@@ -40,12 +41,12 @@ jobListing.index(
   },
   {
     weights: {
-      company: 7,
-      role: 7,
-      experience: 7,
-      description: 2,
-      title: 7,
-      location: 7,
+      company: 20,
+      role: 20,
+      experience: 20,
+      description: 1,
+      title: 20,
+      location: 20,
     },
   },
 );

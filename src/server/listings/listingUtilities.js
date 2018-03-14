@@ -15,6 +15,12 @@ const EXCLUDED_WORDS = [
   'field',
   'sales',
   'helpdesk',
+  'manufacturing',
+  'thermal',
+  'electronics',
+  'acoustics',
+  'hardware',
+  'electrical'
 ];
 
 function isEngineeringJob(title) {
@@ -33,14 +39,14 @@ function isEngineeringJob(title) {
   return true;
 }
 
-function getExperienceLevelFromTitle(title) {
+function getExperienceLevel(title) {
   title = title.toLowerCase();
 
   if (/\binterns?(ships?)?\b/.test(title)) {
     return 'Intern';
   }
   else if (/\bcampus\b|\b(grad(uate)?)\b/.test(title)) {
-    return 'New Graduate';
+    return 'New graduate';
   }
   else if (/\bsr\.?\b|\bsenior\b|\bstaff\b/.test(title)) {
     return 'Senior';
@@ -52,7 +58,7 @@ function getExperienceLevelFromTitle(title) {
   return 'Mid-level';
 }
 
-function getRoleFromTitle(title) {
+function getRole(title) {
   title = title.toLowerCase();
 
   if (/\bfront.?end\b|\bjavascript\b|\bui\b|\bweb\b/.test(title)) {
@@ -65,20 +71,41 @@ function getRoleFromTitle(title) {
     return 'Full-stack';
   }
   else if (/\b(machine|deep) learning\b|\bml\b|\bai\b/.test(title)) {
-    return 'Machine Learning';
+    return 'Machine learning';
   }
   else if (/\bdevops\b|\binfrastructure\b/.test(title)) {
     return 'DevOps / Infrastructure';
   } 
-  else if (/\bmobile\b|\bios\b|\bandroid\b/.test(title)) {
+  else if (/\bmobile\b|\bios\b|\bandroid\b|\bswift\b/.test(title)) {
     return 'Mobile';
   }
 
   return 'General';
 }
 
+function getSkills(title, description) {
+  let skills = [];
+  const addSkill = (regex, skill) =>  {
+    if (regex.test(title) || regex.test(description)) {
+      skills.push(skill);
+    }
+  };
+
+  addSkill(/\bjavascript\b/i, 'JavaScript');
+  addSkill(/\bios\b/i, 'iOS');
+  addSkill(/\bAndroid\b/, 'Android');
+  addSkill(/\bGo\b|\bGolang\b/, 'Go');
+  addSkill(/\bPython\b/, 'Python');
+  addSkill(/\bC\+\+\b/, 'C++');
+  addSkill(/\bJava\b/, 'Java');
+
+  return skills;
+}
+
+
 module.exports = {
   isEngineeringJob,
-  getExperienceLevelFromTitle,
-  getRoleFromTitle,
+  getExperienceLevel,
+  getRole,
+  getSkills,
 };

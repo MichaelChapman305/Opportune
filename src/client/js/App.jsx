@@ -26,7 +26,8 @@ class Home extends Component {
       isLoading: false,
       isSubscriptionModalShown: false,
       jobs: [],
-      text: '',
+      activeText: '',
+      activeTokens: [],
     };
 
     this.onToggleSubscription = this.onToggleSubscription.bind(this);
@@ -42,7 +43,8 @@ class Home extends Component {
   fetchJobs(text = '', tokens = []) {
     this.setState({
       isLoading: true,
-      text,
+      activeText: text,
+      activeTokens: tokens,
     });
 
     const searchQuery = {
@@ -67,7 +69,9 @@ class Home extends Component {
       }
     }
 
-    const queryParam = (text || tokens) ? `?query=${JSON.stringify(searchQuery)}` : '';
+    const encodedSearchQuery = encodeURIComponent(JSON.stringify(searchQuery));
+    const queryParam = (text || tokens) ? `?query=${encodedSearchQuery}` : '';
+
     return fetch(`${JOBS_URI}${queryParam}`)
       .then(res => res.json())
       .then(json => this.setState({ jobs: json, isLoading: false }));
@@ -78,10 +82,12 @@ class Home extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    const { jobs, text } = this.state;
+    const { jobs, activeText, activeTokens } = this.state;
 
-    if (jobs.length === 0 && nextState.jobs.length === 0 && text.length > 0) {
-      return false;
+    if (jobs.length === 0 && nextState.jobs.length === 0) {
+      if (activeText || activeTokens.length > 0) {
+        return false;
+      }
     }
 
     return true;
@@ -106,10 +112,7 @@ class Home extends Component {
             <h3>How about trying <a>new graduate jobs in San Fransisco</a> or <a>roles at FinTech companies</a>?</h3>
           </div>
           :
-          <JobListingContainer
-            jobs={jobs}
-            isLoading={isLoading}
-          />
+          <JobListingContainer jobs={jobs} isLoading={isLoading} />
         }
       </div>
     );

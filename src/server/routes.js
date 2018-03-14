@@ -50,7 +50,7 @@ router.get(routes.JOBS_URI, (req, res) => {
   let query = {};
 
   try {
-    query = JSON.parse(queryText);
+    query = JSON.parse(decodeURIComponent(queryText));
   }
   catch (e) {
     return res.status(400).send({ error: e });

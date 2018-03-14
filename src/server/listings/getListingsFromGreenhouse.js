@@ -10,16 +10,21 @@ function getListingsFromGreenhouse(companyID) {
         throw new Error(`couldn't retrieve data for company ${companyID}`);
       }
 
-      const jobs = json.jobs.map(job => ({
-        id: job.id,
-        company: companyNames.GREENHOUSE_COMPANIES[companyID],
-        title: job.title,
-        role: listingUtilities.getRoleFromTitle(job.title),
-        experience: listingUtilities.getExperienceLevelFromTitle(job.title),
-        description: htmlToPlainText(job.content),
-        location: job.location && job.location.name,
-        url: job.absolute_url,
-      }));
+      const jobs = json.jobs.map(job => {
+        const cleanDescription = htmlToPlainText(job.content);
+
+        return {
+          id: job.id,
+          company: companyNames.GREENHOUSE_COMPANIES[companyID],
+          title: job.title,
+          role: listingUtilities.getRole(job.title),
+          experience: listingUtilities.getExperienceLevel(job.title),
+          skills: listingUtilities.getSkills(job.title, cleanDescription),
+          description: cleanDescription,
+          location: job.location && job.location.name,
+          url: job.absolute_url,
+        };
+      });
 
       return jobs;
     }).catch(err => console.error('Error fetching Greenhouse data:', err));
