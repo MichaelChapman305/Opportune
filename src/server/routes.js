@@ -14,6 +14,10 @@ const ORDER_BY_SCORE = {
   }
 };
 
+const ORDER_BY_COMPANY_ASC = {
+  company: 1,
+};
+
 router.post(routes.SUBSCRIBE_URI, (req, res) => {
   request
     .post('https://us12.api.mailchimp.com/3.0/lists/' + process.env.MAILCHIMP_LIST + '/members/')
@@ -44,7 +48,11 @@ router.get(routes.JOBS_URI, (req, res) => {
   const queryText = req.query.query;
 
   if (!queryText) {
-    return JobListing.find({}).exec().then(items => res.send(items));
+    return JobListing
+      .find({})
+      .sort(ORDER_BY_COMPANY_ASC)
+      .exec()
+      .then(items => res.send(items));
   }
 
   let query = {};
@@ -101,10 +109,14 @@ router.get(routes.JOBS_URI, (req, res) => {
       {
         $sort: ORDER_BY_SCORE,
       },
-    ]).exec().then(items => res.send(items));
+    ]).sort(ORDER_BY_COMPANY_ASC).exec().then(items => res.send(items));
   }
 
-  return JobListing.find(searchQuery).exec().then(items => res.send(items));
+  return JobListing
+    .find(searchQuery)
+    .sort(ORDER_BY_COMPANY_ASC)
+    .exec()
+    .then(items => res.send(items));
 });
 
 module.exports = router;
