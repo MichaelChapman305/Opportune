@@ -27,7 +27,7 @@ export default class SearchBar extends Component {
           autoFocus
         />
         {this.props.searchText.length > 0 &&
-          <img className="SearchBar__cancelIcon" src="./images/cancel-icon.svg" alt="Cancel icon" onClick={this.clearSearch}  />
+          <img className="SearchBar__cancelIcon" src="./images/cancel-icon.svg" alt="Cancel button" onClick={this.clearSearch}  />
         }
       </div>
     );

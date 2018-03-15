@@ -35,15 +35,22 @@ class SubscriptionModal extends Component {
   render() {
     return (
       <div className="SubscriptionModal" onSubmit={this.handleSubscription}>
-        <p>Get new weekly job listings delivered right to your inbox!</p>
+        <img
+          className="SubscriptionModal__closeButton"
+          src="./images/close-icon.svg"
+          alt="Close modal button"
+          onClick={this.props.onToggleSubscription}
+        />
+        <h1 className="SubscriptionModal__title">Find your new career.</h1>
+        <p className="SubscriptionModal__description">Enter your information below and receive new job listings every week from the world's most talented technology companies.</p>
         <form className="SubscriptionModal__form">
-          <p>Email Address</p>
+          <label htmlFor="email">Email Address</label>
           <input name="email" type="text" className="SubscriptionModal__email"></input>
-          <p>First Name</p>
+          <label htmlFor="firstName">First Name</label>
           <input name="firstName" type="text" className="SubscriptionModal__firstName"></input>
-          <p>Last Name</p>
+          <label htmlFor="lastName">Last Name</label>
           <input name="lastName" type="text" className="SubscriptionModal__lastName"></input>
-          <button className="SubscriptionModal__submit" type="submit" value='subscription'>SUBSCRIBE</button>
+          <button className="SubscriptionModal__submit" type="submit">Subscribe</button>
         </form>
       </div>
     );

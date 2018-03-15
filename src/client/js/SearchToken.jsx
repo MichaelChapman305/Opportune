@@ -18,7 +18,7 @@ export default class SearchToken extends Component {
     return (
       <div className="SearchToken">
         <p>{this.props.value}</p>
-        <img src="./images/close-icon.svg" alt="Remove icon" onClick={this.onRemoveToken}/>
+        <img src="./images/close-icon.svg" alt="Remove token button" onClick={this.onRemoveToken}/>
       </div>
     );
   }

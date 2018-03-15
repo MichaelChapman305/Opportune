@@ -10,9 +10,12 @@ export const LOCATION_OPTIONS = [
   'San Francisco, CA',
   'New York, NY',
   'Seattle, WA',
+  'Boston, MA',
   'Washington, D.C.',
   'Pittsburgh, PA',
   'Chicago, IL',
+  'Mountain View, CA',
+  'Palo Alto, CA',
   'Remote',
 ];
 
