@@ -15,12 +15,12 @@ export default class SearchToken extends Component {
   }
 
   render() {
-  	return (
+    return (
       <div className="SearchToken">
         <p>{this.props.value}</p>
         <img src="./images/close-icon.svg" alt="Remove icon" onClick={this.onRemoveToken}/>
       </div>
-  	);
+    );
   }
 }
 

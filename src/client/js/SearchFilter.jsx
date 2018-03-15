@@ -24,6 +24,11 @@ export default class SearchFilter extends Component {
 
   handleClickOutside(event) {
     const target = event.target;
+
+    if (!target || !target.className) {
+      return;
+    }
+
     const isFilter = target.className === 'SearchFilter__button' || 
                      target.className.animVal === 'Arrow';
     const isFilterMenu = target.parentElement.className === 'SearchFilter__menu';

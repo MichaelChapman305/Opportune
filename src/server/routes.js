@@ -73,6 +73,14 @@ router.get(routes.JOBS_URI, (req, res) => {
     }
   };
 
+  // We need to be able to find all variations of a particular location.
+  // For example, if someone adds a "New York, NY" token we should also
+  // find entries such as NYC, New York City, NY - HQ, etc so we can
+  // build several regexes for every location to properly filter entries
+  if (query.locations.length > 0) {
+    query.locations = buildLocationRegexes(query.locations);
+  }
+
   addToSearchQuery('$text', '$search', query.text && `\"${query.text}\"`);
   addToSearchQuery('experience', '$in', query.experienceLevels);
   addToSearchQuery('location', '$in', query.locations);
@@ -118,5 +126,39 @@ router.get(routes.JOBS_URI, (req, res) => {
     .exec()
     .then(items => res.send(items));
 });
+
+function buildLocationRegexes(locations) {
+  const locationRegexes = [];
+
+  for (let i = 0, len = locations.length; i < len; i++) {
+    if (locations[i] === 'Washington, D.C.') {
+      // Hackfix: Washington, D.C. is the only "special" location so
+      // we just want to find all instances of Washington, D.C. with
+      // varying punctuation
+      locationRegexes.push(/Washington..?D.?C.?/);
+      continue;
+    }
+
+    const location = locations[i].split(',');
+    const city = location[0];
+
+    if (location.length < 2) {
+      // If there is no state (i.e. for Remote locations) then just add the
+      // location as is
+      locationRegexes.push(new RegExp(location, 'g'));
+      continue;
+    }
+
+    locationRegexes.push(new RegExp(city, 'g'));
+
+    if (city.indexOf(' ') !== -1) {
+      // If the city is multiple words, add the abbreviation of the city
+      const abbreviation = city.match(/\b(\w)/g).join('');
+      locationRegexes.push(new RegExp(abbreviation, 'g'));
+    }
+  }
+
+  return locationRegexes;
+}
 
 module.exports = router;

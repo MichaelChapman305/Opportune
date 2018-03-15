@@ -3,17 +3,17 @@ export const EXPERIENCE_OPTIONS = [
   'New graduate',
   'Mid-level',
   'Senior',
-  'Management'
+  'Management',
 ];
 
 export const LOCATION_OPTIONS = [
   'San Francisco, CA',
-  'New York City, NY',
+  'New York, NY',
   'Seattle, WA',
   'Washington, D.C.',
   'Pittsburgh, PA',
   'Chicago, IL',
-  'Remote'
+  'Remote',
 ];
 
 export const ROLE_OPTIONS = [
@@ -22,7 +22,7 @@ export const ROLE_OPTIONS = [
   'Backend',
   'Mobile',
   'DevOps / Infra',
-  'Machine learning'
+  'Machine learning',
 ];
 
 export const SKILL_OPTIONS = [
@@ -32,7 +32,7 @@ export const SKILL_OPTIONS = [
   'Java',
   'C++',
   'iOS',
-  'Android'
+  'Android',
 ];
 
 export const EXPERIENCE_FILTER_TITLE = 'Experience';

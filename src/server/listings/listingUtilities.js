@@ -20,7 +20,7 @@ const EXCLUDED_WORDS = [
   'electronics',
   'acoustics',
   'hardware',
-  'electrical'
+  'electrical',
 ];
 
 function isEngineeringJob(title) {
@@ -44,14 +44,11 @@ function getExperienceLevel(title) {
 
   if (/\binterns?(ships?)?\b/.test(title)) {
     return 'Intern';
-  }
-  else if (/\bcampus\b|\b(grad(uate)?)\b/.test(title)) {
+  } else if (/\bcampus\b|\b(grad(uate)?)\b/.test(title)) {
     return 'New graduate';
-  }
-  else if (/\bsr\.?\b|\bsenior\b|\bstaff\b/.test(title)) {
+  } else if (/\bsr\.?\b|\bsenior\b|\bstaff\b/.test(title)) {
     return 'Senior';
-  }
-  else if (/\blead\b|\bmanager\b/.test(title)) {
+  } else if (/\blead\b|\bmanager\b/.test(title)) {
     return 'Management';
   }
 
@@ -63,20 +60,15 @@ function getRole(title) {
 
   if (/\bfront.?end\b|\bjavascript\b|\bui\b|\bweb\b/.test(title)) {
     return 'Frontend';
-  }
-  else if (/\bback.?end\b|\bapi\b/.test(title)) {
+  } else if (/\bback.?end\b|\bapi\b/.test(title)) {
     return 'Backend';
-  }
-  else if (/\bfull.?stack\b/.test(title)) {
+  } else if (/\bfull.?stack\b/.test(title)) {
     return 'Full-stack';
-  }
-  else if (/\b(machine|deep) learning\b|\bml\b|\bai\b/.test(title)) {
+  } else if (/\b(machine|deep) learning\b|\bml\b|\bai\b/.test(title)) {
     return 'Machine learning';
-  }
-  else if (/\bdevops\b|\binfrastructure\b/.test(title)) {
-    return 'DevOps / Infrastructure';
-  } 
-  else if (/\bmobile\b|\bios\b|\bandroid\b|\bswift\b/.test(title)) {
+  } else if (/\bdevops\b|\binfrastructure\b/.test(title)) {
+    return 'DevOps / Infra';
+  } else if (/\bmobile\b|\bios\b|\bandroid\b|\bswift\b/.test(title)) {
     return 'Mobile';
   }
 
@@ -84,7 +76,7 @@ function getRole(title) {
 }
 
 function getSkills(title, description) {
-  let skills = [];
+  const skills = [];
   const addSkill = (regex, skill) =>  {
     if (regex.test(title) || regex.test(description)) {
       skills.push(skill);
@@ -101,7 +93,6 @@ function getSkills(title, description) {
 
   return skills;
 }
-
 
 module.exports = {
   isEngineeringJob,
