@@ -29,7 +29,7 @@ export default class SearchContainer extends Component {
       }
     }
 
-    this.debouncedFetchJobs = debounce(this.handleChange, 500);
+    this.debouncedFetchJobs = debounce(this.handleChange, searchConstants.DEBOUNCE_TIME);
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
@@ -44,9 +44,9 @@ export default class SearchContainer extends Component {
     const { searchText, searchTokens } = this.state;
     this.props.fetchJobs(searchText, searchTokens);
   }
-  
+
   handleSearch(e) {
-    this.setState({ 
+    this.setState({
       searchText: e.target.value,
     }, this.debouncedFetchJobs());
   }

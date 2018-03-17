@@ -42,3 +42,4 @@ export const EXPERIENCE_FILTER_TITLE = 'Experience';
 export const LOCATION_FILTER_TITLE = 'Location';
 export const ROLE_FILTER_TITLE = 'Role';
 export const SKILLS_FILTER_TITLE = 'Skills';
+export const DEBOUNCE_TIME = 500;

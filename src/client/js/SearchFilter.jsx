@@ -29,7 +29,7 @@ export default class SearchFilter extends Component {
       return;
     }
 
-    const isFilter = target.className === 'SearchFilter__button' || 
+    const isFilter = target.className === 'SearchFilter__button' ||
                      target.className.animVal === 'Arrow';
     const isFilterMenu = target.parentElement.className === 'SearchFilter__menu';
 
@@ -51,7 +51,7 @@ export default class SearchFilter extends Component {
           {title}
           <Arrow fill={isMenuShown ? '#ffffff' : '#484848'} isExpanded={isMenuShown}></Arrow>
         </button>
-        {isMenuShown && 
+        {isMenuShown &&
           <ul className="SearchFilter__menu">
           {optionsMenu.map(menuOption =>
             <li key={`${title}-${menuOption}`} onClick={this.onClickMenuOption}>

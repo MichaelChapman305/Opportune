@@ -26,7 +26,11 @@ function combineCompanyListings(greenhouseCompanies, leverCompanies) {
 
 function getEmailList() {
   JobListing.find({ $where: "this.updatedAt[0] === this.createdAt[0]" }, { company: 1, title: 1, url: 1 }).exec()
-  .then(newListings => createEmailTemplate(newListings))
+  .then(newListings => {
+    if (newListings.length > 0) {
+      createEmailTemplate(newListings)
+    }
+  })
 }
 
 function updateDatabase(listings) {

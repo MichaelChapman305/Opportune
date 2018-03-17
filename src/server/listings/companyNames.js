@@ -173,7 +173,6 @@ const GREENHOUSE_COMPANIES = {
   instacart: 'Instacart',
   artsy: 'Artsy',
   robinhood: 'Robinhood',
-  checkr: 'Checkr',
   optoro: 'Optoro',
   rubrik: 'Rubrik',
   figma: 'Figma',
