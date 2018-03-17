@@ -1,6 +1,15 @@
 {
-  "extends": "airbnb",
+  "extends": ["airbnb", "plugin:prettier/recommended"],
+  "parser": "babel-eslint",
   "rules": {
-    "arrow-parens": [2, "as-needed"]
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": true,
+        "trailingComma": 'es5',
+        "arrowParens": 'avoid',
+        "printWidth": 100,
+      }
+    ]
   }
 }
