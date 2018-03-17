@@ -1,6 +1,7 @@
 const express = require('express');
 const request = require('superagent');
 const bodyParser = require('body-parser');
+const fs = require('fs');
 
 const routes = require('../shared/routes.js');
 const JobListing = require('./models.js');
@@ -25,14 +26,14 @@ router.post(routes.SUBSCRIBE_URI, (req, res) => {
     .set('Authorization', 'Basic ' + new Buffer('any:' + process.env.MAILCHIMP_KEY ).toString('base64'))
     .send({
       'email_address': req.body.email,
-      'status': 'subscribed',
+      'status': 'pending',
       'merge_fields': {
         'FNAME': req.body.firstName,
         'LNAME': req.body.lastName
       }
     })
     .end((err, response) => {
-      if (response.status < 300 || (response.status === 400 && response.body.title === "Member Exists")) {
+      if (response.status < 300 || (response.status === 400 && response.body.title === 'Member Exists')) {
         res.send('Signed Up!');
       } else {
         res.send(response.body.title);

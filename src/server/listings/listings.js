@@ -2,6 +2,7 @@ const getListingsFromGreenhouse = require('./getListingsFromGreenhouse');
 const getListingsFromLever = require('./getListingsFromLever');
 const JobListing = require('../models.js');
 const listingUtilities = require('./listingUtilities.js');
+const createEmailTemplate = require('../email/createEmailTemplate.js');
 
 function combineCompanyListings(greenhouseCompanies, leverCompanies) {
   const greenhousePromise = getCompanyListings(greenhouseCompanies, getListingsFromGreenhouse);
@@ -16,8 +17,16 @@ function combineCompanyListings(greenhouseCompanies, leverCompanies) {
       return listing && listingUtilities.isEngineeringJob(listing.title);
     });
   })
-  .then(filteredListings => updateDatabase(filteredListings))
+  .then((filteredListings) => updateDatabase(filteredListings))
+  .then(() => {
+    getEmailList()
+  })
   .catch(err => console.error('Error updating database with job listings', err));
+}
+
+function getEmailList() {
+  JobListing.find({ $where: "this.updatedAt[0] === this.createdAt[0]" }, { company: 1, title: 1, url: 1 }).exec()
+  .then(newListings => createEmailTemplate(newListings))
 }
 
 function updateDatabase(listings) {
@@ -25,27 +34,32 @@ function updateDatabase(listings) {
     upsert: true,
     runValidators: true,
   };
+  let promiseArr = [];
 
   for (let i = 0, len = listings.length; i < len; i++) {
-    const updateCondition = { 
+    const updateCondition = {
       id: listings[i].id,
     };
 
-    // Update all our of entries and insert any new entries with the upsert option
-    JobListing.findOneAndUpdate(updateCondition, listings[i], updateOptions).exec();
+    const findAndUpdateDatabase = JobListing.findOneAndUpdate(updateCondition, listings[i], updateOptions).exec();
+    promiseArr.push(findAndUpdateDatabase);
   }
 
   const purgeDate = new Date();
   purgeDate.setDate(purgeDate.getDate() - 7);
 
-  // Since we have updated every entry in the database above, we can remove any 
-  // entries that were not updated in the last week which means that jobs fitting 
+  // Since we have updated every entry in the database above, we can remove any
+  // entries that were not updated in the last week which means that jobs fitting
   // this criteria no longer exist on their Greenhouse or Lever job boards
-  JobListing.remove({ 
-    updatedAt: { 
+  const removeListings = JobListing.remove({
+    updatedAt: {
       $lte: purgeDate,
     },
-  }).exec().then(info => console.log(`Purged ${info.n} old jobs from the database`));
+  })
+
+  return Promise.all(promiseArr)
+  .then(removeListings)
+  .catch(err => console.error(err))
 }
 
 function getCompanyListings(companies, getListingsFunc) {
