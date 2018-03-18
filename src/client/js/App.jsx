@@ -112,8 +112,7 @@ class Home extends Component {
           <div className="no-results">
             <h1>No search results found.</h1>
             <h3>
-              How about trying <a>new graduate jobs in San Fransisco</a> or{' '}
-              <a>roles at FinTech companies</a>?
+              Can't find what you're looking for? Don't worry, we update our career listings every week!
             </h3>
           </div>
         )}
