@@ -30,7 +30,7 @@ export default class SearchFilter extends Component {
     }
 
     const isFilter =
-      target.className === 'SearchFilter__button' || target.className.animVal === 'Arrow';
+      target.className === 'SearchFilter__button' || target.className instanceof SVGAnimatedString;
     const isFilterMenu = target.parentElement.className === 'SearchFilter__menu';
 
     if (!isFilter && !isFilterMenu) {
