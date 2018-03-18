@@ -29,8 +29,8 @@ export default class SearchFilter extends Component {
       return;
     }
 
-    const isFilter = target.className === 'SearchFilter__button' ||
-                     target.className.animVal === 'Arrow';
+    const isFilter =
+      target.className === 'SearchFilter__button' || target.className.animVal === 'Arrow';
     const isFilterMenu = target.parentElement.className === 'SearchFilter__menu';
 
     if (!isFilter && !isFilterMenu) {
@@ -45,21 +45,23 @@ export default class SearchFilter extends Component {
     return (
       <div className="SearchFilter">
         <button
-          className={'SearchFilter__button' + (isMenuShown ? ' SearchFilter__button--selected' : '')}
+          className={
+            'SearchFilter__button' + (isMenuShown ? ' SearchFilter__button--selected' : '')
+          }
           onClick={this.onClickFilter}
         >
           {title}
-          <Arrow fill={isMenuShown ? '#ffffff' : '#484848'} isExpanded={isMenuShown}></Arrow>
+          <Arrow fill={isMenuShown ? '#ffffff' : '#484848'} isExpanded={isMenuShown} />
         </button>
-        {isMenuShown &&
+        {isMenuShown && (
           <ul className="SearchFilter__menu">
-          {optionsMenu.map(menuOption =>
-            <li key={`${title}-${menuOption}`} onClick={this.onClickMenuOption}>
-              {menuOption}
-            </li>
-          )}
+            {optionsMenu.map(menuOption =>
+              <li key={`${title}-${menuOption}`} onClick={this.onClickMenuOption}>
+                {menuOption}
+              </li>
+            )}
           </ul>
-        }
+        )}
       </div>
     );
   }
@@ -70,4 +72,5 @@ SearchFilter.propTypes = {
   activeFilterTitle: PropTypes.string.isRequired,
   setActiveFilter: PropTypes.func.isRequired,
   addSearchToken: PropTypes.func.isRequired,
+  optionsMenu: PropTypes.array.isRequired,
 };

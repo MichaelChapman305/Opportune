@@ -77,7 +77,7 @@ function getRole(title) {
 
 function getSkills(title, description) {
   const skills = [];
-  const addSkill = (regex, skill) =>  {
+  const addSkill = (regex, skill) => {
     if (regex.test(title) || regex.test(description)) {
       skills.push(skill);
     }

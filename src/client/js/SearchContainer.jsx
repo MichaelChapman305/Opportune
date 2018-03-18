@@ -26,8 +26,8 @@ export default class SearchContainer extends Component {
         const args = arguments;
         clearTimeout(trackDebounce);
         trackDebounce = setTimeout(() => func.apply(context, args), delay);
-      }
-    }
+      };
+    };
 
     this.debouncedFetchJobs = debounce(this.handleChange, searchConstants.DEBOUNCE_TIME);
 
@@ -46,15 +46,21 @@ export default class SearchContainer extends Component {
   }
 
   handleSearch(e) {
-    this.setState({
-      searchText: e.target.value,
-    }, this.debouncedFetchJobs());
+    this.setState(
+      {
+        searchText: e.target.value,
+      },
+      this.debouncedFetchJobs()
+    );
   }
 
   removeSearchText() {
-    this.setState({
-      searchText: '',
-    }, this.debouncedFetchJobs());
+    this.setState(
+      {
+        searchText: '',
+      },
+      this.debouncedFetchJobs()
+    );
   }
 
   addSearchToken(value, type) {
@@ -70,15 +76,21 @@ export default class SearchContainer extends Component {
       }
     }
 
-    this.setState(prevState => ({
-      searchTokens: prevState.searchTokens.concat([searchToken]),
-    }), this.debouncedFetchJobs());
+    this.setState(
+      prevState => ({
+        searchTokens: prevState.searchTokens.concat([searchToken]),
+      }),
+      this.debouncedFetchJobs()
+    );
   }
 
   removeSearchToken(value, type) {
-    this.setState(prevState => ({
-      searchTokens: prevState.searchTokens.filter(item => item.value !== value),
-    }), this.debouncedFetchJobs());
+    this.setState(
+      prevState => ({
+        searchTokens: prevState.searchTokens.filter(item => item.value !== value),
+      }),
+      this.debouncedFetchJobs()
+    );
   }
 
   removeAllTokens() {
@@ -86,9 +98,12 @@ export default class SearchContainer extends Component {
       return;
     }
 
-    this.setState({
-      searchTokens: [],
-    }, this.debouncedFetchJobs());
+    this.setState(
+      {
+        searchTokens: [],
+      },
+      this.debouncedFetchJobs()
+    );
   }
 
   setActiveFilter(filterTitle) {
@@ -143,19 +158,22 @@ export default class SearchContainer extends Component {
             activeFilterTitle={activeFilterTitle}
             addSearchToken={this.addSearchToken}
           />
-          <a className="SearchContainer__resetFilters" onClick={this.removeAllTokens}>Reset Filters</a>
+        <a className="SearchContainer__resetFilters" role="button" onClick={this.removeAllTokens}>
+            Reset Filters
+          </a>
         </div>
-        {searchTokens.length > 0 &&
+        {searchTokens.length > 0 && (
           <div className="SearchContainer__tokens">
-            {searchTokens.map(token =>
-              (<SearchToken
+            {searchTokens.map(token => (
+              <SearchToken
                 key={`${token.value}-${token.type}`}
                 value={token.value}
                 type={token.type}
                 removeSearchToken={this.removeSearchToken}
-              />))}
+              />
+            ))}
           </div>
-        }
+        )}
       </div>
     );
   }

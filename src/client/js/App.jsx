@@ -34,6 +34,22 @@ class Home extends Component {
     this.fetchJobs = this.fetchJobs.bind(this);
   }
 
+  componentDidMount() {
+    this.fetchJobs();
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    const { jobs, activeText, activeTokens } = this.state;
+
+    if (jobs.length === 0 && nextState.jobs.length === 0) {
+      if (activeText || activeTokens.length > 0) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
   onToggleSubscription() {
     this.setState(prevState => ({
       isSubscriptionModalShown: !prevState.isSubscriptionModalShown,
@@ -70,27 +86,11 @@ class Home extends Component {
     }
 
     const encodedSearchQuery = encodeURIComponent(JSON.stringify(searchQuery));
-    const queryParam = (text || tokens) ? `?query=${encodedSearchQuery}` : '';
+    const queryParam = text || tokens ? `?query=${encodedSearchQuery}` : '';
 
     return fetch(`${JOBS_URI}${queryParam}`)
       .then(res => res.json())
       .then(json => this.setState({ jobs: json, isLoading: false }));
-  }
-
-  componentDidMount() {
-    this.fetchJobs();
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    const { jobs, activeText, activeTokens } = this.state;
-
-    if (jobs.length === 0 && nextState.jobs.length === 0) {
-      if (activeText || activeTokens.length > 0) {
-        return false;
-      }
-    }
-
-    return true;
   }
 
   render() {
@@ -100,20 +100,23 @@ class Home extends Component {
       <div className="app-container">
         <Header onToggleSubscription={this.onToggleSubscription} />
         <SearchContainer fetchJobs={this.fetchJobs} />
-        {isSubscriptionModalShown &&
+        {isSubscriptionModalShown && (
           <div>
             <div className="Subscription__overlay" />
             <SubscriptionModal onToggleSubscription={this.onToggleSubscription} />
           </div>
-        }
-        {jobs.length === 0 && !isLoading ?
+        )}
+        {jobs.length === 0 && !isLoading ? (
           <div className="no-results">
             <h1>No search results found.</h1>
-            <h3>How about trying <a>new graduate jobs in San Fransisco</a> or <a>roles at FinTech companies</a>?</h3>
+            <h3>
+              How about trying <a>new graduate jobs in San Fransisco</a> or{' '}
+              <a>roles at FinTech companies</a>?
+            </h3>
           </div>
-          :
+        ) : (
           <JobListingContainer jobs={jobs} isLoading={isLoading} />
-        }
+        )}
       </div>
     );
   }

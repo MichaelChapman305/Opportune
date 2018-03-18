@@ -17,18 +17,22 @@ export default class SearchBar extends Component {
   render() {
     return (
       <div className="SearchBar">
-        <img className="SearchBar__searchIcon "src="./images/search-icon.svg" alt="Search icon" />
+        <img className="SearchBar__searchIcon " src="./images/search-icon.svg" alt="Search icon" />
         <input
           className="SearchBar__input"
-          ref={input => this.textInput = input}
+          ref={input => (this.textInput = input)}
           onChange={this.props.handleSearch}
           type="search"
           placeholder="Find your dream job"
-          autoFocus
         />
-        {this.props.searchText.length > 0 &&
-          <img className="SearchBar__cancelIcon" src="./images/cancel-icon.svg" alt="Cancel button" onClick={this.clearSearch}  />
-        }
+        {this.props.searchText.length > 0 && (
+          <img
+            className="SearchBar__cancelIcon"
+            src="./images/cancel-icon.svg"
+            alt="Cancel button"
+            onClick={this.clearSearch}
+          />
+        )}
       </div>
     );
   }

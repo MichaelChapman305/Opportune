@@ -1,10 +1,4 @@
-export const EXPERIENCE_OPTIONS = [
-  'Intern',
-  'New graduate',
-  'Mid-level',
-  'Senior',
-  'Management',
-];
+export const EXPERIENCE_OPTIONS = ['Intern', 'New graduate', 'Mid-level', 'Senior', 'Management'];
 
 export const LOCATION_OPTIONS = [
   'San Francisco, CA',
@@ -28,15 +22,7 @@ export const ROLE_OPTIONS = [
   'Machine learning',
 ];
 
-export const SKILL_OPTIONS = [
-  'JavaScript',
-  'Python',
-  'Go',
-  'Java',
-  'C++',
-  'iOS',
-  'Android',
-];
+export const SKILL_OPTIONS = ['JavaScript', 'Python', 'Go', 'Java', 'C++', 'iOS', 'Android'];
 
 export const EXPERIENCE_FILTER_TITLE = 'Experience';
 export const LOCATION_FILTER_TITLE = 'Location';

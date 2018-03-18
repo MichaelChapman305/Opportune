@@ -4,33 +4,17 @@ const JobListing = require('../models.js');
 const listingUtilities = require('./listingUtilities.js');
 const createEmailTemplate = require('../email/createEmailTemplate.js');
 
-function combineCompanyListings(greenhouseCompanies, leverCompanies) {
-  const greenhousePromise = getCompanyListings(greenhouseCompanies, getListingsFromGreenhouse);
-  const leverPromise = getCompanyListings(leverCompanies, getListingsFromLever);
-
-  Promise.all([greenhousePromise, leverPromise]).then(data => {
-    // Flatten the resulting data from the several Promise.all chains
-    const listings = flatten(data);
-
-    // Return all valid, engineering jobs from our data
-    return listings.filter(listing => {
-      return listing && listingUtilities.isEngineeringJob(listing.title);
-    });
-  })
-  .then((filteredListings) => updateDatabase(filteredListings))
-  .then(() => {
-    getEmailList()
-  })
-  .catch(err => console.error('Error updating database with job listings', err));
-}
-
 function getEmailList() {
-  JobListing.find({ $where: "this.updatedAt[0] === this.createdAt[0]" }, { company: 1, title: 1, url: 1 }).exec()
-  .then(newListings => {
-    if (newListings.length > 0) {
-      createEmailTemplate(newListings)
-    }
-  })
+  JobListing.find(
+    { $where: 'this.updatedAt[0] === this.createdAt[0]' },
+    { company: 1, title: 1, url: 1 }
+  )
+    .exec()
+    .then(newListings => {
+      if (newListings.length > 0) {
+        createEmailTemplate(newListings);
+      }
+    });
 }
 
 function updateDatabase(listings) {
@@ -38,14 +22,18 @@ function updateDatabase(listings) {
     upsert: true,
     runValidators: true,
   };
-  let promiseArr = [];
+  const promiseArr = [];
 
   for (let i = 0, len = listings.length; i < len; i++) {
     const updateCondition = {
       id: listings[i].id,
     };
 
-    const findAndUpdateDatabase = JobListing.findOneAndUpdate(updateCondition, listings[i], updateOptions).exec();
+    const findAndUpdateDatabase = JobListing.findOneAndUpdate(
+      updateCondition,
+      listings[i],
+      updateOptions
+    ).exec();
     promiseArr.push(findAndUpdateDatabase);
   }
 
@@ -59,11 +47,11 @@ function updateDatabase(listings) {
     updatedAt: {
       $lte: purgeDate,
     },
-  })
+  });
 
   return Promise.all(promiseArr)
-  .then(removeListings)
-  .catch(err => console.error(err))
+    .then(removeListings)
+    .catch(err => console.error(err));
 }
 
 function getCompanyListings(companies, getListingsFunc) {
@@ -95,6 +83,27 @@ function flatten(arr, result = []) {
     }
   }
   return result;
+}
+
+function combineCompanyListings(greenhouseCompanies, leverCompanies) {
+  const greenhousePromise = getCompanyListings(greenhouseCompanies, getListingsFromGreenhouse);
+  const leverPromise = getCompanyListings(leverCompanies, getListingsFromLever);
+
+  Promise.all([greenhousePromise, leverPromise])
+    .then(data => {
+      // Flatten the resulting data from the several Promise.all chains
+      const listings = flatten(data);
+
+      // Return all valid, engineering jobs from our data
+      return listings.filter(
+        listing => listing && listingUtilities.isEngineeringJob(listing.title)
+      );
+    })
+    .then(filteredListings => updateDatabase(filteredListings))
+    .then(() => {
+      getEmailList();
+    })
+    .catch(err => console.error('Error updating database with job listings', err));
 }
 
 module.exports = combineCompanyListings;

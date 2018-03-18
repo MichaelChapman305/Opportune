@@ -6,9 +6,15 @@ const routes = require('./routes.js');
 
 const app = express();
 
-const cron = new CronJob('00 00 12 * * 6', () => {
-  combineCompanyListings(companyNames.GREENHOUSE_COMPANIES, companyNames.LEVER_COMPANIES);
-}, null, true, 'America/New_York');
+const cron = new CronJob(
+  '00 00 12 * * 6',
+  () => {
+    combineCompanyListings(companyNames.GREENHOUSE_COMPANIES, companyNames.LEVER_COMPANIES);
+  },
+  null,
+  true,
+  'America/New_York'
+);
 
 app.use('/images', express.static('./src/client/images'));
 app.use('/', express.static('./dist'));

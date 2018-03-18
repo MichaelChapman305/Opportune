@@ -1,7 +1,6 @@
 const express = require('express');
 const request = require('superagent');
 const bodyParser = require('body-parser');
-const fs = require('fs');
 
 const routes = require('../shared/routes.js');
 const JobListing = require('./models.js');
@@ -12,7 +11,7 @@ router.use(bodyParser.json());
 const ORDER_BY_SCORE = {
   score: {
     $meta: 'textScore',
-  }
+  },
 };
 
 const ORDER_BY_COMPANY_ASC = {
@@ -21,19 +20,25 @@ const ORDER_BY_COMPANY_ASC = {
 
 router.post(routes.SUBSCRIBE_URI, (req, res) => {
   request
-    .post('https://us12.api.mailchimp.com/3.0/lists/' + process.env.MAILCHIMP_LIST + '/members/')
+    .post(`https://us12.api.mailchimp.com/3.0/lists/${process.env.MAILCHIMP_LIST}/members/`)
     .set('Content-Type', 'application/json;charset=utf-8')
-    .set('Authorization', 'Basic ' + new Buffer('any:' + process.env.MAILCHIMP_KEY ).toString('base64'))
+    .set(
+      'Authorization',
+      `Basic ${Buffer.from(`any:${process.env.MAILCHIMP_KEY}`).toString('base64')}`
+    )
     .send({
-      'email_address': req.body.email,
-      'status': 'pending',
-      'merge_fields': {
-        'FNAME': req.body.firstName,
-        'LNAME': req.body.lastName
-      }
+      email_address: req.body.email,
+      status: 'pending',
+      merge_fields: {
+        FNAME: req.body.firstName,
+        LNAME: req.body.lastName,
+      },
     })
     .end((err, response) => {
-      if (response.status < 300 || (response.status === 400 && response.body.title === 'Member Exists')) {
+      if (
+        response.status < 300 ||
+        (response.status === 400 && response.body.title === 'Member Exists')
+      ) {
         res.send('Signed Up!');
       } else {
         res.send(response.body.title);
@@ -49,8 +54,7 @@ router.get(routes.JOBS_URI, (req, res) => {
   const queryText = req.query.query;
 
   if (!queryText) {
-    return JobListing
-      .find({})
+    return JobListing.find({})
       .sort(ORDER_BY_COMPANY_ASC)
       .exec()
       .then(items => res.send(items));
@@ -60,8 +64,7 @@ router.get(routes.JOBS_URI, (req, res) => {
 
   try {
     query = JSON.parse(decodeURIComponent(queryText));
-  }
-  catch (e) {
+  } catch (e) {
     return res.status(400).send({ error: e });
   }
 
@@ -118,11 +121,13 @@ router.get(routes.JOBS_URI, (req, res) => {
       {
         $sort: ORDER_BY_SCORE,
       },
-    ]).sort(ORDER_BY_COMPANY_ASC).exec().then(items => res.send(items));
+    ])
+      .sort(ORDER_BY_COMPANY_ASC)
+      .exec()
+      .then(items => res.send(items));
   }
 
-  return JobListing
-    .find(searchQuery)
+  return JobListing.find(searchQuery)
     .sort(ORDER_BY_COMPANY_ASC)
     .exec()
     .then(items => res.send(items));

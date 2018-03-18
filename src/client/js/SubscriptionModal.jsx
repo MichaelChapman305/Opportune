@@ -29,7 +29,7 @@ class SubscriptionModal extends Component {
         firstName: form.get('firstName'),
         lastName: form.get('lastName'),
       }),
-    })
+    });
   }
 
   render() {
@@ -42,15 +42,20 @@ class SubscriptionModal extends Component {
           onClick={this.props.onToggleSubscription}
         />
         <h1 className="SubscriptionModal__title">Find your new career.</h1>
-        <p className="SubscriptionModal__description">Enter your information below and receive new job listings every week from the world's most talented technology companies.</p>
+        <p className="SubscriptionModal__description">
+          Enter your information below and receive new job listings every week from the world's most
+          talented technology companies.
+        </p>
         <form className="SubscriptionModal__form">
           <label htmlFor="email">Email Address</label>
-          <input name="email" type="text" className="SubscriptionModal__email"></input>
+          <input name="email" type="text" className="SubscriptionModal__email" />
           <label htmlFor="firstName">First Name</label>
-          <input name="firstName" type="text" className="SubscriptionModal__firstName"></input>
+          <input name="firstName" type="text" className="SubscriptionModal__firstName" />
           <label htmlFor="lastName">Last Name</label>
-          <input name="lastName" type="text" className="SubscriptionModal__lastName"></input>
-          <button className="SubscriptionModal__submit" type="submit">Subscribe</button>
+          <input name="lastName" type="text" className="SubscriptionModal__lastName" />
+          <button className="SubscriptionModal__submit" type="submit">
+            Subscribe
+          </button>
         </form>
       </div>
     );

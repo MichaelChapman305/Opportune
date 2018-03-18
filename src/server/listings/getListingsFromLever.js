@@ -23,7 +23,8 @@ function getListingsFromLever(companyID) {
       }));
 
       return jobs;
-    }).catch(err => console.error('Error fetching lever data:', err));
+    })
+    .catch(err => console.error('Error fetching lever data:', err));
 }
 
 module.exports = getListingsFromLever;

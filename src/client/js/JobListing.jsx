@@ -10,7 +10,9 @@ const JobListing = ({ company, title, location, applyUrl }) => (
       </h2>
       <h3 className="JobListing__location">{location}</h3>
     </div>
-    <a className="JobListing__apply" href={applyUrl} target="_blank">APPLY</a>
+    <a className="JobListing__apply" href={applyUrl} target="_blank">
+      APPLY
+    </a>
   </div>
 );
 

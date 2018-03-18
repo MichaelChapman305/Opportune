@@ -7,13 +7,19 @@ const Header = ({ onToggleSubscription }) => (
     <h1 className="Header__title">Opportune</h1>
     <ul className="Header__items">
       <li>
-        <a className="Header__button" onClick={onToggleSubscription}>Subscribe</a>
+        <a className="Header__button" role="button" onClick={onToggleSubscription}>
+          Subscribe
+        </a>
       </li>
       <li>
-        <a className="Header__button" href="https://www.buymeacoffee.com/oZfAMy0mC" target="_blank">Donate</a>
+        <a className="Header__button" href="https://www.buymeacoffee.com/oZfAMy0mC" target="_blank" rel="noopener noreferrer">
+          Donate
+        </a>
       </li>
       <li>
-        <a className="Header__button" href="mailto:hello@opportunecareers.com">Contact</a>
+        <a className="Header__button" href="mailto:hello@opportunecareers.com">
+          Contact
+        </a>
       </li>
     </ul>
   </div>

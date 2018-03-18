@@ -2,6 +2,18 @@ const fetch = require('node-fetch');
 const companyNames = require('./companyNames.js');
 const listingUtilities = require('./listingUtilities.js');
 
+function htmlToPlainText(str) {
+  return str
+    .replace(/&amp;amp;/g, '&') // Convert HTML entities
+    .replace(/&#39;/g, "'")
+    .replace(/&amp;/, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/<(?:.|\n)*?>/gm, '') // Strip HTML elements
+    .replace(/\n/g, ' '); // Strip newlines
+}
+
 function getListingsFromGreenhouse(companyID) {
   return fetch(`https://api.greenhouse.io/v1/boards/${companyID}/jobs?content=true`)
     .then(res => res.json())
@@ -27,19 +39,8 @@ function getListingsFromGreenhouse(companyID) {
       });
 
       return jobs;
-    }).catch(err => console.error('Error fetching Greenhouse data:', err));
-}
-
-function htmlToPlainText(str) {
-  return str
-    .replace(/&amp;amp;/g, '&') // Convert HTML entities
-    .replace(/&#39;/g, '\'')
-    .replace(/&amp;/, '&')
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-    .replace(/&quot;/g, '"')
-    .replace(/<(?:.|\n)*?>/gm, '') // Strip HTML elements
-    .replace(/\n/g, ' '); // Strip newlines
+    })
+    .catch(err => console.error('Error fetching Greenhouse data:', err));
 }
 
 module.exports = getListingsFromGreenhouse;
