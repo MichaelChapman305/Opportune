@@ -37,7 +37,7 @@ function updateDatabase(listings) {
 
   return Promise.all(promises)
     .then(removeListings)
-    .then(numRemoved => console.log(`Removed ${numRemoved} old entries from the database`));
+    .then(removedListings => console.log(`Removed ${removedListings.length} old entries from the database`));
 }
 
 function getNewJobListings() {

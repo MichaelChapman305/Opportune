@@ -100,7 +100,7 @@ class Home extends Component {
       <div className="app-container">
         <Header onToggleSubscription={this.onToggleSubscription} />
         <SearchContainer fetchJobs={this.fetchJobs} />
-        {isSubscriptionModalShown &&
+        {isSubscriptionModalShown && (
           <div className="Subscription__overlay">
             <SubscriptionModal onToggleSubscription={this.onToggleSubscription} />
           </div>
