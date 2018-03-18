@@ -124,33 +124,33 @@
         border-color: $primary-color;
       }
     }
+  }
+  
+  .SearchFilter__menu {
+    list-style-type: none;
+    font-family: Camphor;
+    position: absolute;
+    top: 48px !important;
+    display: flex;
+    z-index: 3000;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 11em;
+    height: auto;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    border-radius: 2px;
 
-    .SearchFilter__menu {
-      list-style-type: none;
-      font-family: Camphor;
-      position: absolute;
-      top: 48px !important;
-      display: flex;
+    li {
+      padding-top: 10px;
+      padding-bottom: 10px;
+      padding-left: 20px;
+      padding-right: 1px;
       z-index: 3000;
-      flex-direction: column;
-      justify-content: space-evenly;
-      width: 11em;
-      height: auto;
-      background-color: white;
-      box-shadow: 0 0 10px rgba(0, 0, 0, .1);
-      border-radius: 2px;
 
-      li {
-        padding-top: 10px;
-        padding-bottom: 10px;
-        padding-left: 20px;
-        padding-right: 1px;
-        z-index: 3000;
-
-        &:hover {
-          cursor: pointer;
-          background-color: #E5E5E5;
-        }
+      &:hover {
+        cursor: pointer;
+        background-color: #E5E5E5;
       }
     }
   }
@@ -163,30 +163,30 @@
     justify-content: flex-start;
     width: 50em;
     padding-left: 10%;
+  }
 
-    .SearchToken {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-      margin-right: 1em;
-      margin-bottom: 1em;
-      padding: 1em .5em 1em .5em;
-      height: 1em;
-      font-size: 15px;
-      background-color: $primary-color;
+  .SearchToken {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 1em;
+    margin-bottom: 1em;
+    padding: 1em .5em 1em .5em;
+    height: 1em;
+    font-size: 15px;
+    background-color: $primary-color;
+    color: white;
+    border-radius: 3px;
+
+    img {
+      margin-left: .3em;
+      width: 29px;
+      padding: 8px 10px;
       color: white;
-      border-radius: 3px;
 
-      img {
-        margin-left: .3em;
-        width: 29px;
-        padding: 8px 10px;
-        color: white;
-
-        &:hover {
-          cursor: pointer;
-        }
+      &:hover {
+        cursor: pointer;
       }
     }
   }

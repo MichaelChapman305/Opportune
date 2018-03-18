@@ -87,29 +87,29 @@
       font-size: 19px;
       padding-left: 5px;
     }
+  }
 
-    .SubscriptionModal__submit {
-      font-family: CamphorThree;
-      text-transform: uppercase;
-      width: 10.5em;
-      height: 2.5em;
-      font-size: 18px;
-      font-weight: bold;
-      background-color: white;
-      color: black;
-      display: block;
-      margin-top: 1em;
-      margin-left: auto;
-      margin-right: auto;
-      border-radius: 2px;
-      border: none;
-      box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.2);
+  .SubscriptionModal__submit {
+    font-family: CamphorThree;
+    text-transform: uppercase;
+    width: 10.5em;
+    height: 2.5em;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: white;
+    color: black;
+    display: block;
+    margin-top: 1em;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 2px;
+    border: none;
+    box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.2);
 
-      &:hover {
-        cursor: pointer;
-        color: $text-color;
-        transform: translateY(-1px);
-      }
+    &:hover {
+      cursor: pointer;
+      color: $text-color;
+      transform: translateY(-1px);
     }
   }
 }
