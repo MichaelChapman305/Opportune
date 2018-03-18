@@ -100,9 +100,7 @@ function combineCompanyListings(greenhouseCompanies, leverCompanies) {
       );
     })
     .then(filteredListings => updateDatabase(filteredListings))
-    .then(() => {
-      getEmailList();
-    })
+    .then(getEmailList)
     .catch(err => console.error('Error updating database with job listings', err));
 }
 
