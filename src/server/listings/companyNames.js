@@ -1,5 +1,6 @@
 const LEVER_COMPANIES = {
   addepar: 'Addepar',
+  affinity: 'Affinity',
   blendlabs: 'Blend Labs',
   buildzoom: 'BuildZoom',
   yelp: 'Yelp',
@@ -68,6 +69,7 @@ const LEVER_COMPANIES = {
 };
 
 const GREENHOUSE_COMPANIES = {
+  remind: 'Remind',
   yext: 'Yext',
   appian: 'Appian',
   airbnb: 'Airbnb',
