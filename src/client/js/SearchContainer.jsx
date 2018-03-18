@@ -158,7 +158,7 @@ export default class SearchContainer extends Component {
             activeFilterTitle={activeFilterTitle}
             addSearchToken={this.addSearchToken}
           />
-        <a className="SearchContainer__resetFilters" role="button" onClick={this.removeAllTokens}>
+          <a className="SearchContainer__resetFilters" role="button" onClick={this.removeAllTokens}>
             Reset Filters
           </a>
         </div>

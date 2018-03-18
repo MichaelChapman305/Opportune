@@ -12,7 +12,12 @@ const Header = ({ onToggleSubscription }) => (
         </a>
       </li>
       <li>
-        <a className="Header__button" href="https://www.buymeacoffee.com/oZfAMy0mC" target="_blank" rel="noopener noreferrer">
+        <a
+          className="Header__button"
+          href="https://www.buymeacoffee.com/oZfAMy0mC"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           Donate
         </a>
       </li>

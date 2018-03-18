@@ -2,27 +2,13 @@ const getListingsFromGreenhouse = require('./getListingsFromGreenhouse');
 const getListingsFromLever = require('./getListingsFromLever');
 const JobListing = require('../models.js');
 const listingUtilities = require('./listingUtilities.js');
-const createEmailTemplate = require('../email/createEmailTemplate.js');
-
-function getEmailList() {
-  JobListing.find(
-    { $where: 'this.updatedAt[0] === this.createdAt[0]' },
-    { company: 1, title: 1, url: 1 }
-  )
-    .exec()
-    .then(newListings => {
-      if (newListings.length > 0) {
-        createEmailTemplate(newListings);
-      }
-    });
-}
 
 function updateDatabase(listings) {
   const updateOptions = {
     upsert: true,
     runValidators: true,
   };
-  const promiseArr = [];
+  const promises = [];
 
   for (let i = 0, len = listings.length; i < len; i++) {
     const updateCondition = {
@@ -34,7 +20,7 @@ function updateDatabase(listings) {
       listings[i],
       updateOptions
     ).exec();
-    promiseArr.push(findAndUpdateDatabase);
+    promises.push(findAndUpdateDatabase);
   }
 
   const purgeDate = new Date();
@@ -49,7 +35,7 @@ function updateDatabase(listings) {
     },
   });
 
-  return Promise.all(promiseArr)
+  return Promise.all(promises)
     .then(removeListings)
     .catch(err => console.error(err));
 }
@@ -89,7 +75,7 @@ function combineCompanyListings(greenhouseCompanies, leverCompanies) {
   const greenhousePromise = getCompanyListings(greenhouseCompanies, getListingsFromGreenhouse);
   const leverPromise = getCompanyListings(leverCompanies, getListingsFromLever);
 
-  Promise.all([greenhousePromise, leverPromise])
+  return Promise.all([greenhousePromise, leverPromise])
     .then(data => {
       // Flatten the resulting data from the several Promise.all chains
       const listings = flatten(data);
@@ -100,7 +86,6 @@ function combineCompanyListings(greenhouseCompanies, leverCompanies) {
       );
     })
     .then(filteredListings => updateDatabase(filteredListings))
-    .then(getEmailList)
     .catch(err => console.error('Error updating database with job listings', err));
 }
 

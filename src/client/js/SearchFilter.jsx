@@ -45,9 +45,7 @@ export default class SearchFilter extends Component {
     return (
       <div className="SearchFilter">
         <button
-          className={
-            'SearchFilter__button' + (isMenuShown ? ' SearchFilter__button--selected' : '')
-          }
+          className={`SearchFilter__button${isMenuShown ? ' SearchFilter__button--selected' : ''}`}
           onClick={this.onClickFilter}
         >
           {title}
@@ -55,11 +53,11 @@ export default class SearchFilter extends Component {
         </button>
         {isMenuShown && (
           <ul className="SearchFilter__menu">
-            {optionsMenu.map(menuOption =>
+            {optionsMenu.map(menuOption => (
               <li key={`${title}-${menuOption}`} onClick={this.onClickMenuOption}>
                 {menuOption}
               </li>
-            )}
+            ))}
           </ul>
         )}
       </div>

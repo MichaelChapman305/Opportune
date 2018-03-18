@@ -106,7 +106,9 @@ class Home extends Component {
             <SubscriptionModal onToggleSubscription={this.onToggleSubscription} />
           </div>
         )}
-        {jobs.length === 0 && !isLoading ? (
+        {jobs.length > 0 || isLoading ? (
+          <JobListingContainer jobs={jobs} isLoading={isLoading} />
+        ) : (
           <div className="no-results">
             <h1>No search results found.</h1>
             <h3>
@@ -114,8 +116,6 @@ class Home extends Component {
               <a>roles at FinTech companies</a>?
             </h3>
           </div>
-        ) : (
-          <JobListingContainer jobs={jobs} isLoading={isLoading} />
         )}
       </div>
     );

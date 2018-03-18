@@ -7,9 +7,9 @@ import JobListing from './JobListing.jsx';
 const JobListingContainer = ({ jobs, isLoading }) => (
   <div className="JobListingContainer">
     {isLoading && <div className="loading" />}
-    <a className="JobListingContainer__amount">
+    <p className="JobListingContainer__amount">
       Showing <b>{jobs.length}</b> jobs
-    </a>
+    </p>
     {jobs.map(job => (
       <JobListing
         key={`${job.company}-${job.id}`}
