@@ -100,9 +100,8 @@ class Home extends Component {
       <div className="app-container">
         <Header onToggleSubscription={this.onToggleSubscription} />
         <SearchContainer fetchJobs={this.fetchJobs} />
-        {isSubscriptionModalShown && (
-          <div>
-            <div className="Subscription__overlay" />
+        {isSubscriptionModalShown &&
+          <div className="Subscription__overlay">
             <SubscriptionModal onToggleSubscription={this.onToggleSubscription} />
           </div>
         )}
@@ -112,7 +111,7 @@ class Home extends Component {
           <div className="no-results">
             <h1>No search results found.</h1>
             <h3>
-              How about trying <a>new graduate jobs in San Fransisco</a> or{' '}
+              How about trying <a>new graduate jobs in San Fransisco</a> or
               <a>roles at FinTech companies</a>?
             </h3>
           </div>
