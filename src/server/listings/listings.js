@@ -14,13 +14,13 @@ function updateDatabase(listings) {
     const updateCondition = {
       id: listings[i].id,
     };
-
-    const findAndUpdateDatabase = JobListing.findOneAndUpdate(
+    const updatePromise = JobListing.findOneAndUpdate(
       updateCondition,
       listings[i],
       updateOptions
     ).exec();
-    promises.push(findAndUpdateDatabase);
+
+    promises.push(updatePromise);
   }
 
   const purgeDate = new Date();
@@ -33,11 +33,24 @@ function updateDatabase(listings) {
     updatedAt: {
       $lte: purgeDate,
     },
-  });
+  }).exec();
 
   return Promise.all(promises)
     .then(removeListings)
-    .catch(err => console.error(err));
+    .then(numRemoved => console.log(`Removed ${numRemoved} old entries from the database`));
+}
+
+function getNewJobListings() {
+  return JobListing.find(
+    {
+      $where: 'this.updatedAt[0] === this.createdAt[0]',
+    },
+    {
+      company: 1,
+      title: 1,
+      url: 1,
+    }
+  ).exec();
 }
 
 function getCompanyListings(companies, getListingsFunc) {
@@ -75,18 +88,17 @@ function combineCompanyListings(greenhouseCompanies, leverCompanies) {
   const greenhousePromise = getCompanyListings(greenhouseCompanies, getListingsFromGreenhouse);
   const leverPromise = getCompanyListings(leverCompanies, getListingsFromLever);
 
-  return Promise.all([greenhousePromise, leverPromise])
-    .then(data => {
-      // Flatten the resulting data from the several Promise.all chains
-      const listings = flatten(data);
+  return Promise.all([greenhousePromise, leverPromise]).then(data => {
+    // Flatten the resulting data from the several Promise.all chains
+    const listings = flatten(data);
 
-      // Return all valid, engineering jobs from our data
-      return listings.filter(
-        listing => listing && listingUtilities.isEngineeringJob(listing.title)
-      );
-    })
-    .then(filteredListings => updateDatabase(filteredListings))
-    .catch(err => console.error('Error updating database with job listings', err));
+    // Return all valid, engineering jobs from our data
+    return listings.filter(listing => listing && listingUtilities.isEngineeringJob(listing.title));
+  });
 }
 
-module.exports = combineCompanyListings;
+module.exports = {
+  combineCompanyListings,
+  updateDatabase,
+  getNewJobListings,
+};

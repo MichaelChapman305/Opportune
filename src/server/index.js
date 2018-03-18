@@ -1,23 +1,25 @@
 const express = require('express');
 const CronJob = require('cron').CronJob;
-const combineCompanyListings = require('./listings/listings.js');
+const listings = require('./listings/listings.js');
 const companyNames = require('./listings/companyNames.js');
 const routes = require('./routes.js');
-const createEmailTemplate = require('./email/createEmailTemplate.js');
+const sendEmailsToUsers = require('./emails.js');
 
 const app = express();
 
 const cron = new CronJob(
   '00 00 12 * * 6',
   () => {
-    combineCompanyListings(companyNames.GREENHOUSE_COMPANIES, companyNames.LEVER_COMPANIES)
-    .then(createEmailTemplate.getNewJobListings)
-    .then(newListings => {
-      if (newListings.length > 0) {
-        createEmailTemplate.createEmail(newListings);
-      }
-    })
-    .catch(err => console.error(err));
+    listings
+      .combineCompanyListings(companyNames.GREENHOUSE_COMPANIES, companyNames.LEVER_COMPANIES)
+      .then(jobListings => listings.updateDatabase(jobListings))
+      .then(listings.getNewJobListings)
+      .then(newListings => {
+        if (newListings.length > 0) {
+          sendEmailsToUsers(newListings);
+        }
+      })
+      .catch(err => console.error('There was an error running backend updates', err));
   },
   null,
   true,
