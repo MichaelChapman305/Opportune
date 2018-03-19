@@ -1,14 +1,3 @@
-.SearchContainer__overlay {
-  width: 100%;
-  height: 100%;
-  background-color: $background-color;
-  z-index: 1000;
-  opacity: .6;
-  position: fixed;
-  top: 150px;
-  left: 0;
-}
-
 .Arrow {
   display: inline-block;
   margin-left: 1em;
@@ -22,6 +11,142 @@
   transform: rotate(180deg);
 }
 
+.SearchBar {
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  .SearchBar__input {
+    font-family: CamphorThree;
+    color: $text-color;
+    width: 30em;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    height: 1.8em;
+    font-size: 1.6em;
+    padding-top: 0;
+    border: none;
+    outline: none;
+    border-radius: 2px;
+    padding: 0px 0px 0px 8%;
+    -moz-appearance: none;
+
+    &::-webkit-search-decoration,
+    &::-webkit-search-results-button,
+    &::-webkit-search-results-decoration,
+    &::-webkit-search-cancel-button {
+      -webkit-appearance: none;
+    }
+  }
+
+  .SearchBar__searchIcon {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    left: 1.5%;
+  }
+
+  .SearchBar__cancelIcon {
+    position: absolute;
+    right: 1.5%;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.SearchToken {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 1em;
+  margin-bottom: 1em;
+  padding: 1em .5em 1em .5em;
+  height: 1em;
+  font-size: 15px;
+  background-color: $primary-color;
+  color: white;
+  border-radius: 3px;
+
+  img {
+    margin-left: .3em;
+    width: 29px;
+    padding: 8px 10px;
+    color: white;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.SearchFilter {
+  position: relative;
+
+  .SearchFilter__button {
+    font-family: CamphorThree;
+    cursor: pointer;
+    letter-spacing: 0.2px;
+    border-radius: 2px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, .05);
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-left: 16px;
+    font-size: 1.2em;
+    margin-right: 1.3em;
+    outline: none;
+    border: none;
+    color: #484848;
+    background-color: white;
+
+    &:hover {
+      background-color: $shadow-color;
+      border-color: $shadow-color;
+    }
+  }
+
+  .SearchFilter__button--selected {
+    background-color: $primary-color;
+    border-color: $primary-color;
+    color: white;
+
+    &:hover {
+      background-color: $primary-color;
+      border-color: $primary-color;
+    }
+  }
+}
+
+.SearchFilter__menu {
+  list-style-type: none;
+  font-family: Camphor;
+  position: absolute;
+  top: 48px !important;
+  display: flex;
+  z-index: 3000;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 11em;
+  height: auto;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+  border-radius: 2px;
+
+  li {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 1px;
+    z-index: 3000;
+
+    &:hover {
+      cursor: pointer;
+      background-color: #E5E5E5;
+    }
+  }
+}
+
 .SearchContainer {
   grid-area: SearchContainer;
   display: flex;
@@ -32,127 +157,12 @@
   justify-self: center;
   align-self: start;
 
-  .SearchBar {
-    display: flex;
-    align-items: center;
-    position: relative;
-
-    .SearchBar__input {
-      font-family: CamphorThree;
-      color: $text-color;
-      width: 30em;
-      box-shadow: 0 0 10px rgba(0, 0, 0, .1);
-      height: 1.8em;
-      font-size: 1.6em;
-      padding-top: 0;
-      border: none;
-      outline: none;
-      border-radius: 2px;
-      padding: 0px 0px 0px 8%;
-      -moz-appearance: none;
-
-      &::-webkit-search-decoration,
-      &::-webkit-search-results-button,
-      &::-webkit-search-results-decoration,
-      &::-webkit-search-cancel-button {
-        -webkit-appearance: none;
-      }
-    }
-
-    .SearchBar__searchIcon {
-      position: absolute;
-      width: 24px;
-      height: 24px;
-      left: 1.5%;
-    }
-
-    .SearchBar__cancelIcon {
-      position: absolute;
-      right: 1.5%;
-
-      &:hover {
-        cursor: pointer;
-      }
-    }
-  }
-
   .SearchContainer__filters {
     z-index: 1000;
     display: flex;
     flex-wrap: nowrap;
     margin-top: 1em;
     align-items: center;
-
-    .SearchFilter {
-      position: relative;
-    }
-
-    .SearchFilter__button {
-      font-family: CamphorThree;
-      cursor: pointer;
-      letter-spacing: 0.2px;
-      border-radius: 2px;
-      box-shadow: 0 0 5px rgba(0, 0, 0, .05);
-      padding-top: 6px;
-      padding-bottom: 6px;
-      padding-left: 16px;
-      font-size: 1.2em;
-      margin-right: 1.3em;
-      outline: none;
-      border: none;
-      color: #484848;
-      background-color: white;
-
-      &:hover {
-        background-color: $shadow-color;
-        border-color: $shadow-color;
-      }
-    }
-
-    .SearchContainer__resetFilters {
-      cursor: pointer;
-      text-transform: uppercase;
-    }
-
-    .SearchFilter__button--selected {
-      background-color: $primary-color;
-      border-color: $primary-color;
-      color: white;
-
-      &:hover {
-        background-color: $primary-color;
-        border-color: $primary-color;
-      }
-    }
-  }
-  
-  .SearchFilter__menu {
-    list-style-type: none;
-    font-family: Camphor;
-    position: absolute;
-    top: 48px !important;
-    display: flex;
-    z-index: 3000;
-    flex-direction: column;
-    justify-content: space-evenly;
-    width: 11em;
-    height: auto;
-    background-color: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
-    border-radius: 2px;
-
-    li {
-      padding-top: 10px;
-      padding-bottom: 10px;
-      padding-left: 20px;
-      padding-right: 1px;
-      z-index: 3000;
-
-      &:hover {
-        cursor: pointer;
-        background-color: #E5E5E5;
-      }
-    }
   }
 
   .SearchContainer__tokens {
@@ -165,29 +175,8 @@
     padding-left: 10%;
   }
 
-  .SearchToken {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin-right: 1em;
-    margin-bottom: 1em;
-    padding: 1em .5em 1em .5em;
-    height: 1em;
-    font-size: 15px;
-    background-color: $primary-color;
-    color: white;
-    border-radius: 3px;
-
-    img {
-      margin-left: .3em;
-      width: 29px;
-      padding: 8px 10px;
-      color: white;
-
-      &:hover {
-        cursor: pointer;
-      }
-    }
+  .SearchContainer__resetFilters {
+    cursor: pointer;
+    text-transform: uppercase;
   }
 }

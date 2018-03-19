@@ -21,6 +21,15 @@
     background-clip: text;
   }
 
+  .Header__items {
+    list-style-type: none;
+
+    li {
+      margin-right: 1.8em;
+      display: inline;
+    }
+  }
+
   .Header__button {
     font-size: 1.2rem;
     font-family: Camphor;
@@ -29,15 +38,6 @@
 
     &:hover {
       cursor: pointer;
-    }
-  }
-
-  .Header__items {
-    list-style-type: none;
-
-    li {
-      margin-right: 1.8em;
-      display: inline;
     }
   }
 }
