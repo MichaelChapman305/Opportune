@@ -44,12 +44,12 @@ jobListing.index(
   },
   {
     weights: {
-      company: 20,
-      role: 20,
-      experience: 20,
+      company: 3,
+      role: 3,
+      experience: 3,
       description: 1,
-      title: 20,
-      location: 20,
+      title: 3,
+      location: 3,
     },
   }
 );
