@@ -1,16 +1,12 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost:27017/jobListings');
+mongoose.connect(process.env.MONGOLAB_URI);
 
 const db = mongoose.connection;
 mongoose.promise = global.promise;
 
 db.on('error', err => {
   console.error('connection error:', err);
-});
-
-db.once('open', () => {
-  console.log('db connection successful');
 });
 
 const Schema = mongoose.Schema;
