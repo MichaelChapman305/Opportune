@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "prod": "npm run build && node ./src/server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev-client": "webpack --watch --display error-details --config ./webpack/webpack.config-dev.js",
     "dev-server": "nodemon ./src/server/index.js",
