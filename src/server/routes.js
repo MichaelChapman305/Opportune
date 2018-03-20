@@ -122,7 +122,6 @@ router.get(routes.JOBS_URI, (req, res) => {
         $sort: ORDER_BY_SCORE,
       },
     ])
-      .sort(ORDER_BY_COMPANY_ASC)
       .exec()
       .then(items => res.send(items));
   }
