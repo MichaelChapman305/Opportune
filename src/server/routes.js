@@ -114,7 +114,7 @@ router.get(routes.JOBS_URI, (req, res) => {
       {
         $match: {
           score: {
-            $gte: .5,
+            $gte: 0.5,
           },
         },
       },

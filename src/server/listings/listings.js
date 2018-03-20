@@ -35,20 +35,17 @@ function updateDatabase(listings) {
     },
   }).exec();
 
-  return Promise.all(promises)
-    .then(removeListings)
-    .then(removedListings =>
-      console.log(`Removed ${removedListings.length} old entries from the database`)
-    );
+  return Promise.all(promises).then(removeListings);
 }
 
 function getNewJobListings() {
   return JobListing.find(
     {
-      $where: 'this.updatedAt[0] === this.createdAt[0]',
+      $where: 'this.updatedAt.getDate() === this.createdAt.getDate()',
     },
     {
       company: 1,
+      location: 1,
       title: 1,
       url: 1,
     }

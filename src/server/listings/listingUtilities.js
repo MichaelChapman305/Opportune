@@ -10,7 +10,6 @@ const EXCLUDED_WORDS = [
   'construction',
   'customer',
   'solution',
-  'solutions',
   'value',
   'field',
   'sales',
@@ -21,6 +20,17 @@ const EXCLUDED_WORDS = [
   'acoustics',
   'hardware',
   'electrical',
+  'audio systems',
+  'integration',
+  'technical services',
+  'equipment',
+  'fpga',
+  'civil',
+  'marketing manager',
+  'process development',
+  'vehicle controls',
+  'bridge',
+  'strategic partner',
 ];
 
 function isEngineeringJob(title) {

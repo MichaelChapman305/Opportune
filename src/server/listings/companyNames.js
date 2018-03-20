@@ -141,6 +141,7 @@ const GREENHOUSE_COMPANIES = {
   mongoDB: 'MongoDB',
   flatironhealth: 'Flatiron Health',
   commonbond: 'Commonbond',
+  ripple: 'Ripple',
   knotch: 'Knotch',
   warbyparker: 'Warby Parker',
   uptake: 'Uptake',
