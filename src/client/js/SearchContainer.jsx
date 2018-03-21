@@ -40,27 +40,32 @@ export default class SearchContainer extends Component {
     this.setActiveFilter = this.setActiveFilter.bind(this);
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    const { searchText, searchTokens } = this.state;
+
+    if (
+      searchText !== prevState.searchText ||
+      searchTokens.length !== prevState.searchTokens.length
+    ) {
+      this.debouncedFetchJobs();
+    }
+  }
+
   handleChange() {
     const { searchText, searchTokens } = this.state;
     this.props.fetchJobs(searchText, searchTokens);
   }
 
   handleSearch(e) {
-    this.setState(
-      {
-        searchText: e.target.value,
-      },
-      this.debouncedFetchJobs()
-    );
+    this.setState({
+      searchText: e.target.value,
+    });
   }
 
   removeSearchText() {
-    this.setState(
-      {
-        searchText: '',
-      },
-      this.debouncedFetchJobs()
-    );
+    this.setState({
+      searchText: '',
+    });
   }
 
   addSearchToken(value, type) {
@@ -76,21 +81,15 @@ export default class SearchContainer extends Component {
       }
     }
 
-    this.setState(
-      prevState => ({
-        searchTokens: prevState.searchTokens.concat([searchToken]),
-      }),
-      this.debouncedFetchJobs()
-    );
+    this.setState(prevState => ({
+      searchTokens: prevState.searchTokens.concat([searchToken]),
+    }));
   }
 
   removeSearchToken(value, type) {
-    this.setState(
-      prevState => ({
-        searchTokens: prevState.searchTokens.filter(item => item.value !== value),
-      }),
-      this.debouncedFetchJobs()
-    );
+    this.setState(prevState => ({
+      searchTokens: prevState.searchTokens.filter(item => item.value !== value),
+    }));
   }
 
   removeAllTokens() {
@@ -98,12 +97,9 @@ export default class SearchContainer extends Component {
       return;
     }
 
-    this.setState(
-      {
-        searchTokens: [],
-      },
-      this.debouncedFetchJobs()
-    );
+    this.setState({
+      searchTokens: [],
+    });
   }
 
   setActiveFilter(filterTitle) {
