@@ -43,10 +43,10 @@
   flex-direction: column;
   z-index: 2000;
   width: 49.5em;
-  height: 33em;
+  min-height: 33em;
   background-color: $primary-color;
   color: white;
-  padding: 2em;
+  padding: 1em;
   margin: auto;
   align-items: center;
   transform-origin: bottom center;
@@ -68,13 +68,13 @@
     font-size: 19px;
     max-width: 400px;
     margin-top: 1em;
-    margin-bottom: 1.5em;
     text-align: center;
   }
 
   form {
     label {
       display: block;
+      margin-top: 1.25em;
     }
 
     input {
@@ -83,10 +83,14 @@
       border: none;
       border-radius: 1px;
       outline: none;
-      margin-bottom: 1em;
       font-size: 19px;
       padding-left: 5px;
     }
+  }
+
+  .SubscriptionModal__errorMessage {
+    margin-top: 6px;
+    color: darken(#ffcccc, 5%);
   }
 
   .SubscriptionModal__submit {
@@ -99,7 +103,8 @@
     background-color: white;
     color: black;
     display: block;
-    margin-top: 1em;
+    margin-top: 2em;
+    margin-bottom: 1em;
     margin-left: auto;
     margin-right: auto;
     border-radius: 2px;

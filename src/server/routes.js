@@ -28,22 +28,13 @@ router.post(routes.SUBSCRIBE_URI, (req, res) => {
     )
     .send({
       email_address: req.body.email,
-      status: 'pending',
+      status: 'subscribed',
       merge_fields: {
         FNAME: req.body.firstName,
         LNAME: req.body.lastName,
       },
     })
-    .end((err, response) => {
-      if (
-        response.status < 300 ||
-        (response.status === 400 && response.body.title === 'Member Exists')
-      ) {
-        res.send('Signed Up!');
-      } else {
-        res.send(response.body.title);
-      }
-    });
+    .end((err, response) => res.send({ error: response.body.title }));
 });
 
 router.get(routes.HOME_URI, (req, res) => {

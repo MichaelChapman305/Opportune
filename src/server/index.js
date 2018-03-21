@@ -6,7 +6,6 @@ const companyNames = require('./listings/companyNames.js');
 const routes = require('./routes.js');
 const sendEmailsToUsers = require('./emails.js');
 
-
 const app = express();
 const cron = new CronJob(
   '00 00 12 * * 6',
