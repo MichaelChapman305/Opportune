@@ -76,8 +76,8 @@ function sendEmailToUsers(jobs) {
   return uploadTemplate({
     name: TEMPLATE_NAME,
     html: TEMPLATE_HTML(listingsMarkup),
-  }).then(json => createEmailCampaign(json.id));
-  // .then(json => sendEmailCampaign(json.id));
+  }).then(json => createEmailCampaign(json.id))
+    .then(json => sendEmailCampaign(json.id));
 }
 
 module.exports = sendEmailToUsers;

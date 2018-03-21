@@ -28,7 +28,7 @@ class SubscriptionModal extends Component {
     event.preventDefault();
     const form = new FormData(event.target);
 
-    return fetch(SUBSCRIBE_URI, {
+    fetch(SUBSCRIBE_URI, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -46,6 +46,8 @@ class SubscriptionModal extends Component {
           this.setState({
             fieldError: json.error,
           });
+        } else {
+          this.props.onToggleSubscription();
         }
       });
   }
