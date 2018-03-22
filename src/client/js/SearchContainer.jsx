@@ -103,6 +103,7 @@ export default class SearchContainer extends Component {
   }
 
   setActiveFilter(filterTitle) {
+    console.log('yes');
     // If a person click's the filter when they already have that filter opened,
     // we should reset the activeFilterTitle in order to close the filter's menu
     if (this.state.activeFilterTitle === filterTitle) {
