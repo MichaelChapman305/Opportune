@@ -25,20 +25,20 @@ class SubscriptionModal extends Component {
     this.updateLastName = this.updateLastName.bind(this);
   }
 
-  componentDidUpdate(preProps, preState) {
-    if (this.state.fieldError) {
-      this.setState({
-        fieldError: '',
-      });
-    }
-  }
-
   shouldComponentUpdate(nextProps, nextState) {
     if (!this.state.fieldError && nextState.fieldError) {
       return true;
     }
 
     return false;
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.fieldError) {
+      this.setState({
+        fieldError: '',
+      });
+    }
   }
 
   handleClickOutside(event) {
