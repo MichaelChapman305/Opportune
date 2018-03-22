@@ -25,7 +25,6 @@ class SubscriptionModal extends Component {
   }
 
   handleSubscription(event) {
-    event.preventDefault();
     const form = new FormData(event.target);
 
     fetch(SUBSCRIBE_URI, {
@@ -47,7 +46,7 @@ class SubscriptionModal extends Component {
             fieldError: json.error,
           });
         } else {
-          this.props.onToggleSubscription();
+          this.props.onToggleSubscription()
         }
       });
   }
@@ -82,7 +81,7 @@ class SubscriptionModal extends Component {
           Enter your information below and receive new job listings every week from the world's most
           talented technology companies.
         </p>
-        <form className="SubscriptionModal__form">
+        <form className="SubscriptionModal__form" onSubmit={e => { e.preventDefault(); }}>
           <label htmlFor="email">Email Address</label>
           <input
             name="email"
