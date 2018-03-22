@@ -84,3 +84,71 @@
     }
   }
 }
+
+@media only screen and (max-width: $ex-lg-viewport) {
+  .JobListingContainer {
+    margin-left: 4em;
+    margin-right: 4em;
+  }
+
+  .no-results {
+    font-size: 16px;
+    margin-left: 4em;
+    margin-right: 4em;
+  }
+
+}
+
+@media only screen and (max-width: $lg-viewport) {
+  .JobListingContainer__amount {
+    margin-bottom: 1em !important;
+    margin-left: .5em;
+  }
+
+  .JobListingContainer {
+    margin-left: 3em !important;
+    margin-right: 3em !important;
+  }
+
+  .JobListing {
+    margin-bottom: 1em !important;
+  }
+
+  .JobListing__title {
+    font-size: 17px !important;
+  }
+
+  .jobListing__location {
+    font-size: 15px !important;
+  }
+}
+
+@media only screen and (max-width: $md-viewport) {
+  .JobListingContainer__amount {
+    margin-bottom: 1em !important;
+    margin-left: 1em;
+  }
+
+  .JobListingContainer {
+    margin-left: .75em !important;
+    margin-right: .75em !important;
+  }
+
+  .JobListing {
+    margin-bottom: .75em !important;
+  }
+
+  .JobListing__title {
+    font-size: 17px !important;
+  }
+
+  .jobListing__location {
+    font-size: 15px !important;
+  }
+
+  .no-results {
+    font-size: 16px !important;
+    margin-left: 2em !important;
+    margin-right: 2em !important;
+  }
+}

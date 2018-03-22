@@ -11,6 +11,7 @@
   .Header__title {
     font-size: 3rem;
     letter-spacing: .5px;
+    margin-left: 1.8em;
     font-family: CamphorThree;
   }
 
@@ -38,6 +39,44 @@
 
     &:hover {
       cursor: pointer;
+    }
+  }
+}
+
+@media only screen and (max-width: $lg-viewport) {
+  .Header {
+    flex-wrap: nowrap !important;
+    margin-bottom: 1em;
+  }
+
+  .Header__title {
+    margin-left: 0em !important;
+    margin-right: 2em !important;
+  }
+
+  li {
+    margin-right: 0 !important;
+    margin-left: 1em !important;
+  }
+}
+
+@media only screen and (max-width: $md-viewport) {
+  .Header {
+    display: block !important;
+    text-align: center !important;
+    margin: 0 auto !important;
+  }
+
+  .Header__title {
+    margin-top: .5em !important;
+    margin-bottom: .5em !important;
+    margin-right: 0 !important;
+  }
+
+  .Header__items {
+    li {
+      margin-left: 1em !important;
+      margin-right: 1em !important;
     }
   }
 }

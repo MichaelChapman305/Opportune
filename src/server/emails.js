@@ -2,7 +2,7 @@ const fetch = require('node-fetch');
 
 const EMAIL_SUBJECT = 'New careers from opportunecareers.com';
 const EMAIL_FROM = 'Opportune Careers';
-const EMAIL_REPLY_TO = 'hello@opportunecareers.com';
+const EMAIL_REPLY_TO = 'chapmanm305@gmail.com';
 
 const TEMPLATE_NAME = EMAIL_SUBJECT;
 const TEMPLATE_HTML = listingsMarkup =>

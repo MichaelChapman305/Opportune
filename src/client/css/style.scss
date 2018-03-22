@@ -3,8 +3,8 @@
 
 * {
   box-sizing: border-box;
-  -webkit-box-sizing: border-box; 
-  -moz-box-sizing: border-box;    
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   padding: 0;
   margin: 0;
 }
@@ -50,3 +50,30 @@ body {
         'layout/search',
         'layout/jobListings',
         'layout/subscription';
+
+@media only screen and (max-width: $md-viewport) {
+  .app-container {
+    grid-template-areas:
+    "Header Header Header"
+    "SearchContainer SearchContainer SearchContainer"
+    "JobListingContainer JobListingContainer JobListingContainer";
+  }
+}
+
+@media only screen and (max-width: $lg-viewport) {
+  .app-container {
+    grid-template-areas:
+    "Header Header Header"
+    "SearchContainer SearchContainer SearchContainer"
+    "JobListingContainer JobListingContainer JobListingContainer";
+  }
+}
+
+@media only screen and (max-width: $ex-lg-viewport) {
+  .app-container {
+    grid-template-areas:
+    "Header Header Header"
+    "SearchContainer SearchContainer SearchContainer"
+    "JobListingContainer JobListingContainer JobListingContainer";
+  }
+}
