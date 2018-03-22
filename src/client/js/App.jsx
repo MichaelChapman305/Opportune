@@ -51,9 +51,18 @@ class Home extends Component {
   }
 
   onToggleSubscription() {
-    this.setState(prevState => ({
-      isSubscriptionModalShown: !prevState.isSubscriptionModalShown,
-    }));
+    this.setState(
+      prevState => ({
+        isSubscriptionModalShown: !prevState.isSubscriptionModalShown,
+      }),
+      () => {
+        if (this.state.isSubscriptionModalShown) {
+          document.body.style.position = 'fixed';
+        } else {
+          document.body.style.position = '';
+        }
+      }
+    );
   }
 
   fetchJobs(text = '', tokens = []) {

@@ -12,20 +12,60 @@ class SubscriptionModal extends Component {
   constructor(props) {
     super(props);
 
-    this.textInput = null;
     this.state = {
-      fieldError: false,
+      fieldError: '',
+      emailText: '',
+      firstNameText: '',
+      lastNameText: '',
     };
 
     this.handleSubscription = this.handleSubscription.bind(this);
+    this.updateEmail = this.updateEmail.bind(this);
+    this.updateFirstName = this.updateFirstName.bind(this);
+    this.updateLastName = this.updateLastName.bind(this);
+  }
+
+  componentDidUpdate(preProps, preState) {
+    if (this.state.fieldError) {
+      this.setState({
+        fieldError: '',
+      });
+    }
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    if (!this.state.fieldError && nextState.fieldError) {
+      return true;
+    }
+
+    return false;
   }
 
   handleClickOutside(event) {
     this.props.onToggleSubscription();
   }
 
+  updateEmail(event) {
+    this.setState({
+      emailText: event.target.value,
+    });
+  }
+
+  updateFirstName(event) {
+    this.setState({
+      firstNameText: event.target.value,
+    });
+  }
+
+  updateLastName(event) {
+    this.setState({
+      lastNameText: event.target.value,
+    });
+  }
+
   handleSubscription(event) {
-    const form = new FormData(event.target);
+    const { emailText, firstNameText, lastNameText } = this.state;
+    event.preventDefault();
 
     fetch(SUBSCRIBE_URI, {
       method: 'POST',
@@ -34,9 +74,9 @@ class SubscriptionModal extends Component {
         Accept: 'application/json',
       },
       body: JSON.stringify({
-        email: form.get('email'),
-        firstName: form.get('firstName'),
-        lastName: form.get('lastName'),
+        email: emailText || null,
+        firstName: firstNameText || null,
+        lastName: lastNameText || null,
       }),
     })
       .then(res => res.json())
@@ -46,30 +86,26 @@ class SubscriptionModal extends Component {
             fieldError: json.error,
           });
         } else {
-          this.props.onToggleSubscription()
+          this.props.onToggleSubscription();
         }
       });
   }
 
   render() {
-    const { fieldError } = this.state;
+    const { fieldError, emailText, firstNameText, lastNameText } = this.state;
 
     let error = '';
 
     if (fieldError === ERROR_MEMBER_EXISTS) {
       error = 'This email is already subscribed to our service';
-    } else if (
-      fieldError === ERROR_INVALID_RESOURCE &&
-      this.firstNameInput.value.length > 0 &&
-      this.lastNameInput.value.length > 0
-    ) {
+    } else if (fieldError === ERROR_INVALID_RESOURCE && firstNameText && lastNameText) {
       error = 'Please enter a valid email address.';
-    } else if (fieldError === ERROR_INVALID_RESOURCE && this.emailInput.value.length === 0) {
+    } else if (fieldError === ERROR_INVALID_RESOURCE && !emailText) {
       error = 'Please enter your email address.';
     }
 
     return (
-      <div className="SubscriptionModal" onSubmit={this.handleSubscription}>
+      <div className="SubscriptionModal">
         <img
           className="SubscriptionModal__closeButton"
           src="./images/close-icon.svg"
@@ -81,24 +117,24 @@ class SubscriptionModal extends Component {
           Enter your information below and receive new job listings every week from the world's most
           talented technology companies.
         </p>
-        <form className="SubscriptionModal__form" onSubmit={e => { e.preventDefault(); }}>
+        <form className="SubscriptionModal__form">
           <label htmlFor="email">Email Address</label>
           <input
             name="email"
             type="text"
             className="SubscriptionModal__email"
-            ref={input => (this.emailInput = input)}
+            onChange={this.updateEmail}
           />
-          {error.length > 0 && <p className="SubscriptionModal__errorMessage">{error}</p>}
+          {error && <p className="SubscriptionModal__errorMessage">{error}</p>}
           <label htmlFor="firstName">First Name</label>
           <input
             name="firstName"
             type="text"
             className="SubscriptionModal__firstName"
-            ref={input => (this.firstNameInput = input)}
+            onChange={this.updateFirstName}
           />
           {fieldError === ERROR_INVALID_RESOURCE &&
-            this.firstNameInput.value.length === 0 && (
+            !firstNameText && (
               <p className="SubscriptionModal__errorMessage">Please enter your first name.</p>
             )}
           <label htmlFor="lastName">Last Name</label>
@@ -106,13 +142,17 @@ class SubscriptionModal extends Component {
             name="lastName"
             type="text"
             className="SubscriptionModal__lastName"
-            ref={input => (this.lastNameInput = input)}
+            onChange={this.updateLastName}
           />
           {fieldError === ERROR_INVALID_RESOURCE &&
-            this.lastNameInput.value.length === 0 && (
+            !lastNameText && (
               <p className="SubscriptionModal__errorMessage">Please enter your last name.</p>
             )}
-          <button className="SubscriptionModal__submit" type="submit">
+          <button
+            className="SubscriptionModal__submit"
+            type="submit"
+            onClick={this.handleSubscription}
+          >
             Subscribe
           </button>
         </form>

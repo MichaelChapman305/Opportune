@@ -30,12 +30,11 @@ export default class SearchFilter extends Component {
     }
 
     const isFilter =
-      target.className.indexOf('SearchFilter__button') > -1 || target.className instanceof SVGAnimatedString;
+      target.className.indexOf('SearchFilter__button') !== -1 ||
+      target.className instanceof SVGAnimatedString;
     const isFilterMenu = target.parentElement.className === 'SearchFilter__menu';
 
     if (!isFilter && !isFilterMenu) {
-      console.log(event.target.className);
-      console.log(event.target.className === 'SearchFilter__button SearchFilter__button--selected');
       this.props.setActiveFilter('');
     }
   }

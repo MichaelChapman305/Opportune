@@ -36,7 +36,7 @@ if (process.env.NODE_ENV === 'production') {
     } else {
       next();
     }
-  })
+  });
 }
 
 app.use(routes);
