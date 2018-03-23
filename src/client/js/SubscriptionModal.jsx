@@ -97,7 +97,7 @@ class SubscriptionModal extends Component {
     let error = '';
 
     if (fieldError === ERROR_MEMBER_EXISTS) {
-      error = 'This email is already subscribed to our service';
+      error = 'This email is already subscribed to our service.';
     } else if (fieldError === ERROR_INVALID_RESOURCE && firstNameText && lastNameText) {
       error = 'Please enter a valid email address.';
     } else if (fieldError === ERROR_INVALID_RESOURCE && !emailText) {
