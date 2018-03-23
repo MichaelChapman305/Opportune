@@ -31,6 +31,7 @@ const EXCLUDED_WORDS = [
   'vehicle controls',
   'bridge',
   'strategic partner',
+  'content developer',
 ];
 
 function isEngineeringJob(title) {
