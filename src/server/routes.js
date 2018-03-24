@@ -1,6 +1,7 @@
 const express = require('express');
 const request = require('superagent');
 const bodyParser = require('body-parser');
+const cache = require('memory-cache');
 
 const routes = require('../shared/routes.js');
 const JobListing = require('./models.js');
@@ -44,13 +45,6 @@ router.get(routes.HOME_URI, (req, res) => {
 router.get(routes.JOBS_URI, (req, res) => {
   const queryText = req.query.query;
 
-  if (!queryText) {
-    return JobListing.find({})
-      .sort(ORDER_BY_COMPANY_ASC)
-      .exec()
-      .then(items => res.send(items));
-  }
-
   let query = {};
 
   try {
@@ -81,6 +75,21 @@ router.get(routes.JOBS_URI, (req, res) => {
   addToSearchQuery('location', '$in', query.locations);
   addToSearchQuery('role', '$in', query.roles);
   addToSearchQuery('skills', '$in', query.skills);
+
+  if (Object.keys(searchQuery).length === 0) {
+    const cachedItems = cache.get('initial');
+    if (cachedItems) {
+      return res.send(cachedItems);
+    }
+
+    return JobListing.find({})
+      .sort(ORDER_BY_COMPANY_ASC)
+      .exec()
+      .then(items => {
+        cache.put('initial', items);
+        res.send(items);
+      });
+  }
 
   if (query.text) {
     // If we do a full-text search, then we want to order the results by decreasing text score

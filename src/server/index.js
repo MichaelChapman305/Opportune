@@ -1,4 +1,5 @@
 const express = require('express');
+const cache = require('memory-cache');
 const config = require('dotenv').config();
 const CronJob = require('cron').CronJob;
 const listings = require('./listings/listings.js');
@@ -13,6 +14,7 @@ const cron = new CronJob(
     listings
       .combineCompanyListings(companyNames.GREENHOUSE_COMPANIES, companyNames.LEVER_COMPANIES)
       .then(jobListings => listings.updateDatabase(jobListings))
+      .then(() => cache.clear())
       .then(listings.getNewJobListings)
       .then(newListings => {
         if (newListings.length > 0) {
