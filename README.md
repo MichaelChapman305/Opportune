@@ -13,7 +13,7 @@ We make all of this data fully searchable with a search bar and search filters t
 ![Home screen](https://i.imgur.com/pgSlCtG.png)
 ![Active Search](https://i.imgur.com/aSiyVAM.png)
 
-##Coding standard
+## Coding standard
 We made use of ESLint for linting issues with code and Prettier for consistent styling / formatting. No unit tests exist at this time.
 
 ## Technology used
