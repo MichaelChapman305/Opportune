@@ -28,6 +28,8 @@ const cron = new CronJob(
   'America/New_York'
 );
 
+cache.clear();
+
 app.use('/images', express.static('./src/client/images'));
 app.use('/', express.static('./dist'));
 
