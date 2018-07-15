@@ -93,7 +93,9 @@ function combineCompanyListings(greenhouseCompanies, leverCompanies) {
     const listings = flatten(data);
 
     // Return all valid, engineering jobs from our data
-    return listings.filter(listing => listing && listingUtilities.isEngineeringJob(listing.title));
+    return listings.filter(
+       listing => listing && listing.title && listingUtilities.isEngineeringJob(listing.title)
+     );
   });
 }
 
