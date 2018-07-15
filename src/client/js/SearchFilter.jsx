@@ -29,10 +29,14 @@ export default class SearchFilter extends Component {
       return;
     }
 
-    const isFilter =
-      target.className.indexOf('SearchFilter__button') !== -1 ||
-      target.className instanceof SVGAnimatedString;
     const isFilterMenu = target.parentElement.className === 'SearchFilter__menu';
+    let isFilter = false;
+
+    if (target.className instanceof SVGAnimatedString) {
+      isFilter = target.className instanceof SVGAnimatedString;
+    } else {
+      isFilter = target.className.indexOf('SearchFilter__button') !== -1;
+    }
 
     if (!isFilter && !isFilterMenu) {
       this.props.setActiveFilter('');

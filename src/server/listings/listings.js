@@ -12,7 +12,8 @@ function updateDatabase(listings) {
 
   for (let i = 0, len = listings.length; i < len; i++) {
     const updateCondition = {
-      id: listings[i].id,
+      company: listings[i].company,
+      title: listings[i].title,
     };
     const updatePromise = JobListing.findOneAndUpdate(
       updateCondition,
@@ -62,10 +63,7 @@ function getCompanyListings(companies, getListingsFunc) {
 
   for (let i = 0, len = companyIDs.length; i < len; i++) {
     const companyID = companyIDs[i];
-    const delayedGetListings = () =>
-      new Promise(resolve => setTimeout(resolve, 1000)).then(getListingsFunc(companyID));
-
-    promises.push(delayedGetListings);
+    promises.push(getListingsFunc(companyID));
   }
 
   // Return a promise that resolves when all the listings from all the companies
@@ -95,9 +93,7 @@ function combineCompanyListings(greenhouseCompanies, leverCompanies) {
     const listings = flatten(data);
 
     // Return all valid, engineering jobs from our data
-    return listings.filter(
-      listing => listing && listing.title && listingUtilities.isEngineeringJob(listing.title)
-    );
+    return listings.filter(listing => listing && listingUtilities.isEngineeringJob(listing.title));
   });
 }
 
